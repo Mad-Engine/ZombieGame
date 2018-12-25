@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<game_state>
+	<input />
+	<window />
+	<textures />
+	<audio>
+		<VolumeChanger_music value="1" />
+		<VolumeChanger_fx value="1" />
+	</audio>
+	<entities>
+		<Player>
+			<Playerx value="2501.58936" />
+			<Playery value="201.901581" />
+			<orbs_number value="0" />
+			<score value="0" />
+			<time value="29701" />
+			<timePaused value="0" />
+		</Player>
+		<Entity2>
+			<Batx value="2542.80127" />
+			<Baty value="172.749969" />
+			<active value="true" />
+		</Entity2>
+		<Entity3>
+			<Batx value="1784.20166" />
+			<Baty value="566" />
+			<active value="true" />
+		</Entity3>
+		<Entity4>
+			<Slimex value="852.548706" />
+			<Slimey value="333.499969" />
+			<active value="true" />
+		</Entity4>
+		<Entity5>
+			<Slimex value="2114.95288" />
+			<Slimey value="94.4000244" />
+			<active value="true" />
+		</Entity5>
+		<Orb1>
+			<touched value="false" />
+			<active value="true" />
+		</Orb1>
+		<Orb2>
+			<touched value="false" />
+			<active value="true" />
+		</Orb2>
+		<Orb3>
+			<touched value="false" />
+			<active value="true" />
+		</Orb3>
+	</entities>
+	<collision />
+	<map />
+	<pathfinding />
+	<fonts />
+	<gui />
+	<scene>
+		<firstStage value="false" />
+		<secondStage value="true" />
+	</scene>
+	<renderer>
+		<camera x="-4335" y="0" />
+	</renderer>
+</game_state>
