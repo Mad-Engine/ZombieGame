@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="133" tileheight="133" nextobjectid="1">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="133" tileheight="133" nextobjectid="10">
  <tileset firstgid="1" name="stageTileset" tilewidth="133" tileheight="133" tilecount="207" columns="23">
-  <image source="ZombieGamePack/Spritesheets/stageTileset.png" width="3059" height="1197"/>
+  <image source="stageTileset.png" width="3059" height="1197"/>
   <terraintypes>
    <terrain name="grass" tile="-1"/>
   </terraintypes>
@@ -20,6 +20,10 @@
   <tile id="99" terrain=",0,0,0"/>
  </tileset>
  <layer name="ground" width="45" height="45">
+  <properties>
+   <property name="Anumproperties" type="int" value="2"/>
+   <property name="Song" value="audio/music/stage1.ogg"/>
+  </properties>
   <data>
    <tile gid="31"/>
    <tile gid="31"/>
@@ -8136,6 +8140,11 @@
   </data>
  </layer>
  <layer name="Collisions" width="45" height="45" opacity="0.39">
+  <properties>
+   <property name="Anumproperties" type="int" value="3"/>
+   <property name="Collision" type="int" value="1"/>
+   <property name="Nodraw" type="int" value="1"/>
+  </properties>
   <data>
    <tile gid="189"/>
    <tile gid="189"/>
@@ -10164,4 +10173,19 @@
    <tile gid="189"/>
   </data>
  </layer>
+ <objectgroup name="initpos">
+  <object id="1" x="2793" y="2926" width="266" height="266"/>
+ </objectgroup>
+ <objectgroup name="Enemies1">
+  <object id="4" x="133" y="665" width="266" height="266"/>
+ </objectgroup>
+ <objectgroup name="Enemies2">
+  <object id="6" x="5054" y="133" width="266" height="266"/>
+ </objectgroup>
+ <objectgroup name="Enemies3">
+  <object id="7" x="5586" y="5054" width="266" height="266"/>
+ </objectgroup>
+ <objectgroup name="Enemies4">
+  <object id="9" x="665" y="5586" width="266" height="266"/>
+ </objectgroup>
 </map>
