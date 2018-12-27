@@ -23,6 +23,23 @@ struct Playerdata {
 	Animation* airRight = nullptr;
 	Animation* airLeft = nullptr;
 
+	Animation* Idleknife = nullptr;
+	Animation* IdleShotgun = nullptr;
+	Animation* IdleFlame = nullptr;
+	Animation* IdleGun = nullptr;
+	
+	Animation* Walkknife = nullptr;
+	Animation* WalkShotgun = nullptr;
+	Animation* WalkFlame = nullptr;
+	Animation* WalkGun = nullptr;
+
+	Animation* AttackKnife = nullptr;
+	Animation* AttackShotgun = nullptr;
+	Animation* AttackFlame = nullptr;
+	Animation* AttackGun = nullptr;
+
+
+
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
 

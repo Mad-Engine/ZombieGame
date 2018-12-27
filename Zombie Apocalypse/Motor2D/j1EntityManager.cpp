@@ -48,6 +48,18 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.airRight = LoadAnimation(playerinfo.folder.GetString(), "air right");
 	playerinfo.airLeft = LoadAnimation(playerinfo.folder.GetString(), "air left");
 
+	//zombie Game
+	playerinfo.Walkknife= LoadAnimation(playerinfo.folder.GetString(), "knife walk");
+	playerinfo.WalkShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun walk");
+	playerinfo.WalkGun = LoadAnimation(playerinfo.folder.GetString(),"gun walk");
+	playerinfo.WalkFlame = LoadAnimation(playerinfo.folder.GetString(), "flame walk");
+
+	playerinfo.AttackKnife= LoadAnimation(playerinfo.folder.GetString(), "knife");
+	playerinfo.AttackShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun");
+	playerinfo.AttackGun = LoadAnimation(playerinfo.folder.GetString(), "gun");
+	playerinfo.AttackFlame= playerinfo.AttackShotgun = LoadAnimation(playerinfo.folder.GetString(), "flame thrower");
+	//.............................................
+
 	int x = playernode.child("collider").attribute("x").as_int();
 	int y = playernode.child("collider").attribute("y").as_int();
 	int w = playernode.child("collider").attribute("width").as_int();
@@ -77,6 +89,12 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.deathRight->loop = false;
 	playerinfo.deathLeft->loop = false;
 	
+
+
+	//zombie Game
+	playerinfo.WalkGun->speed = 10.0f;
+	playerinfo.AttackGun->speed = 10.0f;
+
 
 	//--Slime data load ------------
 

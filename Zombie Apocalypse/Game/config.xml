@@ -29,8 +29,8 @@
 
   <map>
     <folder>maps/</folder>
-    <collision1 red="189"/>
-    <collision2 red="189"/>
+    <collision1 red="197"/>
+    <collision2 red="197"/>
     <parallax speed="0.5" speed2="1.5"/>
     <offset offset="-160"/>
   </map>
@@ -62,8 +62,8 @@
 
 
   <player>
-    <folder>animation/player.tmx</folder>
-    <texture>textures/sprite_sheet_character.png</texture>
+    <folder>animation/girl.tmx</folder>
+    <texture>textures/playergirl.png</texture>
     <collider x="5" y="4" width="15" height="34"/>
     <Velocity x="150.0" y="0.0" jump_force="350.0"/>
     <gravity value="29.4"/>
