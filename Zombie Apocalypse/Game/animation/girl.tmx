@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="3735" height="1195" tilewidth="1" tileheight="1" nextobjectid="217">
  <imagelayer name="Image Layer 1">
-  <image source="../textures/BasiAnimationGirl.jpg" width="3735" height="1195"/>
+  <image source="../textures/TiledAnimationTexture/BasiAnimationGirl.jpg" width="3735" height="1195"/>
  </imagelayer>
  <objectgroup name="shotgun walk" visible="0">
   <object id="163" x="1992" y="955.957" width="249" height="238.112"/>

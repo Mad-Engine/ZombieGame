@@ -62,8 +62,8 @@
 
 
   <player>
-    <folder>animation/girl.tmx</folder>
-    <texture>textures/playergirl.png</texture>
+    <folder>animation/girl2.tmx</folder>
+    <texture>textures/BasiAnimationGirlx124x114.png</texture>
     <collider x="5" y="4" width="15" height="34"/>
     <Velocity x="35.0" y="0.0" jump_force="350.0"/>
     <gravity value="29.4"/>
