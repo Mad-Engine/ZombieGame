@@ -1121,7 +1121,7 @@ bool j1Scene::change_scene(const char* map_name) {
 		RELEASE_ARRAY(buffer_data);
 	}
 
-	player->CurrentAnimation = player->playerinfo.idleRight;
+	//player->CurrentAnimation = player->playerinfo.idleRight;
 
 	setStandarEntityPosition(map_name);
 
@@ -1223,7 +1223,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 void j1Scene::setStandarEntityPosition(const char* map_name)
 {
-	player->CurrentAnimation = player->playerinfo.idleRight;
+	//player->CurrentAnimation = player->playerinfo.idleRight;
 	// set entity position defined on tiled
 	if (FirstStage == map_name)
 	{

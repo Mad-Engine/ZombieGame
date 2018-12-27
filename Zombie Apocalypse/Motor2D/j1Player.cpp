@@ -42,7 +42,7 @@ bool j1Player::Start()
 	Future_position.y = position.y;
 
 	// --- Currently playing Animation ---
-	CurrentAnimation = playerinfo.idleRight;
+	//CurrentAnimation = playerinfo.idleRight;
 	
 	// --- Entity Spritesheet ---
 	if (spritesheet == nullptr)
@@ -170,15 +170,15 @@ void j1Player::Handle_Ground_Animations()
 
 		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT && App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		{
-			if (CurrentAnimation == playerinfo.runRight)
+			/*if (CurrentAnimation == playerinfo.runRight)
 				CurrentAnimation = playerinfo.idleRight;
 			else if (CurrentAnimation == playerinfo.runLeft)
-				CurrentAnimation = playerinfo.idleLeft;
+				CurrentAnimation = playerinfo.idleLeft;*/
 		}
 		else
 		{
 
-			if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT &&
+			/*if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT &&
 				CurrentAnimation != playerinfo.jumpingRight      &&
 				CurrentAnimation != playerinfo.fallingRight)
 			{
@@ -190,22 +190,10 @@ void j1Player::Handle_Ground_Animations()
 				CurrentAnimation != playerinfo.fallingLeft)
 			{
 				CurrentAnimation = playerinfo.runLeft;
-			}
+			}*/
 		}
 
 		//--- TO IDLE ---
-
-		/*if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP && CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.jumpingRight)
-			CurrentAnimation = playerinfo.idleRight;
-
-		if (CurrentAnimation == playerinfo.fallingRight)
-			CurrentAnimation = playerinfo.idleRight;
-
-		else if (App->input->GetKey(SDL_SCANCODE_A) == KEY_UP && CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.jumpingLeft)
- 			CurrentAnimation = playerinfo.idleLeft;
-		
-		if (CurrentAnimation == playerinfo.fallingLeft)
-			CurrentAnimation = playerinfo.idleLeft;*/
 
     //--------------    ---------------
 
@@ -248,7 +236,7 @@ void j1Player::Handle_Ground_Animations()
 			else
 				App->LoadGame("save_game.xml");
 
-			CurrentAnimation = playerinfo.idleRight;
+			//CurrentAnimation = playerinfo.idleRight;
 		}
 		
 }
@@ -315,7 +303,7 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::RIGHTWARDS;
 		}
 
-		
+
 		// --- LEFT ---
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT &&
 			App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
@@ -342,57 +330,19 @@ bool j1Player::Update(float dt)
 		if (EntityMovement != MOVEMENT::STATIC)
 			UpdateEntityMovement(dt);
 
-		//// --- IMPULSE ---
-		//if (!on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		//{
-		//	App->audio->PlayFx(App->audio->jumpfx);
-		//	Apply_Vertical_Impulse(dt);
-		//	on_air = true;
-		//}
-
-		//else if (on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && double_jump==false)
-		//{
-		//	App->audio->PlayFx(App->audio->doublejumpfx);
-		//	double_jump = true;
-		//	Velocity.y = 0.0f;
-		//	Apply_Vertical_Impulse(dt);
-		//}
-
-		//// --- UP ---
-		//if (on_air && Velocity.y > 0.0f)
-		//{
-		//	EntityMovement = MOVEMENT::UPWARDS;
-		//}
-
-		//if (EntityMovement != MOVEMENT::STATIC)
-		//	UpdateEntityMovement(dt);
 
 
-		//// --- FREE FALL --- 
+		//-------------------------------
+
+		// --- Handling animations ---
 
 
-		//	for (unsigned short i = 0; i < 4; ++i)
-		//	{
-		//		EntityMovement = MOVEMENT::DOWNWARDS;
-		//		UpdateEntityMovement(dt);
+		Handle_Ground_Animations();
 
-		//		if (coll_up)
-		//			break;
 
-		//	}
+
+		return true;
 	}
-
-	//-------------------------------
-
-	// --- Handling animations ---
-
-	//if(Velocity.y == 0.0f)
-	Handle_Ground_Animations();
-	/*else
-	Handle_Aerial_Animations();
-*/
-	
-	return true;
 }
 
 bool j1Player::PostUpdate(float dt)
@@ -422,15 +372,7 @@ bool j1Player::PostUpdate(float dt)
 
 	CurrentAnimation = playerinfo.WalkGun;
 
-	/*	if (CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.idleRight || CurrentAnimation == playerinfo.fallingRight || CurrentAnimation == playerinfo.jumpingRight)
-			App->render->Blit(spritesheet, Future_position.x - 3, Future_position.y, &CurrentAnimation->GetCurrentFrame(dt));
-
-		else if (CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.idleLeft || CurrentAnimation == playerinfo.fallingLeft || CurrentAnimation == playerinfo.jumpingLeft)
-			App->render->Blit(spritesheet, Future_position.x - 6, Future_position.y, &CurrentAnimation->GetCurrentFrame(dt));
-
-		else*/
-
-			App->render->Blit(spritesheet, Future_position.x , Future_position.y, &CurrentAnimation->GetCurrentFrame(dt));
+	App->render->Blit(spritesheet, Future_position.x-90 , Future_position.y-23, &CurrentAnimation->GetCurrentFrame(dt));
 	
 	
 	// ---------------------- //
@@ -549,10 +491,10 @@ void j1Player::Down_Collision(Collider * entitycollider, const Collider * to_che
 			{
 				App->audio->PlayFx(App->audio->deathfx);
 				LOG("actual lifes. %i", lifes);
-				playerinfo.deathRight->Reset();
-				CurrentAnimation = playerinfo.deathRight;
+				//playerinfo.deathRight->Reset();
+				//CurrentAnimation = playerinfo.deathRight;
 				Velocity.y += playerinfo.jump_force;
-				CurrentAnimation = playerinfo.deathRight;
+				//CurrentAnimation = playerinfo.deathRight;
 				lifes -= 1;
 				LOG("now lifes. %i", App->scene->player->lifes);
 				dead = true;
