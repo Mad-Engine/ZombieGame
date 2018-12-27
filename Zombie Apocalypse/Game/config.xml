@@ -11,7 +11,7 @@
   </renderer>
 
   <window>
-    <resolution width="1080" height="1080" scale="1"/>
+    <resolution width="1280" height="1000" scale="1"/>
     <fullscreen value="false"/>
     <borderless value="false"/>
     <resizable value="false"/>
@@ -65,7 +65,7 @@
     <folder>animation/player.tmx</folder>
     <texture>textures/sprite_sheet_character.png</texture>
     <collider x="5" y="4" width="15" height="34"/>
-    <Velocity x="35.0" y="0.0" jump_force="350.0"/>
+    <Velocity x="150.0" y="0.0" jump_force="350.0"/>
     <gravity value="29.4"/>
   </player>
    

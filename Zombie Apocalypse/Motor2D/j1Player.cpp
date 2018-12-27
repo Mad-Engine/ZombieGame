@@ -74,58 +74,60 @@ void j1Player::UpdateEntityMovement(float dt)
 
 	switch (EntityMovement)
 	{
-		case MOVEMENT::RIGHTWARDS:
-			Accumulative_pos_Right += Velocity.x*dt;
+	case MOVEMENT::RIGHTWARDS:
+		Accumulative_pos_Right += Velocity.x*dt;
 
-			if (Accumulative_pos_Right > 1.1)
+		if (Accumulative_pos_Right > 1.1)
+		{
+			Future_position.x += Accumulative_pos_Right;
+			Accumulative_pos_Right -= Accumulative_pos_Right;
+		}
+		break;
+	case MOVEMENT::LEFTWARDS:
+		Accumulative_pos_Left += Velocity.x*dt;
+
+		/*if (on_air)
+		{
+			if (Accumulative_pos_Left > 1.0)
 			{
-				Future_position.x += Accumulative_pos_Right;
-				Accumulative_pos_Right -= Accumulative_pos_Right;
-			}
-			break;
-		case MOVEMENT::LEFTWARDS:
-			Accumulative_pos_Left += Velocity.x*dt;
-			
-			if (on_air)
-			{
-				if (Accumulative_pos_Left > 1.0)
-				{
-					Future_position.x -= Accumulative_pos_Left;
-					Future_position.x -= Accumulative_pos_Left;
+				Future_position.x -= Accumulative_pos_Left;
+				Future_position.x -= Accumulative_pos_Left;
 
-					Accumulative_pos_Left -= Accumulative_pos_Left;
-				}
+				Accumulative_pos_Left -= Accumulative_pos_Left;
 			}
-			else
-			{
-				if (Accumulative_pos_Left > 1.5)
-				{
-					Future_position.x -= Accumulative_pos_Left;
-					Accumulative_pos_Left -= Accumulative_pos_Left;
-				}
-			}
-			break;
-		case MOVEMENT::UPWARDS:
+		}*/
 
-			Accumulative_pos_Up += Velocity.y*dt;
+		if (Accumulative_pos_Left > 1.5)
+		{
+			Future_position.x -= Accumulative_pos_Left;
+			Accumulative_pos_Left -= Accumulative_pos_Left;
+		}
 
-			if (Accumulative_pos_Up > 0.75)
-			{
-				Future_position.y -= Accumulative_pos_Up;
-				Accumulative_pos_Up -= Accumulative_pos_Up;
-			}
-			break;
-		case MOVEMENT::DOWNWARDS:
+		break;
+	case MOVEMENT::UPWARDS:
 
-			Accumulative_pos_Down += Velocity.y*dt;
+		Future_position.y -= Velocity.x*dt;
+		/*Accumulative_pos_Up += Velocity.y*dt;
 
-			if (Accumulative_pos_Down > 1.0)
-			{
-				Future_position.y += Accumulative_pos_Down;
-				Accumulative_pos_Down -= Accumulative_pos_Down;
-			}
-			
-			break;
+		if (Accumulative_pos_Up > 0.75)
+		{
+			Future_position.y -= Accumulative_pos_Up;
+			Accumulative_pos_Up -= Accumulative_pos_Up;
+		}*/
+		break;
+	case MOVEMENT::DOWNWARDS:
+
+		Future_position.y += Velocity.x*dt;
+
+		/*Accumulative_pos_Down += Velocity.y*dt;
+
+		if (Accumulative_pos_Down > 1.0)
+		{
+			Future_position.y += Accumulative_pos_Down;
+			Accumulative_pos_Down -= Accumulative_pos_Down;
+		}*/
+
+		break;
 	}
 
 	entitycoll->SetPos(Future_position.x, Future_position.y);
@@ -155,7 +157,7 @@ void j1Player::God_Movement(float dt)
 
 inline void j1Player::Apply_Vertical_Impulse(float dt)
 {
-	Velocity.y += playerinfo.jump_force;
+	//Velocity.y += playerinfo.jump_force;
 }
 
 void j1Player::Handle_Ground_Animations()
@@ -191,7 +193,7 @@ void j1Player::Handle_Ground_Animations()
 
 		//--- TO IDLE ---
 
-		if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP && CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.jumpingRight)
+		/*if (App->input->GetKey(SDL_SCANCODE_D) == KEY_UP && CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.jumpingRight)
 			CurrentAnimation = playerinfo.idleRight;
 
 		if (CurrentAnimation == playerinfo.fallingRight)
@@ -201,7 +203,7 @@ void j1Player::Handle_Ground_Animations()
  			CurrentAnimation = playerinfo.idleLeft;
 		
 		if (CurrentAnimation == playerinfo.fallingLeft)
-			CurrentAnimation = playerinfo.idleLeft;
+			CurrentAnimation = playerinfo.idleLeft;*/
 
     //--------------    ---------------
 
@@ -255,26 +257,26 @@ void j1Player::Handle_Aerial_Animations()
 	// --- Handling Aerial Animations ---
 
 	
-		//--- TO JUMP ---
+		////--- TO JUMP ---
 
-		if (Velocity.y > playerinfo.jump_force / 2)
-		{
-			if (CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.idleRight)
-				CurrentAnimation = playerinfo.jumpingRight;
+		//if (Velocity.y > playerinfo.jump_force / 2)
+		//{
+		//	if (CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.idleRight)
+		//		CurrentAnimation = playerinfo.jumpingRight;
 
-			else if (CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.idleLeft)
-				CurrentAnimation = playerinfo.jumpingLeft;
-		}
+		//	else if (CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.idleLeft)
+		//		CurrentAnimation = playerinfo.jumpingLeft;
+		//}
 
-		//--- TO FALL ---
+		////--- TO FALL ---
 
-		else if (Velocity.y < playerinfo.jump_force / 2)
-		{
-			if (CurrentAnimation == playerinfo.jumpingRight || CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.idleRight)
-				CurrentAnimation = playerinfo.fallingRight;
-			else if (CurrentAnimation == playerinfo.jumpingLeft || CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.idleLeft)
-				CurrentAnimation = playerinfo.fallingLeft;
-		}
+		//else if (Velocity.y < playerinfo.jump_force / 2)
+		//{
+		//	if (CurrentAnimation == playerinfo.jumpingRight || CurrentAnimation == playerinfo.runRight || CurrentAnimation == playerinfo.idleRight)
+		//		CurrentAnimation = playerinfo.fallingRight;
+		//	else if (CurrentAnimation == playerinfo.jumpingLeft || CurrentAnimation == playerinfo.runLeft || CurrentAnimation == playerinfo.idleLeft)
+		//		CurrentAnimation = playerinfo.fallingLeft;
+		//}
 
 
 	//------------ --------------
@@ -311,9 +313,7 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::RIGHTWARDS;
 		}
 
-		if (EntityMovement != MOVEMENT::STATIC)
-			UpdateEntityMovement(dt);
-
+		
 		// --- LEFT ---
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT &&
 			App->input->GetKey(SDL_SCANCODE_D) != KEY_REPEAT)
@@ -321,58 +321,74 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::LEFTWARDS;
 		}
 
-		if (EntityMovement != MOVEMENT::STATIC)
-			UpdateEntityMovement(dt);
-
-		// --- IMPULSE ---
-		if (!on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
-		{
-			App->audio->PlayFx(App->audio->jumpfx);
-			Apply_Vertical_Impulse(dt);
-			on_air = true;
-		}
-
-		else if (on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && double_jump==false)
-		{
-			App->audio->PlayFx(App->audio->doublejumpfx);
-			double_jump = true;
-			Velocity.y = 0.0f;
-			Apply_Vertical_Impulse(dt);
-		}
 
 		// --- UP ---
-		if (on_air && Velocity.y > 0.0f)
+		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT &&
+			App->input->GetKey(SDL_SCANCODE_S) != KEY_REPEAT)
 		{
 			EntityMovement = MOVEMENT::UPWARDS;
 		}
 
+
+		// --- DOWN ---
+		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT &&
+			App->input->GetKey(SDL_SCANCODE_W) != KEY_REPEAT)
+		{
+			EntityMovement = MOVEMENT::DOWNWARDS;
+		}
+
 		if (EntityMovement != MOVEMENT::STATIC)
 			UpdateEntityMovement(dt);
 
+		//// --- IMPULSE ---
+		//if (!on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN)
+		//{
+		//	App->audio->PlayFx(App->audio->jumpfx);
+		//	Apply_Vertical_Impulse(dt);
+		//	on_air = true;
+		//}
 
-		// --- FREE FALL --- 
+		//else if (on_air && App->input->GetKey(SDL_SCANCODE_SPACE) == KEY_DOWN && double_jump==false)
+		//{
+		//	App->audio->PlayFx(App->audio->doublejumpfx);
+		//	double_jump = true;
+		//	Velocity.y = 0.0f;
+		//	Apply_Vertical_Impulse(dt);
+		//}
+
+		//// --- UP ---
+		//if (on_air && Velocity.y > 0.0f)
+		//{
+		//	EntityMovement = MOVEMENT::UPWARDS;
+		//}
+
+		//if (EntityMovement != MOVEMENT::STATIC)
+		//	UpdateEntityMovement(dt);
 
 
-			for (unsigned short i = 0; i < 4; ++i)
-			{
-				EntityMovement = MOVEMENT::DOWNWARDS;
-				UpdateEntityMovement(dt);
+		//// --- FREE FALL --- 
 
-				if (coll_up)
-					break;
 
-			}
+		//	for (unsigned short i = 0; i < 4; ++i)
+		//	{
+		//		EntityMovement = MOVEMENT::DOWNWARDS;
+		//		UpdateEntityMovement(dt);
+
+		//		if (coll_up)
+		//			break;
+
+		//	}
 	}
 
 	//-------------------------------
 
 	// --- Handling animations ---
 
-	if(Velocity.y == 0.0f)
+	//if(Velocity.y == 0.0f)
 	Handle_Ground_Animations();
-	else
+	/*else
 	Handle_Aerial_Animations();
-
+*/
 	
 	return true;
 }
