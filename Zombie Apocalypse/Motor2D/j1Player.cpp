@@ -115,16 +115,12 @@ void j1Player::UpdateEntityMovement(float dt)
 				Accumulative_pos_Up -= Accumulative_pos_Up;
 			}
 			break;
-		case MOVEMENT::FREEFALL:
+		case MOVEMENT::DOWNWARDS:
 
-			Accumulative_pos_Down += playerinfo.gravity* dt;
-
-			if(on_air)
-			Accumulative_pos_Down += playerinfo.gravity * dt;
+			Accumulative_pos_Down += Velocity.y*dt;
 
 			if (Accumulative_pos_Down > 1.0)
 			{
-				Velocity.y -= Accumulative_pos_Down;
 				Future_position.y += Accumulative_pos_Down;
 				Accumulative_pos_Down -= Accumulative_pos_Down;
 			}
@@ -359,7 +355,7 @@ bool j1Player::Update(float dt)
 
 			for (unsigned short i = 0; i < 4; ++i)
 			{
-				EntityMovement = MOVEMENT::FREEFALL;
+				EntityMovement = MOVEMENT::DOWNWARDS;
 				UpdateEntityMovement(dt);
 
 				if (coll_up)
@@ -437,7 +433,7 @@ void j1Player::OnCollision(Collider * entitycollider, Collider * to_check)
 		case MOVEMENT::UPWARDS:
 			Up_Collision(entitycollider, to_check);
 			break;
-		case MOVEMENT::FREEFALL:
+		case MOVEMENT::DOWNWARDS:
 			Down_Collision(entitycollider, to_check);
 			break;
 		}
