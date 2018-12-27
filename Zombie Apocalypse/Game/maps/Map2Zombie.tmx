@@ -2052,8 +2052,7 @@
    <tile gid="31"/>
   </data>
  </layer>
-
-  <layer name="ground2" width="45" height="45">
+ <layer name="ground2" width="45" height="45">
   <data>
    <tile gid="28"/>
    <tile gid="28"/>

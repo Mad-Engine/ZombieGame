@@ -47,6 +47,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.deathLeft = LoadAnimation(playerinfo.folder.GetString(), "dead left");
 	playerinfo.airRight = LoadAnimation(playerinfo.folder.GetString(), "air right");
 	playerinfo.airLeft = LoadAnimation(playerinfo.folder.GetString(), "air left");
+
 	int x = playernode.child("collider").attribute("x").as_int();
 	int y = playernode.child("collider").attribute("y").as_int();
 	int w = playernode.child("collider").attribute("width").as_int();
