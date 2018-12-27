@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="133" tileheight="133" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="54" tileheight="54" nextobjectid="10">
  <tileset firstgid="1" name="stageTileset" tilewidth="54" tileheight="54" tilecount="240" columns="24">
   <image source="stageTilesetx56.png" width="1296" height="540"/>
   <terraintypes>
