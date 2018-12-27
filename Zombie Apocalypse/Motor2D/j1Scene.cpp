@@ -274,44 +274,7 @@ bool j1Scene::PreUpdate()
 	//	}
 	//}
 
-			//Checkpoint
-			// Player pos    ------------------------------   area around checkpoint
-	if (//checkoint 1
-		player->Future_position.x <= App->map->data.checkpoint1.x + 5        &&
-		player->Future_position.x >= App->map->data.checkpoint1.x - 5        &&
-		player->Future_position.y <= App->map->data.checkpoint1.y + App->map->data.tile_height*2			&&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint1.y - App->map->data.tile_height*2 
-		||//checkoint 2
-		player->Future_position.x <= App->map->data.checkpoint2.x + 5 &&
-		player->Future_position.x >= App->map->data.checkpoint2.x - 5 &&
-		player->Future_position.y <= App->map->data.checkpoint2.y + App->map->data.tile_height * 2 &&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint2.y - App->map->data.tile_height * 2
-		|| //checkoint 3
-		player->Future_position.x <= App->map->data.checkpoint3.x + 5 &&
-		player->Future_position.x >= App->map->data.checkpoint3.x - 5 &&
-		player->Future_position.y <= App->map->data.checkpoint3.y + App->map->data.tile_height * 2 &&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint3.y - App->map->data.tile_height * 2
-		||
-		//checkoint 1 second map
-		player->Future_position.x <= App->map->data2.checkpoint1.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint1.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint1.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint1.y - App->map->data2.tile_height * 2
-		||//checkoint 2 second map
-		player->Future_position.x <= App->map->data2.checkpoint2.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint2.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint2.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint2.y - App->map->data2.tile_height * 2
-		|| //checkoint 3 second map
-		player->Future_position.x <= App->map->data2.checkpoint3.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint3.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint3.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint3.y - App->map->data2.tile_height * 2)
-
-	{
-		App->SaveGame("save_game.xml");
-	}
-
+	
 
 	//win condition
 	if (firstStage && (player->Future_position.x >= App->map->data.finalpos.x) && (player->Future_position.y <= App->map->data.finalpos.y))
@@ -1069,12 +1032,6 @@ bool j1Scene::change_scene(const char* map_name) {
 
 	Fade(245, 245, 245, 2.0);
 
-	App->map->paralaxRef[0] = App->map->offset;
-	App->map->paralaxRef[1] = App->map->offset;
-
-	player->parallaxflow = 0;
-	player->previousflow = 0;
-	player->orbs_number = 0; //player must save and load this
 	App->coll->CleanUp();
 
 	

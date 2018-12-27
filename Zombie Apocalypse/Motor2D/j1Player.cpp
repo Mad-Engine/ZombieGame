@@ -349,23 +349,7 @@ bool j1Player::PostUpdate(float dt)
 {
 	bool ret = true;
 
-	// --- Parallax movement ---
-
-	previousflow = parallaxflow;
-	parallaxflow = -App->render->camera.x/App->win->GetScale() - App->map->offset;
-
-	if (App->scene->firstStage)
-	{
-		App->map->paralaxRef[0] -= (parallaxflow-previousflow) / 10.0f;
-		App->map->paralaxRef[1] -= (parallaxflow-previousflow) / 3.0f;
-
-	}
-	else if (App->scene->secondStage)
-	{
-		App->map->paralaxRef[0] -= (parallaxflow - previousflow) / 10.0f;
-		App->map->paralaxRef[1] -= (parallaxflow - previousflow) / 3.0f;
-	}
-
+	
 	// ---------------------- //
 
 	// --- Blitting player ---

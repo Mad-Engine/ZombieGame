@@ -29,23 +29,6 @@ struct Properties
 };
 
 //struct with the infornmation of the parallax layers
-struct ImageLayer
-{
-	SDL_Rect GetParalaxRect() const;
-
-	p2SString	name;
-	int			width;
-	int			height;
-	SDL_Texture* texture;
-
-	ImageLayer() {}
-
-	~ImageLayer() 
-	{
-		
-	}
-
-};
 
 struct MapLayer
 {
@@ -110,17 +93,10 @@ struct MapData
 	iPoint				bat1;
 	iPoint				bat2;
 	iPoint				finalpos;
-	iPoint				checkpoint1;
-	iPoint				checkpoint2;
-	iPoint				checkpoint3;
-	iPoint				orb;
-	iPoint				orb2;
-	iPoint				orb3;
 	SDL_Color			background_color;
 	MapTypes			type;
 	p2List<TileSet*>	tilesets;
 	p2List<MapLayer*>	layers;
-	p2List<ImageLayer*> paralaxlist;
 	Properties          properties;
 };
 
@@ -162,17 +138,14 @@ private:
 	bool LoadTilesetDetails(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadTilesetImage(pugi::xml_node& tileset_node, TileSet* set);
 	bool LoadLayer(pugi::xml_node& node, MapLayer* layer);
-	bool LoadParallax(pugi::xml_node& node, ImageLayer* image);
 
 
 public:
 
 	MapData data;
 	MapData data2;
-
 	int numberStages = 0;
-	float speed[2];
-	float paralaxRef[2];
+	
 	int					offset=0;
 
 private:

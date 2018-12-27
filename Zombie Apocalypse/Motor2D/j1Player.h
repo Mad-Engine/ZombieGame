@@ -94,8 +94,7 @@ public:
 
 public:
 
-	int parallaxflow = 0;
-	int previousflow = 0;
+
 
 	Playerdata playerinfo;
 	SDL_Rect Intersection = { 0,0,0,0 };
