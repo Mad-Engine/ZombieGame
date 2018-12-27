@@ -74,7 +74,7 @@ void j1Player::UpdateEntityMovement(float dt)
 
 	
 
-	/*switch (EntityMovement)
+	switch (EntityMovement)
 	{
 	case MOVEMENT::RIGHTWARDS:
 		Accumulative_pos_Right += Velocity.x*dt;
@@ -131,7 +131,7 @@ void j1Player::UpdateEntityMovement(float dt)
 
 		break;
 	}
-*/
+
 	entitycoll->SetPos(Future_position.x, Future_position.y);
 
 	App->coll->QueryCollisions(*entitycoll);
@@ -430,7 +430,7 @@ bool j1Player::PostUpdate(float dt)
 
 		else*/
 
-			App->render->Blit(spritesheet, Future_position.x - 3, Future_position.y, &CurrentAnimation->GetCurrentFrame(dt));
+			App->render->Blit(spritesheet, Future_position.x , Future_position.y, &CurrentAnimation->GetCurrentFrame(dt));
 	
 	
 	// ---------------------- //
