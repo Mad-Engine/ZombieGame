@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="54" tileheight="54" nextobjectid="10">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="54" tileheight="54" nextobjectid="16">
  <tileset firstgid="1" name="stageTileset" tilewidth="54" tileheight="54" tilecount="240" columns="24">
   <image source="stageTilesetx56.png" width="1296" height="540"/>
   <terraintypes>
@@ -10174,18 +10174,17 @@
   </data>
  </layer>
  <objectgroup name="initpos">
-  <object id="1" x="2793" y="2926" width="266" height="266"/>
+  <object id="10" x="1190" y="1188" width="50" height="52"/>
  </objectgroup>
  <objectgroup name="Enemies1">
-  <object id="4" x="133" y="665" width="266" height="266"/>
+  <object id="11" x="56" y="60" width="52" height="54"/>
+  <object id="15" x="58" y="2224" width="48" height="50"/>
  </objectgroup>
  <objectgroup name="Enemies2">
-  <object id="6" x="5054" y="133" width="266" height="266"/>
+  <object id="13" x="2220" y="2218" width="50" height="52"/>
  </objectgroup>
  <objectgroup name="Enemies3">
-  <object id="7" x="5586" y="5054" width="266" height="266"/>
+  <object id="12" x="2272" y="54" width="48" height="54"/>
  </objectgroup>
- <objectgroup name="Enemies4">
-  <object id="9" x="665" y="5586" width="266" height="266"/>
- </objectgroup>
+ <objectgroup name="Enemies4"/>
 </map>
