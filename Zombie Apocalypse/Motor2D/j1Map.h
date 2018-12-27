@@ -181,13 +181,8 @@ private:
 	pugi::xml_document	map_file;
 	bool				map_loaded ;
 	int					redCollision = NULL;
-	int					yellowCollision = NULL;
-	int					magentaCollision = NULL;
-	int					greenCollison = NULL;
 	int					redCollision2 = NULL;
-	int					yellowCollision2 = NULL;
-	int					magentaCollision2 = NULL;
-	int					greenCollison2 = NULL;
+
 	
 };
 

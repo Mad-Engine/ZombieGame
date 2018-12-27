@@ -27,13 +27,7 @@ bool j1Map::Awake(pugi::xml_node& config)
 
 	folder.create(config.child("folder").child_value());
 	redCollision = config.child("collision1").attribute("red").as_int();
-	//yellowCollision = config.child("collision1").attribute("yellow").as_int();
-	//magentaCollision = config.child("collision1").attribute("magenta").as_int();
-	//greenCollison = config.child("collision1").attribute("green").as_int();
 	redCollision2 = config.child("collision2").attribute("red").as_int();
-	//yellowCollision2 = config.child("collision2").attribute("yellow").as_int();
-	//magentaCollision2 = config.child("collision2").attribute("magenta").as_int();
-	//greenCollison2 = config.child("collision2").attribute("green").as_int();
 	speed[0] = config.child("parallax").attribute("speed").as_float();
 	speed[1] = config.child("parallax").attribute("speed2").as_float();
 	offset= config.child("offset").attribute("offset").as_int();
@@ -547,15 +541,6 @@ bool j1Map::ColliderDrawer(MapData& data)
 
 							if (tile_id == redCollision || tile_id== redCollision2)
 								App->coll->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_TYPE::COLLIDER_FLOOR,this);
-
-							/*else if (tile_id == yellowCollision || tile_id == yellowCollision2)
-								App->coll->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_TYPE::COLLIDER_SPIKES,this);
-
-							else if (tile_id == magentaCollision || tile_id == magentaCollision2)
-								App->coll->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_TYPE::COLLIDER_PLATFORM,this);
-
-							else if (tile_id == greenCollison || tile_id == greenCollison2)
-								App->coll->AddCollider({ pos.x,pos.y,data.tile_width,data.tile_height }, COLLIDER_TYPE::COLLIDER_ROOF, this);*/
 
 						}
 					}
