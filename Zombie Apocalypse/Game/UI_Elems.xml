@@ -27,7 +27,7 @@
   <Element> 2 - BUTTON BACK TO MAIN MENU
     <type id="1" />
     <parent id="-1"/>
-    <position x="550" y="600"/>
+    <position x="525" y="600"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="236" h="140" />
     <normal_rect x="696" y="1093" w="236" h="140"/>
