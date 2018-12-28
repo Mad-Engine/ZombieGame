@@ -60,7 +60,7 @@
   <entities>
 
 
-
+    <player>
     <folder>animation/girl2.tmx</folder>
     <texture>textures/BasiAnimationGirlx124x114.png</texture>
     <collider x="5" y="4" width="60" height="60"/>
