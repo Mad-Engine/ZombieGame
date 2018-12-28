@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="3735" height="1195" tilewidth="1" tileheight="1" nextobjectid="222">
+ <imagelayer name="Image Layer 1">
+  <image source="../textures/ItemsSpritesheet.png" width="270" height="180"/>
+ </imagelayer>
+ <objectgroup name=" money">
+  <object id="221" x="0" y="0" width="90" height="60"/>
+  <object id="1" x="0" y="60" width="90" height="60"/>
+ </objectgroup>
+ <objectgroup name=" gun">
+  <object id="2" x="90" y="0" width="90" height="60"/>
+  <object id="3" x="90" y="60" width="90" height="60"/>
+ </objectgroup>
+ <objectgroup name="health">
+  <object id="4" x="180" y="0" width="90" height="60"/>
+  <object id="5" x="180" y="60" width="90" height="60"/>
+ </objectgroup>
+ <objectgroup name=" Ammo">
+  <object id="225" x="0" y="120" width="90" height="60"/>
+  <object id="226" x="90" y="120" width="90" height="60"/>
+ </objectgroup>
+</map>
