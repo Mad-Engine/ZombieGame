@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="3735" height="1195" tilewidth="1" tileheight="1" nextobjectid="221">
+ <imagelayer name="Image Layer 1">
+  <image source="../textures/TiledAnimationTexture/BasiAnimationGirlx124x114.jpg" width="1860" height="570"/>
+ </imagelayer>
+ <objectgroup name="shotgun walk">
+  <object id="217" x="992.1" y="456" width="123.93" height="114.03"/>
+  <object id="219" x="1116.04" y="456" width="123.93" height="114.03"/>
+  <object id="220" x="1239.97" y="456" width="123.93" height="114.03"/>
+  <object id="221" x="1363.9" y="456" width="123.93" height="114.03"/>
+  <object id="222" x="1487.83" y="456" width="123.93" height="114.03"/>
+  <object id="223" x="1611.76" y="456" width="123.93" height="114.03"/>
+  <object id="224" x="1735.69" y="456" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="shotgun">
+  <object id="210" x="868.17" y="456" width="123.93" height="114.03"/>
+  <object id="211" x="744.24" y="456" width="123.93" height="114.03"/>
+  <object id="212" x="620.31" y="456" width="123.93" height="114.03"/>
+  <object id="213" x="496.38" y="456" width="123.93" height="114.03"/>
+  <object id="214" x="372.45" y="456" width="123.93" height="114.03"/>
+  <object id="215" x="248.52" y="456" width="123.93" height="114.03"/>
+  <object id="216" x="124.59" y="456" width="123.93" height="114.03"/>
+  <object id="216" x="0.66" y="456" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="knife">
+  <object id="210" x="868.17" y="341.97" width="123.93" height="114.03"/>
+  <object id="211" x="744.24" y="341.97" width="123.93" height="114.03"/>
+  <object id="212" x="620.31" y="341.97" width="123.93" height="114.03"/>
+  <object id="213" x="496.38" y="341.97" width="123.93" height="114.03"/>
+  <object id="214" x="372.45" y="341.97" width="123.93" height="114.03"/>
+  <object id="215" x="248.52" y="341.97" width="123.93" height="114.03"/>
+  <object id="216" x="124.59" y="341.97" width="123.93" height="114.03"/>
+  <object id="216" x="0.66" y="341.97" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="knife walk">
+  <object id="225" x="992.1" y="341.97" width="123.93" height="114.03"/>
+  <object id="226" x="1116.04" y="341.97" width="123.93" height="114.03"/>
+  <object id="227" x="1239.97" y="341.97" width="123.93" height="114.03"/>
+  <object id="228" x="1363.9" y="341.97" width="123.93" height="114.03"/>
+  <object id="229" x="1487.83" y="341.97" width="123.93" height="114.03"/>
+  <object id="230" x="1611.76" y="341.97" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="gun">
+  <object id="220" x="372.45" y="227.94" width="123.93" height="114.03"/>
+  <object id="1" x="248.52" y="227.94" width="123.93" height="114.03"/>
+  <object id="2" x="124.59" y="227.94" width="123.93" height="114.03"/>
+  <object id="3" x="0.66" y="227.94" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="gun walk">
+  <object id="4" x="992.1" y="227.94" width="123.93" height="114.03"/>
+  <object id="5" x="1116.04" y="227.94" width="123.93" height="114.03"/>
+  <object id="6" x="1239.97" y="227.94" width="123.93" height="114.03"/>
+  <object id="7" x="868.17" y="227.94" width="123.93" height="114.03"/>
+  <object id="8" x="744.24" y="227.94" width="123.93" height="114.03"/>
+  <object id="9" x="620.31" y="227.94" width="123.93" height="114.03"/>
+  <object id="10" x="496.38" y="227.94" width="123.93" height="114.03"/>
+ </objectgroup>
+ <objectgroup name="flame thrower"/>
+ <objectgroup name="flame walk"/>
+ <objectgroup name="dead">
+  <object id="11" x="620.31" y="0" width="123.93" height="114.03"/>
+  <object id="12" x="496.38" y="0" width="123.93" height="114.03"/>
+  <object id="13" x="372.45" y="0" width="123.93" height="114.03"/>
+  <object id="14" x="248.52" y="0" width="123.93" height="114.03"/>
+  <object id="15" x="124.59" y="0" width="123.93" height="114.03"/>
+  <object id="16" x="0.66" y="0" width="123.93" height="114.03"/>
+ </objectgroup>
+</map>
