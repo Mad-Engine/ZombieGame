@@ -72,23 +72,26 @@ bool j1Player::Start()
 void j1Player::UpdateEntityMovement(float dt)
 {
 
-	
-
 	switch (EntityMovement)
 	{
-	case MOVEMENT::RIGHTWARDS:
-		Accumulative_pos_Right += Velocity.x*dt;
 
-		if (Accumulative_pos_Right > 1.1)
-		{
-			Future_position.x += Accumulative_pos_Right;
-			Accumulative_pos_Right -= Accumulative_pos_Right;
-		}
+	case MOVEMENT::RIGHTWARDS:
+		//Accumulative_pos_Right += Velocity.x*dt;
+
+		//if (Accumulative_pos_Right > 1.1)
+		//{
+		//	Future_position.x += Accumulative_pos_Right;
+		//	Accumulative_pos_Right -= Accumulative_pos_Right;
+		//}
+
+		Future_position.x += Velocity.x * dt/1.5f;
 		break;
 	case MOVEMENT::LEFTWARDS:
-		Accumulative_pos_Left += Velocity.x*dt;
+		Future_position.x -= Velocity.x * dt/1.25f;
 
-		/*if (on_air)
+		/*Accumulative_pos_Left += Velocity.x*dt;
+
+		if (on_air)
 		{
 			if (Accumulative_pos_Left > 1.0)
 			{
@@ -97,19 +100,20 @@ void j1Player::UpdateEntityMovement(float dt)
 
 				Accumulative_pos_Left -= Accumulative_pos_Left;
 			}
-		}*/
+		}
 
 		if (Accumulative_pos_Left > 1.5)
 		{
 			Future_position.x -= Accumulative_pos_Left;
 			Accumulative_pos_Left -= Accumulative_pos_Left;
-		}
+		}*/
 
 		break;
 	case MOVEMENT::UPWARDS:
 
 		Future_position.y -= Velocity.x*dt;
-		/*Accumulative_pos_Up += Velocity.y*dt;
+		/*Future_position.y -= Velocity.x*dt;
+		Accumulative_pos_Up += Velocity.y*dt;
 
 		if (Accumulative_pos_Up > 0.75)
 		{
@@ -119,9 +123,10 @@ void j1Player::UpdateEntityMovement(float dt)
 		break;
 	case MOVEMENT::DOWNWARDS:
 
-		Future_position.y += Velocity.x*dt;
+		Future_position.y += Velocity.x*2.0f*dt;
+		/*Future_position.y += Velocity.x*dt;
 
-		/*Accumulative_pos_Down += Velocity.y*dt;
+		Accumulative_pos_Down += Velocity.y*dt;
 
 		if (Accumulative_pos_Down > 1.0)
 		{
@@ -303,6 +308,8 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::RIGHTWARDS;
 		}
 
+		if (EntityMovement != MOVEMENT::STATIC)
+			UpdateEntityMovement(dt);
 
 		// --- LEFT ---
 		if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT &&
@@ -311,6 +318,8 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::LEFTWARDS;
 		}
 
+		if (EntityMovement != MOVEMENT::STATIC)
+			UpdateEntityMovement(dt);
 
 		// --- UP ---
 		if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT &&
@@ -319,6 +328,8 @@ bool j1Player::Update(float dt)
 			EntityMovement = MOVEMENT::UPWARDS;
 		}
 
+		if (EntityMovement != MOVEMENT::STATIC)
+			UpdateEntityMovement(dt);
 
 		// --- DOWN ---
 		if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT &&
