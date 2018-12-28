@@ -367,7 +367,7 @@ bool j1Player::PostUpdate(float dt)
 
 	CurrentAnimation = playerinfo.WalkGun;
 
-	App->render->Blit(spritesheet, Future_position.x-90 , Future_position.y-23, &CurrentAnimation->GetCurrentFrame(dt));
+	App->render->Blit(spritesheet, Future_position.x - 40.0f , Future_position.y - 10.0f, &CurrentAnimation->GetCurrentFrame(dt));
 	
 	
 	// ---------------------- //
