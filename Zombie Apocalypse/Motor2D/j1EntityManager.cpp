@@ -35,19 +35,6 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.folder.create(playernode.child("folder").child_value());
 	playerinfo.Texture.create(playernode.child("texture").child_value());
 
-	playerinfo.idleRight = LoadAnimation(playerinfo.folder.GetString(), "idle right");
-	playerinfo.idleLeft = LoadAnimation(playerinfo.folder.GetString(), "idle left");
-	playerinfo.runRight = LoadAnimation(playerinfo.folder.GetString(), "run right");
-	playerinfo.runLeft = LoadAnimation(playerinfo.folder.GetString(), "run left");
-	playerinfo.jumpingRight = LoadAnimation(playerinfo.folder.GetString(), "jump right");
-	playerinfo.jumpingLeft = LoadAnimation(playerinfo.folder.GetString(), "jump left");
-	playerinfo.fallingRight = LoadAnimation(playerinfo.folder.GetString(), "air right");
-	playerinfo.fallingLeft = LoadAnimation(playerinfo.folder.GetString(), "air left");
-	playerinfo.deathRight = LoadAnimation(playerinfo.folder.GetString(), "dead right");
-	playerinfo.deathLeft = LoadAnimation(playerinfo.folder.GetString(), "dead left");
-	playerinfo.airRight = LoadAnimation(playerinfo.folder.GetString(), "air right");
-	playerinfo.airLeft = LoadAnimation(playerinfo.folder.GetString(), "air left");
-
 	//zombie Game
 	playerinfo.Walkknife= LoadAnimation(playerinfo.folder.GetString(), "knife walk");
 	playerinfo.WalkShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun walk");
@@ -73,22 +60,11 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.gravity = playernode.child("gravity").attribute("value").as_float();
 	playerinfo.jump_force = playernode.child("Velocity").attribute("jump_force").as_float();
 
-	playerinfo.idleRight->speed = 10.0f;
-	playerinfo.idleLeft->speed = 10.0f;
-	playerinfo.runRight->speed = 10.0f;
-	playerinfo.runLeft->speed =  10.0f;
-	playerinfo.jumpingRight->speed = 10.0f;
-	playerinfo.jumpingLeft->speed = 10.0f;
-	playerinfo.fallingRight->speed = 10.0f;
-	playerinfo.fallingLeft->speed = 10.0f;
-	playerinfo.deathRight->speed = 10.0f;
-	playerinfo.deathLeft->speed = 10.0f;
-	playerinfo.airRight->speed = 10.0f;
-	playerinfo.airLeft->speed = 10.0f;
 
-	playerinfo.deathRight->loop = false;
+
+	/*playerinfo.deathRight->loop = false;
 	playerinfo.deathLeft->loop = false;
-	
+	*/
 
 
 	//zombie Game

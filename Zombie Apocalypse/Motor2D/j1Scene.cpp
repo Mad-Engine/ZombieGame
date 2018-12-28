@@ -69,15 +69,15 @@ bool j1Scene::Start()
 	// --- Creating entity  ---
 	player = (j1Player*)App->entities->CreateEntity("player", entity_type::PLAYER);
 	
-	bat = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
-	bat2 = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
+	//bat = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
+	//bat2 = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
 
-	slime = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
-	slime2 = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
+	//slime = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
+	//slime2 = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
 
-	orb = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
-	orb2 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
-	orb3 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
+	//orb = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
+	//orb2 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
+	//orb3 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
 
 	//Loading both maps
 
@@ -115,7 +115,7 @@ bool j1Scene::Start()
 		player->Future_position.x = App->map->data.initpos.x;
 		player->Future_position.y = App->map->data.initpos.y;
 		
-		slime->position.x = App->map->data.slime1.x;
+		/*slime->position.x = App->map->data.slime1.x;
 		slime->position.y = App->map->data.slime1.y;
 
 		slime2->position.x = App->map->data.slime2.x;
@@ -134,7 +134,7 @@ bool j1Scene::Start()
 		orb2->position.y = App->map->data.orb2.y;
 
 		orb3->position.x = App->map->data.orb3.x;
-		orb3->position.y = App->map->data.orb3.y;
+		orb3->position.y = App->map->data.orb3.y;*/
 
 		//stage1Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
 		//App->audio->PlayMusic(stage1Music.GetString());
@@ -156,7 +156,7 @@ bool j1Scene::Start()
 		player->Future_position.x = App->map->data2.initpos.x;
 		player->Future_position.y = App->map->data2.initpos.y;
 
-		slime->position.x = App->map->data2.slime1.x;
+		/*slime->position.x = App->map->data2.slime1.x;
 		slime->position.y = App->map->data2.slime1.y;
 
 		slime2->position.x = App->map->data2.slime2.x;
@@ -176,7 +176,7 @@ bool j1Scene::Start()
 
 		orb3->position.x = App->map->data2.orb3.x;
 		orb3->position.y = App->map->data2.orb3.y;
-
+*/
 		//stage2Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->next->data->GetString());
 		//App->audio->PlayMusic(stage2Music.GetString());
 
@@ -192,7 +192,7 @@ bool j1Scene::Start()
 	}
 
 	// --- Initial position for enemies ---
-	xSlime = slime->position.x;
+	/*xSlime = slime->position.x;
 	ySlime = slime->position.y;
 
 	xSlime2 = slime2->position.x;
@@ -202,7 +202,7 @@ bool j1Scene::Start()
 	yBat = bat->position.y;
 
 	xBat2 = bat2->position.x;
-	yBat2 = bat2->position.y;
+	yBat2 = bat2->position.y;*/
 
 
 	App->map->ColliderDrawer(App->map->data);
@@ -274,44 +274,7 @@ bool j1Scene::PreUpdate()
 	//	}
 	//}
 
-			//Checkpoint
-			// Player pos    ------------------------------   area around checkpoint
-	if (//checkoint 1
-		player->Future_position.x <= App->map->data.checkpoint1.x + 5        &&
-		player->Future_position.x >= App->map->data.checkpoint1.x - 5        &&
-		player->Future_position.y <= App->map->data.checkpoint1.y + App->map->data.tile_height*2			&&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint1.y - App->map->data.tile_height*2 
-		||//checkoint 2
-		player->Future_position.x <= App->map->data.checkpoint2.x + 5 &&
-		player->Future_position.x >= App->map->data.checkpoint2.x - 5 &&
-		player->Future_position.y <= App->map->data.checkpoint2.y + App->map->data.tile_height * 2 &&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint2.y - App->map->data.tile_height * 2
-		|| //checkoint 3
-		player->Future_position.x <= App->map->data.checkpoint3.x + 5 &&
-		player->Future_position.x >= App->map->data.checkpoint3.x - 5 &&
-		player->Future_position.y <= App->map->data.checkpoint3.y + App->map->data.tile_height * 2 &&
-		player->Future_position.y + App->map->data.tile_height >= App->map->data.checkpoint3.y - App->map->data.tile_height * 2
-		||
-		//checkoint 1 second map
-		player->Future_position.x <= App->map->data2.checkpoint1.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint1.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint1.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint1.y - App->map->data2.tile_height * 2
-		||//checkoint 2 second map
-		player->Future_position.x <= App->map->data2.checkpoint2.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint2.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint2.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint2.y - App->map->data2.tile_height * 2
-		|| //checkoint 3 second map
-		player->Future_position.x <= App->map->data2.checkpoint3.x + 5 &&
-		player->Future_position.x >= App->map->data2.checkpoint3.x - 5 &&
-		player->Future_position.y <= App->map->data2.checkpoint3.y + App->map->data2.tile_height * 2 &&
-		player->Future_position.y + App->map->data2.tile_height >= App->map->data2.checkpoint3.y - App->map->data2.tile_height * 2)
-
-	{
-		App->SaveGame("save_game.xml");
-	}
-
+	
 
 	//win condition
 	if (firstStage && (player->Future_position.x >= App->map->data.finalpos.x) && (player->Future_position.y <= App->map->data.finalpos.y))
@@ -1069,12 +1032,6 @@ bool j1Scene::change_scene(const char* map_name) {
 
 	Fade(245, 245, 245, 2.0);
 
-	App->map->paralaxRef[0] = App->map->offset;
-	App->map->paralaxRef[1] = App->map->offset;
-
-	player->parallaxflow = 0;
-	player->previousflow = 0;
-	player->orbs_number = 0; //player must save and load this
 	App->coll->CleanUp();
 
 	
@@ -1121,7 +1078,7 @@ bool j1Scene::change_scene(const char* map_name) {
 		RELEASE_ARRAY(buffer_data);
 	}
 
-	player->CurrentAnimation = player->playerinfo.idleRight;
+	//player->CurrentAnimation = player->playerinfo.idleRight;
 
 	setStandarEntityPosition(map_name);
 
@@ -1206,14 +1163,14 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 	player->entitycoll->SetPos(player->position.x, player->position.y);
 
-	slime->entitycoll->SetPos(slime->position.x, slime->position.y);
+	/*slime->entitycoll->SetPos(slime->position.x, slime->position.y);
 	
 	slime2->entitycoll->SetPos(slime2->position.x, slime2->position.y);
 
 	bat->entitycoll->SetPos(bat->position.x, bat->position.y);
 
 	bat2->entitycoll->SetPos(bat2->position.x, bat2->position.y);
-
+*/
 	
 
 
@@ -1223,7 +1180,7 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 void j1Scene::setStandarEntityPosition(const char* map_name)
 {
-	player->CurrentAnimation = player->playerinfo.idleRight;
+	//player->CurrentAnimation = player->playerinfo.idleRight;
 	// set entity position defined on tiled
 	if (FirstStage == map_name)
 	{
@@ -1231,7 +1188,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		player->Future_position.x = App->map->data.initpos.x;
 		player->Future_position.y = App->map->data.initpos.y;
 
-		slime->position.x = App->map->data.slime1.x;
+		/*slime->position.x = App->map->data.slime1.x;
 		slime->position.y = App->map->data.slime1.y;
 
 		slime2->position.x = App->map->data.slime2.x;
@@ -1250,7 +1207,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		orb2->position.y = App->map->data.orb2.y;
 	
 		orb3->position.x = App->map->data.orb3.x;
-		orb3->position.y = App->map->data.orb3.y;
+		orb3->position.y = App->map->data.orb3.y;*/
 		
 	
 
@@ -1262,7 +1219,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		player->Future_position.x = App->map->data2.initpos.x;
 		player->Future_position.y = App->map->data2.initpos.y;
 
-		slime->position.x = App->map->data2.slime1.x;
+		/*slime->position.x = App->map->data2.slime1.x;
 		slime->position.y = App->map->data2.slime1.y;
 
 		slime2->position.x = App->map->data2.slime2.x;
@@ -1282,7 +1239,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 
 		orb3->position.x = App->map->data2.orb3.x;
 		orb3->position.y = App->map->data2.orb3.y;
-
+*/
 	}
 
 	// set colliders
@@ -1290,7 +1247,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	player->entitycoll = App->coll->AddCollider(player->entitycollrect, COLLIDER_TYPE::COLLIDER_PLAYER, App->entities);
 	player->entitycoll->SetPos(player->position.x, player->position.y);
 
-	slime->entitycoll = App->coll->AddCollider(slime->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_SLIME, App->entities);
+	/*slime->entitycoll = App->coll->AddCollider(slime->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_SLIME, App->entities);
 	slime->entitycoll->SetPos(slime->position.x, slime->position.y);
 
 	slime2->entitycoll = App->coll->AddCollider(slime2->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_SLIME, App->entities);
@@ -1309,7 +1266,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	orb2->entitycoll->SetPos(orb2->position.x, orb2->position.y);
 
 	orb3->entitycoll = App->coll->AddCollider(orb3->entitycollrect, COLLIDER_TYPE::COLLIDER_ORB, App->entities);
-	orb3->entitycoll->SetPos(orb3->position.x, orb3->position.y);
+	orb3->entitycoll->SetPos(orb3->position.x, orb3->position.y);*/
 
 	// orbs obtain and score
 
@@ -1319,7 +1276,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 
 	player->active = true;
 	player->dead = false;
-	slime->active = true;
+	/*slime->active = true;
 	slime->dead = false;
 	slime2->active = true;
 	slime2->dead = false;
@@ -1332,7 +1289,7 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	orb2->active = true;
 	orb2->touched = false;
 	orb3->active = true;
-	orb3->touched = false;
+	orb3->touched = false;*/
 }
 
 void j1Scene::loadSaveDataEntity()

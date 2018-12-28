@@ -5,7 +5,7 @@
   <Element>  0 - PANEL OrBit Title
     <type id="0" />
     <parent id="-1"/>
-    <position x="312" y="25"/>
+    <position x="420" y="50"/>
     <Texture path="gui/logo.png"/>
     <logic_rect w="401" h="171" />
     <normal_rect x="0" y="0" w="401" h="171"/>
@@ -27,7 +27,7 @@
   <Element> 2 - BUTTON BACK TO MAIN MENU
     <type id="1" />
     <parent id="-1"/>
-    <position x="420" y="500"/>
+    <position x="525" y="600"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="236" h="140" />
     <normal_rect x="696" y="1093" w="236" h="140"/>
@@ -38,7 +38,7 @@
   <Element> 3 - BUTTON QUIT
     <type id="1" />
     <parent id="0"/>
-    <position x="-250" y="0"/>
+    <position x="-350" y="0"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="69" h="69" />
     <normal_rect x="283" y="781" w="69" h="69"/>
@@ -49,7 +49,7 @@
   <Element> 4 - BUTTON START
     <type id="1" />
     <parent id="0"/>
-    <position x="439" y="450"/>
+    <position x="589" y="450"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="236" h="140" />
     <normal_rect x="696" y="1093" w="236" h="140"/>
@@ -60,7 +60,7 @@
   <Element> 5 - BUTTON CREDITS TRIGGER
     <type id="1" />
     <parent id="0"/>
-    <position x="50" y="522"/>
+    <position x="50" y="725"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="330" h="226" />
     <normal_rect x="985" y="750" w="330" h="226"/>
@@ -71,7 +71,7 @@
   <Element> 6 - BUTTON SETTINGS TRIGGER MAIN MENU
     <type id="1" />
     <parent id="0"/>
-    <position x="-300" y="522"/>
+    <position x="-300" y="725"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="330" h="226" />
     <normal_rect x="985" y="750" w="330" h="226"/>
@@ -93,7 +93,7 @@
   <Element> 8 - PANEL CREDITS MAIN MENU
     <type id="0" />
     <parent id="5"/>
-    <position x="-50" y="-400"/>
+    <position x="-25" y="-500"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="425" h="451" />
     <normal_rect x="500" y="299" w="425" h="451"/>
@@ -104,9 +104,9 @@
   <Element> 9 - PANEL SETTINGS IN GAME
     <type id="0" />
     <parent id="7"/>
-    <position x="-100" y="-280"/>
+    <position x="-100" y="-180"/>
     <Texture path="gui/atlas.png"/>
-    <logic_rect w="425" h="254" />
+    <logic_rect w="325" h="254" />
     <normal_rect x="500" y="34" w="425" h="254"/>
     <hover_rect x="500" y="34" w="425" h="254"/>
     <click_rect x="50" y="34"  w="425" h="254"/>
@@ -325,7 +325,7 @@ SOFTWARE."/>
 <Element> 28 - PANEL SETTINGS MAIN MENU
     <type id="0" />
     <parent id="6"/>
-    <position x="100" y="-280"/>
+    <position x="300" y="-400"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="425" h="254" />
     <normal_rect x="500" y="34" w="425" h="254"/>
@@ -453,7 +453,7 @@ SOFTWARE."/>
   <Element> 40 - BUTTON CONTINUE
     <type id="1" />
     <parent id="0"/>
-    <position x="439" y="300"/>
+    <position x="589" y="300"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="236" h="140" />
     <normal_rect x="696" y="1093" w="236" h="140"/>

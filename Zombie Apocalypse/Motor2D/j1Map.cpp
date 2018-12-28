@@ -28,12 +28,8 @@ bool j1Map::Awake(pugi::xml_node& config)
 	folder.create(config.child("folder").child_value());
 	redCollision = config.child("collision1").attribute("red").as_int();
 	redCollision2 = config.child("collision2").attribute("red").as_int();
-	speed[0] = config.child("parallax").attribute("speed").as_float();
-	speed[1] = config.child("parallax").attribute("speed2").as_float();
 	offset= config.child("offset").attribute("offset").as_int();
-	
-	paralaxRef[0] = offset;
-	paralaxRef[1] = offset;
+
 
 	return ret;
 }
@@ -92,17 +88,6 @@ bool j1Map::CleanUp()
 			item2 = item2->next;
 		}
 		MapataItem->layers.clear();
-
-		// Remove all Pralax image
-		p2List_item<ImageLayer*>* item3;
-		item3 = MapataItem->paralaxlist.start;
-
-		while (item3 != NULL)
-		{
-			RELEASE(item3->data);
-			item3 = item3->next;
-		}
-		MapataItem->paralaxlist.clear();
 
 
 		// Clean up the pugui tree
@@ -166,18 +151,6 @@ bool j1Map::Load(const char* file_name, MapData& dataRef)
 			dataRef.layers.add(lay);
 	}
 
-	//Load Image info ----------------------------
-	pugi::xml_node paralaxNode;
-	for (paralaxNode = map_file.child("map").child("imagelayer"); paralaxNode && ret; paralaxNode = paralaxNode.next_sibling("imagelayer"))
-	{
-		ImageLayer* imageList = new ImageLayer();
-
-		ret = LoadParallax(paralaxNode, imageList);
-
-		if (ret == true)
-			dataRef.paralaxlist.add(imageList);
-	}
-
 
 	if(ret == true)
 	{
@@ -212,15 +185,6 @@ bool j1Map::Load(const char* file_name, MapData& dataRef)
 			item_layer = item_layer->next;
 		}
 
-		p2List_item<ImageLayer*>* item_imageParalax = dataRef.paralaxlist.start;
-		while (item_imageParalax != NULL)
-		{
-			ImageLayer* i = item_imageParalax->data;
-			LOG("Paralax image ----");
-			LOG("name: %s", i->name.GetString());
-			LOG("tile width: %d tile height: %d", i->width, i->height);
-			item_imageParalax = item_imageParalax->next;
-		}
 	}
 
 	map_loaded = ret;
@@ -267,7 +231,7 @@ bool j1Map::LoadMap(MapData& data)
 				data.finalpos.x = mapIterator.child("object").attribute("x").as_int();
 				data.finalpos.y = mapIterator.child("object").attribute("y").as_int() + mapIterator.child("object").attribute("height").as_int();
 			}
-			else if (tmp == "slime1")
+			/*else if (tmp == "slime1")
 			{
 				data.slime1.x = mapIterator.child("object").attribute("x").as_int();
 				data.slime1.y = mapIterator.child("object").attribute("y").as_int();
@@ -286,37 +250,9 @@ bool j1Map::LoadMap(MapData& data)
 			{
 				data.bat2.x = mapIterator.child("object").attribute("x").as_int(); 
 				data.bat2.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "checkpoint1")
-			{
-				data.checkpoint1.x = mapIterator.child("object").attribute("x").as_int();
-				data.checkpoint1.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "checkpoint2")
-			{
-				data.checkpoint2.x = mapIterator.child("object").attribute("x").as_int();
-				data.checkpoint2.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "checkpoint3")
-			{
-				data.checkpoint3.x = mapIterator.child("object").attribute("x").as_int();
-				data.checkpoint3.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "orb1")
-			{
-				data.orb.x = mapIterator.child("object").attribute("x").as_int();
-				data.orb.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "orb2")
-			{
-				data.orb2.x = mapIterator.child("object").attribute("x").as_int();
-				data.orb2.y = mapIterator.child("object").attribute("y").as_int();
-			}
-			else if (tmp == "orb3")
-			{
-				data.orb3.x = mapIterator.child("object").attribute("x").as_int();
-				data.orb3.y = mapIterator.child("object").attribute("y").as_int();
-			}
+			}*/
+			
+			
 		}
 		
 
@@ -499,18 +435,6 @@ bool Properties::LoadProperties(pugi::xml_node& node)
 	return ret;
 }
 
-bool j1Map::LoadParallax(pugi::xml_node& node, ImageLayer* image)
-{
-	bool ret = true;
-
-	image->name = node.attribute("name").as_string();
-	image->width = node.child("image").attribute("width").as_int();
-	image->height = node.child("image").attribute("height").as_int();
-	image->texture = App->tex->Load(PATH(folder.GetString(), node.child("image").attribute("source").as_string()));
-
-	return ret;
-}
-
 bool j1Map::ColliderDrawer(MapData& data)
 {
 	bool ret = true;
@@ -560,14 +484,6 @@ void j1Map::Draw(MapData &data)
 
 	if (map_loaded == false)
 		return;
-
-	for (int x = 0; x < data.paralaxlist.count(); ++x)
-	{
-		App->render->Blit(data.paralaxlist[x]->texture,
-			paralaxRef[x],
-			0,
-			&data.paralaxlist[x]->GetParalaxRect());
-	}
 
 
 	//draw all the layers and not just the first one
@@ -712,20 +628,6 @@ SDL_Rect TileSet::GetTileRect(int id) const
 
 	rect.x = margin + ((rect.w + spacing) * (relative_id % num_tiles_width));
 	rect.y = margin + ((rect.h + spacing) * (relative_id / num_tiles_width));
-
-
-	return rect;
-}
-
-SDL_Rect ImageLayer::GetParalaxRect() const
-{
-	SDL_Rect rect;
-
-	rect.w = width;
-	rect.h = height;
-
-	rect.x = 0;
-	rect.y = 0;
 
 
 	return rect;

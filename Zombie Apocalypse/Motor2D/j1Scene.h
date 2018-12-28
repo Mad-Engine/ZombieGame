@@ -92,7 +92,7 @@ public:
 
 	p2List<p2SString*> StageList;
 	p2SString FirstStage;
-	
+
 	bool firstStage = true;
 	bool secondStage = false;
 	iPoint camera1;
@@ -103,13 +103,13 @@ public:
 
 	//Entities on map
 	j1Player*           player = nullptr;
-	j1Slime*			slime = nullptr;
+	/*j1Slime*			slime = nullptr;
 	j1Slime*			slime2 = nullptr;
 	j1Bat*				bat = nullptr;
 	j1Bat*				bat2 = nullptr;
 	j1Orb*				orb = nullptr;
 	j1Orb*				orb2 = nullptr;
-	j1Orb*				orb3 = nullptr;
+	j1Orb*				orb3 = nullptr;*/
 
 	//variables used on module collision
 	int areaofcollision = 0;

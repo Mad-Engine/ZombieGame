@@ -10,19 +10,6 @@ struct Collider;
 
 struct Playerdata {
 
-	Animation* idleRight = nullptr;
-	Animation* idleLeft = nullptr;
-	Animation* runRight = nullptr;
-	Animation* runLeft = nullptr;
-	Animation* jumpingRight = nullptr;
-	Animation* jumpingLeft = nullptr;
-	Animation* fallingRight = nullptr;
-	Animation* fallingLeft = nullptr;
-	Animation* deathRight = nullptr;
-	Animation* deathLeft = nullptr;
-	Animation* airRight = nullptr;
-	Animation* airLeft = nullptr;
-
 	Animation* Idleknife = nullptr;
 	Animation* IdleShotgun = nullptr;
 	Animation* IdleFlame = nullptr;
@@ -56,7 +43,7 @@ enum class MOVEMENT
 	RIGHTWARDS,
 	LEFTWARDS,
 	UPWARDS,
-	FREEFALL,
+	DOWNWARDS,
 
 	STATIC
 };
@@ -107,8 +94,7 @@ public:
 
 public:
 
-	int parallaxflow = 0;
-	int previousflow = 0;
+
 
 	Playerdata playerinfo;
 	SDL_Rect Intersection = { 0,0,0,0 };

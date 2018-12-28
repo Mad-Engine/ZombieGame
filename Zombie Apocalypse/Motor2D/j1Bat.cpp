@@ -296,8 +296,8 @@ void j1Bat::OnCollision(Collider * c1, Collider * c2)
 
 			
 			LOG("actual lifes. %i", App->scene->player->lifes);
-			App->scene->player->playerinfo.deathRight->Reset();
-			App->scene->player->CurrentAnimation = App->scene->player->playerinfo.deathRight;
+			//App->scene->player->playerinfo.deathRight->Reset();
+			//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.deathRight;
 			App->scene->player->lifes -= 1;
 			LOG("now lifes. %i", App->scene->player->lifes);
 			App->scene->player->dead = true;

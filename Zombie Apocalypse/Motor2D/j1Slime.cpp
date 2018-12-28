@@ -299,8 +299,8 @@ void j1Slime::OnCollision(Collider * c1, Collider * c2)
 			entitycoll->SetPos(-10, -10);
 			
 			LOG("actual lifes. %i", App->scene->player->lifes);
-			App->scene->player->playerinfo.deathRight->Reset();
-			App->scene->player->CurrentAnimation = App->scene->player->playerinfo.deathRight;
+			//App->scene->player->playerinfo.deathRight->Reset();
+			//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.deathRight;
 			App->scene->player->lifes -= 1;
 			LOG("now lifes. %i", App->scene->player->lifes);
 			App->scene->player->dead = true;
