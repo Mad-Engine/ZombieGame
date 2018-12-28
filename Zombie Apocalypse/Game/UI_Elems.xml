@@ -223,10 +223,10 @@ SOFTWARE."/>
     <parent id="3"/>
     <position x="15" y="15"/>
     <Texture path="gui/atlas.png"/>
-    <logic_rect w="40" h="40" />
-    <normal_rect x="528" y="906" w="40" h="40"/>
-    <hover_rect x="528" y="906" w="40" h="40"/>
-    <click_rect x="528" y="906" w="40" h="40"/>
+    <logic_rect  w="51" h="50"/>
+    <normal_rect x="528" y="906" w="51" h="50"/>
+    <hover_rect x="528" y="906"  w="51" h="50"/>
+    <click_rect x="528" y="906"  w="51" h="50"/>
   </Element>
   
   <Element> 19 - LABEL START
