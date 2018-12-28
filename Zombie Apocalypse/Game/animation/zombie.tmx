@@ -1,39 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="2421" height="728" tilewidth="1" tileheight="1" nextobjectid="32">
  <imagelayer name="Image Layer 1">
-  <image source="../textures/Zombies color background.jpg" width="2421" height="728"/>
+  <image source="../textures/TiledAnimationTexture/Zombies.jpg" width="1116" height="378"/>
  </imagelayer>
  <objectgroup name="Dead">
-  <object id="1" x="0" y="485" width="269" height="242"/>
-  <object id="2" x="269" y="485" width="269" height="242"/>
-  <object id="4" x="538" y="485" width="269" height="242.125"/>
-  <object id="5" x="807" y="485" width="269" height="242.125"/>
-  <object id="7" x="1076" y="485" width="269" height="242"/>
-  <object id="9" x="1345" y="485" width="269" height="242.125"/>
-  <object id="10" x="1614" y="485" width="269" height="242.125"/>
-  <object id="11" x="1883" y="485" width="269" height="242.125"/>
-  <object id="13" x="2152" y="485" width="267" height="242.182"/>
- </objectgroup>
+   <object id="0" x="0" y="228" width="124" height="114"/>
+  <object id="1" x="124" y="228" width="124" height="114"/>
+  <object id="2" x="248" y="228" width="124" height="114"/>
+  <object id="3" x="372" y="228" width="124" height="114"/>
+  <object id="4" x="496" y="228" width="124" height="114"/>
+  <object id="5" x="620" y="228" width="124" height="114"/>
+  </objectgroup>
  <objectgroup name="attack">
-  <object id="14" x="0" y="242" width="269" height="242"/>
-  <object id="15" x="269" y="242" width="269" height="242"/>
-  <object id="16" x="538" y="242" width="269" height="242.125"/>
-  <object id="17" x="807" y="242" width="269" height="242.125"/>
-  <object id="18" x="1076" y="242" width="269" height="242"/>
-  <object id="19" x="1345" y="242" width="269" height="242.125"/>
-  <object id="20" x="1614" y="242" width="269" height="242.125"/>
-  <object id="21" x="1883" y="242" width="269" height="242.125"/>
-  <object id="22" x="2152" y="242" width="267" height="242.182"/>
- </objectgroup>
+  <object id="9" x="0" y="114" width="124" height="114"/>
+  <object id="10" x="124" y="114" width="124" height="114"/>
+  <object id="12" x="248" y="114" width="124" height="114"/>
+  <object id="13" x="372" y="114" width="124" height="114"/>
+  <object id="14" x="496" y="114" width="124" height="114"/>
+  <object id="15" x="620" y="114" width="124" height="114"/>
+  <object id="16" x="744" y="114" width="124" height="114"/>
+  <object id="17" x="868" y="114" width="124" height="114"/>
+  <object id="18" x="992" y="114" width="124" height="114"/>
+  </objectgroup>
  <objectgroup name="walk">
-  <object id="23" x="0" y="0" width="269" height="242"/>
-  <object id="24" x="269" y="0" width="269" height="242"/>
-  <object id="25" x="538" y="0" width="269" height="242.125"/>
-  <object id="26" x="807" y="0" width="269" height="242.125"/>
-  <object id="27" x="1076" y="0" width="269" height="242"/>
-  <object id="28" x="1345" y="0" width="269" height="242.125"/>
-  <object id="29" x="1614" y="0" width="269" height="242.125"/>
-  <object id="30" x="1883" y="0" width="269" height="242.125"/>
-  <object id="31" x="2152" y="0" width="267" height="242.182"/>
+  <object id="0" x="0" y="0" width="124" height="114"/>
+  <object id="1" x="124" y="0" width="124" height="114"/>
+  <object id="2" x="248" y="0" width="124" height="114"/>
+  <object id="3" x="372" y="0" width="124" height="114"/>
+  <object id="4" x="496" y="0" width="124" height="114"/>
+  <object id="5" x="620" y="0" width="124" height="114"/>
+  <object id="6" x="744" y="0" width="124" height="114"/>
+  <object id="7" x="868" y="0" width="124" height="114"/>
+  <object id="8" x="992" y="0" width="124" height="114"/>
  </objectgroup>
 </map>
