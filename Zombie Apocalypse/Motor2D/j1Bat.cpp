@@ -41,11 +41,12 @@ bool j1Bat::Start()
 	BatInfo.flyRight->speed = BatInfo.animationspeed/2.0f;
  	BatInfo.explote->speed = BatInfo.animationspeed;
 
-
 	gravity = BatInfo.gravity;
 
-	position.x = NULL;
-	position.y = NULL;
+	position.x = 300;
+	position.y = 300;
+
+	Velocity.x = BatInfo.Velocity.x;
 
 	entitystate = FLYING;
 
@@ -81,77 +82,106 @@ bool j1Bat::PostUpdate(float dt)
 {
 	bool ret = true;
 
+	CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
+
+	Pathfind(dt);
+
 	if (active && entitycoll!=nullptr)
 	{ 
 		if ((position.x)*App->win->GetScale() >= -App->render->camera.x && (position.x)*App->win->GetScale() <= -App->render->camera.x + App->render->camera.w)
-	{
-		//check for player nearby
+		{
+			//check for player nearby
 
-		if (!App->scene->player->god_mode &&
-			App->scene->player->Future_position.x > position.x - BatInfo.areaofaction &&
-			App->scene->player->Future_position.x < position.x + BatInfo.areaofaction &&
-			App->scene->player->Future_position.y < position.y + BatInfo.areaofaction &&
-			App->scene->player->Future_position.y > position.y - BatInfo.areaofaction)
-		{
-		
-			
-			CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
-
-			Pathfind(dt);
-
-		}
-
-		//Debug Purpose (moving bat around)
-		/*if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
-		{
-			position.x -= BatInfo.Velocity.x/10;
-			going_right=true;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT)
-		{
-			position.x += BatInfo.Velocity.x/10;
-			going_right = false;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
-		{
-			position.y -= BatInfo.Velocity.y/10;
-			going_up = true;
-		}
-		if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
-		{
-			position.y += BatInfo.Velocity.y/10;
-			going_down = true;
-		}*/
-
-		else
-		{
-			if (BatInfo.Velocity != BatInfo.auxVel)
+			if (!App->scene->player->god_mode &&
+				App->scene->player->Future_position.x > position.x - BatInfo.areaofaction &&
+				App->scene->player->Future_position.x < position.x + BatInfo.areaofaction &&
+				App->scene->player->Future_position.y < position.y + BatInfo.areaofaction &&
+				App->scene->player->Future_position.y > position.y - BatInfo.areaofaction)
 			{
-				BatInfo.Velocity = BatInfo.auxVel;
-			}
 
-			if (going_right)
-			{
-				position.x += BatInfo.Velocity.x*dt;
-			}
-			else if (!going_right)
-			{
-				position.x -= BatInfo.Velocity.x*dt;
+
+				//CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
+
+				//Pathfind(dt);
 
 			}
 
-			if (going_up)
+			//Debug Purpose (moving bat around)
+			/*if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
 			{
-				position.y += BatInfo.Velocity.y*dt;
-
+				position.x -= BatInfo.Velocity.x/10;
+				going_right=true;
 			}
-			else if (going_down)
+			if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT)
 			{
-				position.y -= BatInfo.Velocity.y*dt;
-
+				position.x += BatInfo.Velocity.x/10;
+				going_right = false;
 			}
+			if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
+			{
+				position.y -= BatInfo.Velocity.y/10;
+				going_up = true;
+			}
+			if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
+			{
+				position.y += BatInfo.Velocity.y/10;
+				going_down = true;
+			}*/
 
-		}
+			/*else
+			{
+				if (BatInfo.Velocity != BatInfo.auxVel)
+				{
+					BatInfo.Velocity = BatInfo.auxVel;
+				}
+
+				if (going_right)
+				{
+					position.x += BatInfo.Velocity.x*dt;
+				}
+				else if (!going_right)
+				{
+					position.x -= BatInfo.Velocity.x*dt;
+
+				}
+
+				if (going_up)
+				{
+					position.y += BatInfo.Velocity.y*dt;
+
+				}
+				else if (going_down)
+				{
+					position.y -= BatInfo.Velocity.y*dt;
+
+				}
+
+			}*/
+
+		/*	else
+			{
+
+				if (App->scene->player->Future_position.x >= position.x)
+				{
+					position.x += Velocity.x *5.0f* dt;
+				}
+				else if (App->scene->player->Future_position.x <= position.x)
+				{
+					position.x -= Velocity.x *5.0f* dt;
+				}
+
+				if (App->scene->player->Future_position.y >= position.y)
+				{
+					position.y += Velocity.x *5.0f* dt;
+				}
+
+				if (App->scene->player->Future_position.y >= position.y)
+				{
+					position.y -= Velocity.x *5.0f* dt;
+				}
+
+			}*/
+
 
 		if (going_right)
 			CurrentAnimation = BatInfo.flyRight;
@@ -318,8 +348,6 @@ bool j1Bat::CreatePathfinding(const iPoint destination)
 {
 	bool ret = false;
 
-	if (App->scene->firstStage == true)
-	{
 		if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y, App->map->data), App->map->WorldToMap(destination.x, destination.y,App->map->data)))
 		{
 			last_pathfinding = App->pathfinding->GetLastPath();
@@ -332,22 +360,7 @@ bool j1Bat::CreatePathfinding(const iPoint destination)
 				ret = true;
 			}
 		}
-	}
-	else
-	{
-		if (App->pathfinding->CreatePath(App->map->WorldToMap(position.x, position.y, App->map->data2), App->map->WorldToMap(destination.x, destination.y,App->map->data2)))
-		{
-			last_pathfinding = App->pathfinding->GetLastPath();
-			pathfinding_size = last_pathfinding->Count();
-			pathfinding_index = 1;
-			current_path.Clear();
-
-			for (int i = 0; i < pathfinding_size; ++i) {
-				current_path.PushBack(*last_pathfinding->At(i));
-				ret = true;
-			}
-		}
-	}
+	
 
 	return ret;
 }
@@ -357,8 +370,7 @@ bool j1Bat::Pathfind(float dt)
 	bool ret = true;
 
 	if (pathfinding_size > 1) {
-		if (App->scene->firstStage == true)
-		{
+	
 			iPoint next_node = App->map->MapToWorld(current_path[pathfinding_index].x, current_path[pathfinding_index].y,App->map->data);
 			UpdateMovement(dt);
 
@@ -368,20 +380,6 @@ bool j1Bat::Pathfind(float dt)
 			}
 			if (App->map->WorldToMap(position.x, position.y,App->map->data) == current_path[pathfinding_size - 1])
 				ret = false;
-		}
-
-		else
-		{
-			iPoint next_node = App->map->MapToWorld(current_path[pathfinding_index].x, current_path[pathfinding_index].y, App->map->data2);
-			UpdateMovement(dt);
-
-			if (App->map->WorldToMap(position.x, position.y, App->map->data2) == App->map->WorldToMap(next_node.x, next_node.y, App->map->data2)) {
-				if (pathfinding_index < pathfinding_size - 1)
-					pathfinding_index++;
-			}
-			if (App->map->WorldToMap(position.x, position.y, App->map->data2) == current_path[pathfinding_size - 1])
-				ret = false;
-		}
 	}
 	else
 		ret = false;
@@ -394,8 +392,8 @@ void j1Bat::UpdateMovement(float dt)
 	BatInfo.Velocity.x = current_path[pathfinding_index].x - App->map->WorldToMap(position.x, position.y,App->map->data).x;
 	BatInfo.Velocity.y = current_path[pathfinding_index].y - App->map->WorldToMap(position.x, position.y, App->map->data).y;
 
-	BatInfo.Velocity.x = BatInfo.Velocity.x*50.0f * dt;
-	BatInfo.Velocity.y = BatInfo.Velocity.y*50.0f * dt;
+	BatInfo.Velocity.x = BatInfo.Velocity.x*150.0f * dt;
+	BatInfo.Velocity.y = BatInfo.Velocity.y*150.0f * dt;
 	position.x += BatInfo.Velocity.x;
 	position.y += BatInfo.Velocity.y;
 }

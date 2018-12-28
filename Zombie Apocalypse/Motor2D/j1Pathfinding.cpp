@@ -55,16 +55,16 @@ bool j1PathFinding::IsWalkable(const iPoint& pos) const
 // Utility: return the walkability value of a tile
 uchar j1PathFinding::GetTileAt(const iPoint& pos) const
 {
-	if (App->scene->firstStage == true)
-	{
-		if (CheckBoundaries(pos) && App->map->data.layers.end->data->Get(pos.x, pos.y) < App->map->data.tilesets.start->next->next->data->firstgid)
+	/*if (App->scene->firstStage == true)
+	{*/
+		if (CheckBoundaries(pos) && App->map->data.layers.end->data->Get(pos.x, pos.y) < App->map->data.tilesets.start->data->firstgid)
 			return map[(pos.y*width) + pos.x];
-	}
-	else
+	//}
+	/*else
 	{
 		if (CheckBoundaries(pos) && App->map->data2.layers.end->data->Get(pos.x, pos.y) < App->map->data2.tilesets.start->next->next->data->firstgid)
 			return map[(pos.y*width) + pos.x];
-	}
+	}*/
 
 
 	return INVALID_WALK_CODE;

@@ -52,7 +52,7 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = true;
     matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = true;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
 
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = true;

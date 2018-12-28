@@ -69,7 +69,7 @@ bool j1Scene::Start()
 	// --- Creating entity  ---
 	player = (j1Player*)App->entities->CreateEntity("player", entity_type::PLAYER);
 	
-	//bat = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
+	bat = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
 	//bat2 = (j1Bat*)App->entities->CreateEntity("bat", entity_type::BAT);
 
 	//slime = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
@@ -468,35 +468,17 @@ bool j1Scene::Update(float dt)
 	if (App->coll->debug)
 	{
 		iPoint p = App->render->ScreenToWorld(x, y);
-		if (firstStage)
-		{
+	
 			p = App->map->WorldToMap(p.x, p.y, App->map->data);
 			p = App->map->MapToWorld(p.x, p.y, App->map->data);
 			App->render->Blit(App->map->data.tilesets.start->data->texture, p.x, p.y, &debug_Tex_rect);
-		}
-		else
-		{
-			p = App->map->WorldToMap(p.x, p.y, App->map->data2);
-			p = App->map->MapToWorld(p.x, p.y, App->map->data2);
-			App->render->Blit(App->map->data2.tilesets.start->data->texture, p.x, p.y, &debug_Tex_rect);
-		}
-
+	
 		const p2DynArray<iPoint>* path = App->pathfinding->GetLastPath();
 
 		for (uint i = 0; i < path->Count(); ++i)
 		{
-			if (firstStage)
-			{
 				iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y, App->map->data);
-				App->render->Blit(App->map->data.tilesets.start->next->next->data->texture, pos.x, pos.y, &debug_Tex_rect);
-			}
-			else
-			{
-				iPoint pos = App->map->MapToWorld(path->At(i)->x, path->At(i)->y, App->map->data2);
-				App->render->Blit(App->map->data2.tilesets.start->next->next->data->texture, pos.x, pos.y, &debug_Tex_rect);
-			}
-
-
+				App->render->Blit(App->map->data.tilesets.start->data->texture, pos.x, pos.y, &debug_Tex_rect);
 		}
 	}
 
