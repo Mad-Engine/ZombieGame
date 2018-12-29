@@ -261,31 +261,38 @@ void j1Player::Handle_Ground_Animations()
 			
 		}*/
 		
-
-		if (lifes == 0)
-		{
-			App->scene->Activate_MainMenu = true;
-			App->scene->Activate_HUD = false;
-		}
-
-		if (lifes < 0 && CurrentAnimation->Finished())
-		{
-			lifes = 0;
-			dead = false;
-			App->scene->change_scene(App->scene->StageList.start->data->GetString());
-		}
-		else if (dead == true && CurrentAnimation->Finished())
+		if (no_timer.ReadSec() >= 10 && stop == true)
 		{
 
-			dead = false;
-			
+			stop = false;
 
-			
-				
-
-			//CurrentAnimation = playerinfo.idleRight;
 		}
-		
+
+		if (stop == false)
+		{
+			if (lifes == 0)
+			{
+				App->scene->Activate_MainMenu = true;
+				App->scene->Activate_HUD = false;
+			}
+
+			if (lifes < 0 && CurrentAnimation->Finished())
+			{
+				lifes = 0;
+				dead = false;
+				App->scene->change_scene(App->scene->StageList.start->data->GetString());
+			}
+			else if (dead == true && CurrentAnimation->Finished())
+			{
+
+				dead = false;
+				App->scene->player->lifes -= 1;
+				LOG("now lifes. %i", App->scene->player->lifes);
+				stop = true;
+				no_timer.Start();
+				//CurrentAnimation = playerinfo.idleRight;
+			}
+		}
 }
 
 

@@ -282,7 +282,7 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 			stop = false;
 
 		}
-		 if (stop == false && c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->scene->player->dead == false && !dead)
+		else if (stop == false && c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->scene->player->dead == false && !dead)
 		{ 
 			// -- player death ---
 			 nohit.Start();
@@ -308,9 +308,8 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 			
 			LOG("actual lifes. %i", App->scene->player->lifes);
 			App->scene->player->playerinfo.Death->Reset();
-			//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.deathRight;
-			App->scene->player->lifes -= 1;
-			LOG("now lifes. %i", App->scene->player->lifes);
+			App->scene->player->CurrentAnimation = App->scene->player->playerinfo.Death;
+			
 			App->scene->player->dead = true;
 		}
 	}

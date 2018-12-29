@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "Animation.h"
 #include "j1Entity.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -113,7 +114,10 @@ public:
 	bool coll_up = false;
 	bool double_jump = false;
 	MOVEMENT EntityMovement = MOVEMENT::STATIC;
-
+	
+	// no hit timer
+	j1Timer no_timer;
+	bool stop = false ;
 
 
 	// player lifes
