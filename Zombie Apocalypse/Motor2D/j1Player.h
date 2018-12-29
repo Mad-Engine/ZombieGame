@@ -130,7 +130,14 @@ public:
 	uint32 TimePausedSave;
 
 	//--- Aux ----
-	
+	SDL_RendererFlip        flip = SDL_FLIP_HORIZONTAL;
+	float rot = 180;
+	iPoint mousepos = { 0,0 };
+
+	float diff_x = 0.0f;
+	float diff_y = 0.0f;
+
+	fPoint vec[360];
 };
 
 #endif // __j1Player_H__
