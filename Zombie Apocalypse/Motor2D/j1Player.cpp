@@ -431,6 +431,7 @@ bool j1Player::PostUpdate(float dt)
 	{
 		CurrentAnimation = playerinfo.AttackGun;
 		playerinfo.WalkGun->Reset();
+		App->audio->PlayFx(App->audio->shotfx);
 	}
 	
 	if (CurrentAnimation == playerinfo.AttackGun && CurrentAnimation->Finished())

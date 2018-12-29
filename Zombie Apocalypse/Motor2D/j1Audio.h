@@ -56,6 +56,7 @@ public:
 	p2SString fxbuttonpop = nullptr;
 	p2SString fxorb = nullptr;
 	p2SString fxenemydeath = nullptr;
+	p2SString fxshot = nullptr;
 
 	unsigned int deathfx = NULL;
 	unsigned int jumpfx = NULL;
@@ -63,6 +64,7 @@ public:
 	unsigned int buttonpopfx = NULL;
 	unsigned int orbfx = NULL;
 	unsigned int enemydeathfx = NULL;
+	unsigned int shotfx = NULL;
 
 private:
 
