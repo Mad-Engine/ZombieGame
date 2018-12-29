@@ -25,7 +25,7 @@ struct Playerdata {
 	Animation* AttackFlame = nullptr;
 	Animation* AttackGun = nullptr;
 
-
+	Animation* Death = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
