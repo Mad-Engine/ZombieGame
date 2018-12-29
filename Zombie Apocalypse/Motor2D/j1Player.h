@@ -4,6 +4,7 @@
 #include "p2Point.h"
 #include "Animation.h"
 #include "j1Entity.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -25,7 +26,7 @@ struct Playerdata {
 	Animation* AttackFlame = nullptr;
 	Animation* AttackGun = nullptr;
 
-
+	Animation* Death = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
@@ -113,7 +114,10 @@ public:
 	bool coll_up = false;
 	bool double_jump = false;
 	MOVEMENT EntityMovement = MOVEMENT::STATIC;
-
+	
+	// no hit timer
+	j1Timer no_timer;
+	bool stop = false ;
 
 
 	// player lifes
@@ -130,7 +134,14 @@ public:
 	uint32 TimePausedSave;
 
 	//--- Aux ----
-	
+	SDL_RendererFlip        flip = SDL_FLIP_HORIZONTAL;
+	float rot = 180;
+	iPoint mousepos = { 0,0 };
+
+	float diff_x = 0.0f;
+	float diff_y = 0.0f;
+
+	fPoint vec[360];
 };
 
 #endif // __j1Player_H__

@@ -2,7 +2,7 @@
 
 <config>
   <app framerate_cap="60">
-    <title>orBit_v1.0</title>
+    <title>Zombie Apocalypse</title>
     <organization>UPC</organization>
   </app>
 	
@@ -36,7 +36,7 @@
 
   <scene>
     <map_name name="MapZombie.tmx"/>
-    <map_name name="Map2Zombie.tmx"/>
+    <map_name name="MapZombie.tmx"/>
     <startcamera1 x="0" y="0"  />
     <startcamera2 x="0" y="0"  />
     <areaofcollision value="100" />
@@ -53,14 +53,14 @@
     <fx>
       <folder>audio/fx/</folder>
       <VolumeChanger_fx value="0.0"/>
-      <sound enemydeath="others/enemy-death.wav" orb ="others/star.wav" death="others/hurt.wav" doubleJump="doublejump.wav" jump="jump.wav" buttonpop="pop_button.wav"/>
+      <sound shot ="Pistol_Shoot.wav" enemydeath="others/enemy-death.wav" orb ="others/star.wav" death="others/hurt.wav" doubleJump="doublejump.wav" jump="jump.wav" buttonpop="pop_button.wav"/>
     </fx>
   </audio>
 
   <entities>
 
 
-    <player>
+   <player>
     <folder>animation/girl2.tmx</folder>
     <texture>textures/BasiAnimationGirlx124x114.png</texture>
     <collider x="5" y="4" width="40" height="40"/>
@@ -69,8 +69,8 @@
   </player>
    
      <slime>
-         <folder>animation/enemies.tmx</folder>
-         <texture>textures/monster.png</texture>
+         <folder>animation/zombie.tmx</folder>
+         <texture>textures/Zombies124x114.png</texture>
          <collider x="21" y="17" width="10" height="20"/>
          <animationspeed value="7.5"/>
          <areaofaction value="150"/>
@@ -82,10 +82,10 @@
      
      </slime>
     
-   <bat>
-         <folder>animation/enemies.tmx</folder>
-         <texture>textures/monster.png</texture>
-         <collider x="31" y="7" width="18" height="12"/>
+   <zombie>
+         <folder>animation/zombie.tmx</folder>
+         <texture>textures/Zombies124x114.png</texture>
+         <collider x="31" y="7" width="40" height="40"/>
          <animationspeed value="10.0"/>
          <areaofaction value="300"/>
          <Velocity x="50" y="25" initalVx="50.0"/>
@@ -95,7 +95,7 @@
          <entityID value1="2" value2="3"/>
 
 
-   </bat>
+   </zombie>
     
   <orb>
          <folder>animation/orb.tmx</folder>

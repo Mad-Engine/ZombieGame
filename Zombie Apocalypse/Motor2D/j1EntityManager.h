@@ -10,7 +10,7 @@
 #include "j1Entity.h"
 #include "j1Player.h"
 #include "j1Slime.h"
-#include "j1Bat.h"
+#include "j1Zombie.h"
 #include "j1Orb.h"
 
 class j1Entity;
@@ -63,7 +63,7 @@ public:
 	// --- Get Entities data ---
 	Playerdata& GetPlayerData() { return playerinfo; }
 	SlimeData& GetSlimeData() { return slimeinfo; }
-	BatData& GetBatData() { return batinfo; }
+	ZombieData& GetBatData() { return zombieinfo; }
 	OrbData& GetOrbData() { return orbinfo; }
 
 	// --- Save & Load ---
@@ -80,14 +80,16 @@ public:
 	float				accumulated_time = 0;
 
 	int					entityID = 0;
-
+	int					Secretboi = 0;
+	iPoint click_pos = { 0,0 };
+	iPoint mouse_pos = { 0,0 };
 private:
 	// --- Player ---
 	Playerdata playerinfo;
 
 	SlimeData slimeinfo;
 
-	BatData batinfo;
+	ZombieData zombieinfo;
 
 	OrbData orbinfo;
 

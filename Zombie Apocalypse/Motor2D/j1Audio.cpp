@@ -65,6 +65,7 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	fxbuttonpop = config.child("fx").child("sound").attribute("buttonpop").as_string();
 	fxorb = config.child("fx").child("sound").attribute("orb").as_string();
 	fxenemydeath = config.child("fx").child("sound").attribute("enemydeath").as_string();
+	fxshot = config.child("fx").child("sound").attribute("shot").as_string();
 
 	p2SString deathSound ("%s%s", fxfolder.GetString(), fxDeath.GetString());
 	deathfx = LoadFx(deathSound.GetString());
@@ -83,6 +84,9 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	p2SString orbSound("%s%s", fxfolder.GetString(), fxorb.GetString());
 	orbfx = LoadFx(orbSound.GetString());
+
+	p2SString shotSound("%s%s", fxfolder.GetString(), fxshot.GetString());
+	shotfx = LoadFx(shotSound.GetString());
 
 	pugi::xml_node Music;
 	for (Music = config.child("music").child("song"); Music && ret; Music = Music.next_sibling("song"))

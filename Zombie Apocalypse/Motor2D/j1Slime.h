@@ -11,7 +11,7 @@ struct SlimeData {
 	
 	Animation* runRight = nullptr;
 	Animation* runLeft = nullptr;
-	Animation* explote = nullptr;
+	Animation* dead = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
