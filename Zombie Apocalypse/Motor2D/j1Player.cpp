@@ -11,7 +11,6 @@
 #include "j1EntityManager.h"
 #include "j1Audio.h"
 
-
 j1Player::j1Player() : j1Entity("player",entity_type::PLAYER)
 {
 }
@@ -60,11 +59,59 @@ bool j1Player::Start()
 
 	//-- active ----
 	active = true;
-
-
+	float testx;
+	float testy;
 	// -- score ---
 	score = 0;
 	totalscore = 0;
+
+	memset(vec, 0, 360);
+
+	int changing_value_x [90];
+
+	int changing_value_y [90];
+
+	memset(changing_value_x, 0, 90);
+	memset(changing_value_y, 0, 90);
+
+	for (int i = 0; i < 90; ++i)
+	{
+		changing_value_x[i] = i / 3.0f;
+
+		changing_value_y[i] = i / 3.0f;
+	}
+
+	// 0 --- 90
+	for (int i = 0; i < 90; ++i)
+	{
+		vec[i].x = changing_value_x[i];
+		vec[i].y = -changing_value_y[i];
+	}
+
+	// 90 --- 180
+	for (int j = 0; j < 90; ++j)
+	{
+		vec[90 + j].x = changing_value_x[89] - changing_value_x[j];
+		vec[90 + j].y = -(changing_value_x[89] + changing_value_y[j]);
+	}
+
+	// 180 --- 270
+
+	for (int z = 0; z < 90; ++z)
+	{
+		vec[180 + z].x = vec[179].x - changing_value_x[z];
+		vec[180 + z].y = -(-vec[179].y - changing_value_y[z]);
+	}
+
+	// 270 --- 360
+
+	for (int f = 0; f < 90; ++f)
+	{
+		vec[270 + f].x = - changing_value_x[89] + changing_value_x[f];
+		vec[270 + f].y = - changing_value_y[89] + changing_value_y[f];
+	}
+
+	rot = 0;
 
 	return true;
 }
@@ -83,7 +130,6 @@ void j1Player::UpdateEntityMovement(float dt)
 		//	Future_position.x += Accumulative_pos_Right;
 		//	Accumulative_pos_Right -= Accumulative_pos_Right;
 		//}
-
 		Future_position.x += Velocity.x * dt/1.5f;
 		break;
 	case MOVEMENT::LEFTWARDS:
@@ -356,14 +402,72 @@ bool j1Player::PostUpdate(float dt)
 {
 	bool ret = true;
 
-	
+	// --- Handling flip ---
+
+	App->input->GetMousePosition(mousepos.x,mousepos.y);
+
+	mousepos.x = mousepos.x * 3;
+	mousepos.y = mousepos.y * 3;
+
+	Future_position.x = Future_position.x * 2.0f;
+	Future_position.y = Future_position.y * 2.0f;
+
+
 	// ---------------------- //
 
 	// --- Blitting player ---
 
 	CurrentAnimation = playerinfo.WalkGun;
 
-	App->render->Blit(spritesheet, Future_position.x - 40.0f , Future_position.y - 10.0f, &CurrentAnimation->GetCurrentFrame(dt));
+	float vec_x = mousepos.x - Future_position.x;
+	float vec_y = mousepos.y - Future_position.y;
+
+	if (mousepos.x != 0 && mousepos.y != 0)
+	{
+
+		if (mousepos.y >= Future_position.y + entitycoll->rect.h / 2 && mousepos.x >= Future_position.x + entitycoll->rect.w / 2)
+		{
+			rot = atan(((float)(vec_x) / (float)(vec_y)))*180.0f / 3.14f;
+
+			//rot += 180;
+		}
+
+		else if (mousepos.y >= Future_position.y + entitycoll->rect.h / 2 && mousepos.x <= Future_position.x + entitycoll->rect.w / 2)
+		{
+
+			rot = atan(((float)(vec_x) / (float)(vec_y)))*180.0f / 3.14f;
+
+			//rot += 180;
+		}
+
+		else if (mousepos.y <= Future_position.y + entitycoll->rect.h / 2 && mousepos.x <= Future_position.x + entitycoll->rect.w / 2)
+		{
+			rot = atan(((float)(vec_y) / (float)(-vec_x)))*180.0f / 3.14f;
+
+			rot += 270;
+		}
+
+		else if (mousepos.y <= Future_position.y + entitycoll->rect.h / 2 && mousepos.x >= Future_position.x + entitycoll->rect.w / 2)
+		{
+			rot = -atan(((float)(vec_y) / (float)(vec_x)))*180.0f / 3.14f;
+
+			rot += 90;
+		}
+
+	}
+
+	if (rot == 0 || rot == 360)
+	{
+		rot = 1;
+	}
+	
+	diff_x = vec[(int)rot - 1].x;
+	diff_y = vec[(int)rot - 1].y;
+
+	Future_position.x = Future_position.x / 2.0f;
+	Future_position.y = Future_position.y / 2.0f;
+
+	App->render->Blit(spritesheet, Future_position.x - 40.0f + diff_x, Future_position.y - 10.0f + diff_y, &CurrentAnimation->GetCurrentFrame(dt),true,1.0f,-rot,flip);
 	
 	
 	// ---------------------- //
