@@ -55,9 +55,6 @@
     <ClCompile Include="j1App.cpp">
       <Filter>Development ======\Core</Filter>
     </ClCompile>
-    <ClCompile Include="j1Orb.cpp">
-      <Filter>Development ======\Entities</Filter>
-    </ClCompile>
     <ClCompile Include="j1Gui.cpp">
       <Filter>Development ======\Modules\GUI</Filter>
     </ClCompile>
@@ -74,6 +71,9 @@
       <Filter>Development ======\Modules\GUI\Elements</Filter>
     </ClCompile>
     <ClCompile Include="j1Zombie.cpp">
+      <Filter>Development ======\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="j1Amo.cpp">
       <Filter>Development ======\Entities</Filter>
     </ClCompile>
   </ItemGroup>
@@ -159,9 +159,6 @@
     <ClInclude Include="j1App.h">
       <Filter>Development ======\Core</Filter>
     </ClInclude>
-    <ClInclude Include="j1Orb.h">
-      <Filter>Development ======\Entities</Filter>
-    </ClInclude>
     <ClInclude Include="j1Gui.h">
       <Filter>Development ======\Modules\GUI</Filter>
     </ClInclude>
@@ -178,6 +175,9 @@
       <Filter>Development ======\Modules\GUI\Elements</Filter>
     </ClInclude>
     <ClInclude Include="j1Zombie.h">
+      <Filter>Development ======\Entities</Filter>
+    </ClInclude>
+    <ClInclude Include="j1Amo.h">
       <Filter>Development ======\Entities</Filter>
     </ClInclude>
   </ItemGroup>

@@ -137,32 +137,32 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	zombieinfo.RefID.x = zombienode.child("entityID").attribute("value1").as_int();
 	zombieinfo.RefID.y = zombienode.child("entityID").attribute("value2").as_int();
 
-	//--- Orbs data load --------------------
+	//--- AMMO data load --------------------
 
-	pugi::xml_node orbnode = config.child("orb");
+	pugi::xml_node orbnode = config.child("ammo");
 
-	orbinfo.folder.create(orbnode.child("folder").child_value());
-	orbinfo.Texture.create(orbnode.child("texture").child_value());
+	amoinfo.folder.create(orbnode.child("folder").child_value());
+	amoinfo.Texture.create(orbnode.child("texture").child_value());
 
 	x = orbnode.child("collider").attribute("x").as_int();
 	y = orbnode.child("collider").attribute("y").as_int();
 	w = orbnode.child("collider").attribute("width").as_int();
 	h = orbnode.child("collider").attribute("height").as_int();
-	orbinfo.OrbRect = { x,y,w,h };
+	amoinfo.OrbRect = { x,y,w,h };
 
 
-	orbinfo.fly = LoadAnimation(orbinfo.folder.GetString(), "iddle");
-	orbinfo.disappear = LoadAnimation(orbinfo.folder.GetString(), "disappear");
-	orbinfo.appear = LoadAnimation(orbinfo.folder.GetString(), "appear");
+	
+	amoinfo.glow = LoadAnimation(amoinfo.folder.GetString(), "Ammo");
 
-	orbinfo.colliding_offset = orbnode.child("colliding_offset").attribute("value").as_float();
-	orbinfo.areaofaction = orbnode.child("areaofaction").attribute("value").as_int();
-	orbinfo.animationspeed = orbnode.child("animationspeed").attribute("value").as_float();
-	orbinfo.printingoffset.x = orbnode.child("printingoffset").attribute("x").as_int();
-	orbinfo.printingoffset.y = orbnode.child("printingoffset").attribute("y").as_int();
-	orbinfo.orbID = orbnode.child("entityID").attribute("value1").as_int();
-	orbinfo.orbID2 = orbnode.child("entityID").attribute("value2").as_int();
-	orbinfo.orbID3 = orbnode.child("entityID").attribute("value3").as_int();
+
+	amoinfo.colliding_offset = orbnode.child("colliding_offset").attribute("value").as_float();
+	amoinfo.areaofaction = orbnode.child("areaofaction").attribute("value").as_int();
+	amoinfo.animationspeed = orbnode.child("animationspeed").attribute("value").as_float();
+	amoinfo.printingoffset.x = orbnode.child("printingoffset").attribute("x").as_int();
+	amoinfo.printingoffset.y = orbnode.child("printingoffset").attribute("y").as_int();
+	amoinfo.orbID = orbnode.child("entityID").attribute("value1").as_int();
+	amoinfo.orbID2 = orbnode.child("entityID").attribute("value2").as_int();
+	amoinfo.orbID3 = orbnode.child("entityID").attribute("value3").as_int();
 
 	// ---------------------
 
@@ -318,8 +318,8 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 	case entity_type::PLAYER:
 		entity = new j1Player();
 		break;
-	case entity_type::ORB:
-		entity = new j1Orb();
+	case entity_type::AMMO:
+		entity = new j1Amo();
 		break;
 	
 	}

@@ -1,4 +1,4 @@
-#include "j1Orb.h"
+#include "j1Amo.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Textures.h"
@@ -13,39 +13,35 @@
 #include "j1Player.h"
 
 
-j1Orb::j1Orb() : j1Entity("Orb", entity_type::ORB)
+j1Amo::j1Amo() : j1Entity("ammo", entity_type::AMMO)
 {
 
 }
 
-j1Orb::~j1Orb()
+j1Amo::~j1Amo()
 {
 
 }
 
-bool j1Orb::Start()
+bool j1Amo::Start()
 {
 	LOG("Loading Slime");
 
-	Orbinfo = manager->GetOrbData();
+	Amoinfo = manager->GetOrbData();
 
-	entitycollrect = Orbinfo.OrbRect;
-	colliding_offset = Orbinfo.colliding_offset;
+	entitycollrect = Amoinfo.OrbRect;
+	colliding_offset = Amoinfo.colliding_offset;
 
-	entitycoll = App->coll->AddCollider(entitycollrect, COLLIDER_TYPE::COLLIDER_ORB, (j1Module*)manager);
+	entitycoll = App->coll->AddCollider(entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, (j1Module*)manager);
 
 	touched = false;
 	
 
-	CurrentAnimation = Orbinfo.fly;
-	Orbinfo.fly->speed = Orbinfo.animationspeed;
-	Orbinfo.disappear->loop = false;
-	Orbinfo.disappear->speed = Orbinfo.animationspeed;
+	CurrentAnimation = Amoinfo.glow;
+	Amoinfo.glow->speed = Amoinfo.animationspeed;
+	Amoinfo.glow->loop = true;
+	Amoinfo.glow->speed = Amoinfo.animationspeed;
 
-	
-
-	position.x = -1;
-	position.y = -1;
 
 	entitycoll->SetPos(position.x, position.y);
 
@@ -53,7 +49,7 @@ bool j1Orb::Start()
 
 
 	if (spritesheet == nullptr)
-		spritesheet = App->tex->Load(Orbinfo.Texture.GetString());
+		spritesheet = App->tex->Load(Amoinfo.Texture.GetString());
 
 	entityID = App->entities->entityID;
 
@@ -62,12 +58,12 @@ bool j1Orb::Start()
 	return true;
 }
 
-bool j1Orb::Update(float dt)
+bool j1Amo::Update(float dt)
 {
 	if (active && entitycoll != nullptr)
 	{
 		entitycoll->SetPos(position.x, position.y); 
-		CurrentAnimation = Orbinfo.fly;
+		CurrentAnimation = Amoinfo.glow;
 	}
 	else if (!active && entitycoll != nullptr)
 	{
@@ -79,13 +75,16 @@ bool j1Orb::Update(float dt)
 	return true;
 }
 
-bool j1Orb::PostUpdate(float dt)
+bool j1Amo::PostUpdate(float dt)
 {
 	bool ret = true;
 
 	
-	//Blitting orb
-	App->render->Blit(spritesheet, position.x, position.y, &CurrentAnimation->GetCurrentFrame(dt));
+	//Blitting ammo
+	if (active)
+	{
+		App->render->Blit(spritesheet, position.x, position.y, &CurrentAnimation->GetCurrentFrame(dt));
+	}
 	
 
 
@@ -94,23 +93,22 @@ bool j1Orb::PostUpdate(float dt)
 
 
 
-void j1Orb::OnCollision(Collider * c1, Collider * c2)
+void j1Amo::OnCollision(Collider * c1, Collider * c2)
 {
 	bool lateralcollision = true;
 
 	if (active)
 	{
-		if (c2->type == COLLIDER_TYPE::COLLIDER_ORB || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER)
+		if (c2->type == COLLIDER_TYPE::COLLIDER_AMMO || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER)
 		{
 			if (touched == false)
 			{
 				App->audio->PlayFx(App->audio->orbfx);
 				App->scene->player->score += 1000;
-				App->scene->player->orbs_number += 1;
 				if (entitycoll != nullptr)
 				{
 					entitycoll->to_delete = true;
-					CurrentAnimation = Orbinfo.disappear;
+					CurrentAnimation = Amoinfo.glow;
 				}
 
 				touched = true;
@@ -124,28 +122,28 @@ void j1Orb::OnCollision(Collider * c1, Collider * c2)
 }
 
 
-void j1Orb::UpdateMovement(float dt)
+void j1Amo::UpdateMovement(float dt)
 {
 
 }
 
 
 
-bool j1Orb::Load(pugi::xml_node &config)
+bool j1Amo::Load(pugi::xml_node &config)
 {
 	bool ret = true;
 
-	if (entityID == Orbinfo.orbID)
+	if (entityID == Amoinfo.orbID)
 	{
 		touched = config.child("Orb1").child("touched").attribute("value").as_bool();
 		active =  config.child("Orb1").child("active").attribute("value").as_bool();
 	}
-	else if (entityID == Orbinfo.orbID2)
+	else if (entityID == Amoinfo.orbID2)
 	{
 		touched = config.child("Orb2").child("touched").attribute("value").as_bool();
 		active =  config.child("Orb2").child("active").attribute("value").as_bool();
 	}
-	else if (entityID == Orbinfo.orbID3)
+	else if (entityID == Amoinfo.orbID3)
 	{
 		touched = config.child("Orb3").child("touched").attribute("value").as_bool();
 		active =  config.child("Orb3").child("active").attribute("value").as_bool();
@@ -156,21 +154,21 @@ bool j1Orb::Load(pugi::xml_node &config)
 	return ret;
 }
 
-bool j1Orb::Save(pugi::xml_node &config) const
+bool j1Amo::Save(pugi::xml_node &config) const
 {
-	if (entityID == Orbinfo.orbID)
+	if (entityID == Amoinfo.orbID)
 	{
 		config.append_child("Orb1").append_child("touched").append_attribute("value") = touched;
 		config.child("Orb1").append_child("active").append_attribute("value") = active;
 		
 	}
-	else if (entityID == Orbinfo.orbID2)
+	else if (entityID == Amoinfo.orbID2)
 	{
 		config.append_child("Orb2").append_child("touched").append_attribute("value") = touched;
 		config.child("Orb2").append_child("active").append_attribute("value") = active;
 
 	}
-	else if (entityID == Orbinfo.orbID3)
+	else if (entityID == Amoinfo.orbID3)
 	{
 		config.append_child("Orb3").append_child("touched").append_attribute("value") = touched;
 		config.child("Orb3").append_child("active").append_attribute("value") = active;
@@ -180,7 +178,7 @@ bool j1Orb::Save(pugi::xml_node &config) const
 	return true;
 }
 
-bool j1Orb::CleanUp()
+bool j1Amo::CleanUp()
 {
 	bool ret = true;
 
@@ -192,12 +190,12 @@ bool j1Orb::CleanUp()
 	return ret;
 }
 
-void j1Orb::FixedUpdate(float dt)
+void j1Amo::FixedUpdate(float dt)
 {
 	PostUpdate(dt);
 }
 
-void j1Orb::LogicUpdate(float dt)
+void j1Amo::LogicUpdate(float dt)
 {
 	Update(dt);
 

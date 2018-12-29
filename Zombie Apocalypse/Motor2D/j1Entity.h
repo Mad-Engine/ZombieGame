@@ -26,7 +26,7 @@ enum class entity_type
 	PLAYER,
 	SLIME,
 	ZOMBIE_NORMAL,
-	ORB
+	AMMO
 
 };
 

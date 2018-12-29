@@ -69,13 +69,13 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
 
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_AMMO)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
 
 }
 
@@ -133,7 +133,7 @@ bool j1Collision::CleanUp()
 
 	while (item != NULL)
 	{
-		if (item->data->type == COLLIDER_TYPE::COLLIDER_ORB)
+		if (item->data->type == COLLIDER_TYPE::COLLIDER_AMMO)
 		{
 			//testing where does it fail
 			int lol=0;
@@ -202,7 +202,7 @@ void j1Collision::DebugDraw()
 		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE: // blue
 			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);
 			break;
-		case COLLIDER_TYPE::COLLIDER_ORB: // blue
+		case COLLIDER_TYPE::COLLIDER_AMMO: // blue
 			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);
 			break;
 		}

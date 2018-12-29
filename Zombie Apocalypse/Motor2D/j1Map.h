@@ -92,6 +92,9 @@ struct MapData
 	iPoint				enemy2;
 	iPoint				enemy3;
 	iPoint				enemy4;
+	iPoint				amo1;
+	iPoint				ammo2;
+	iPoint				ammo3;
 	iPoint				finalpos;
 	SDL_Color			background_color;
 	MapTypes			type;

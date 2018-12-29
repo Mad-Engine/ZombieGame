@@ -7,11 +7,9 @@ struct SDL_Texture;
 struct Collider;
 struct PathInfo;
 
-struct OrbData {
+struct AmoData {
 	
-	Animation* fly = nullptr;
-	Animation* disappear = nullptr;
-	Animation* appear = nullptr;
+	Animation* glow = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
@@ -28,12 +26,12 @@ struct OrbData {
 	int				orbID3 = 0;
 };
 
-class j1Orb :public j1Entity
+class j1Amo :public j1Entity
 {
 public:
 
-	j1Orb();
-	~j1Orb();
+	j1Amo();
+	~j1Amo();
 
 	bool Start();
 	bool Update(float dt);
@@ -61,7 +59,7 @@ public:
 
 public:
 
-	OrbData Orbinfo;
+	AmoData Amoinfo;
 	bool touched = false;
 };
 

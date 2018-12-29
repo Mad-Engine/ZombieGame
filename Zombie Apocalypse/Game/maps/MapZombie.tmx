@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="54" tileheight="54" nextobjectid="17">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="45" height="45" tilewidth="54" tileheight="54" nextobjectid="21">
  <tileset firstgid="1" name="stageTileset" tilewidth="54" tileheight="54" tilecount="240" columns="24">
   <image source="stageTilesetx56.png" width="1296" height="540"/>
   <terraintypes>
@@ -10187,5 +10187,14 @@
  </objectgroup>
  <objectgroup name="Enemies4">
   <object id="16" x="216" y="1997" width="52" height="54"/>
+ </objectgroup>
+ <objectgroup name="amo1">
+  <object id="17" x="1188" y="756" width="54" height="54"/>
+ </objectgroup>
+ <objectgroup name="amo2">
+  <object id="18" x="1566" y="756" width="54" height="54"/>
+ </objectgroup>
+ <objectgroup name="amo3">
+  <object id="20" x="864" y="756" width="54" height="54"/>
  </objectgroup>
 </map>

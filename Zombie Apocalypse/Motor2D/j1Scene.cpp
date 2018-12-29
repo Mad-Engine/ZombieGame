@@ -16,7 +16,7 @@
 #include "j1Slime.h"
 #include "j1Zombie.h"
 #include "Brofiler\Brofiler.h"
-#include "j1Orb.h"
+#include "j1Amo.h"
 #include "j1Button.h"
 #include "j1Fonts.h"
 
@@ -84,6 +84,14 @@ bool j1Scene::Start()
 	zombie4->Velocity.x * 4;
 	zombie4->Velocity.y * 4;
 
+	
+
+	ammo = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
+
+	/*ammo2 = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
+
+	ammo3 = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
+*/
 	//Loading both maps
 
 	p2List_item<p2SString*>* stageListItem;
@@ -112,7 +120,7 @@ bool j1Scene::Start()
 
 	FirstStage = StageList.start->data->GetString();
 
-	if (FirstStage =="stage1_TiledV017.tmx" )
+	if (FirstStage =="MapZombie.tmx" )
 	{
 		App->render->camera.x = camera1.x;
 		App->render->camera.y = camera1.y;
@@ -131,6 +139,15 @@ bool j1Scene::Start()
 
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
+
+		ammo->position.x = App->map->data.amo1.x;
+		ammo->position.y = App->map->data.amo1.y;
+
+		/*ammo2->position.x = App->map->data.ammo2.x;
+		ammo2->position.y = App->map->data.ammo2.y;
+
+		ammo3->position.x = App->map->data.ammo3.x;
+		ammo3->position.y = App->map->data.ammo3.y;*/
 
 		stage1Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
 		App->audio->PlayMusic(stage1Music.GetString());
@@ -992,6 +1009,11 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 	zombie4->entitycoll->SetPos(zombie4->position.x, zombie4->position.y);
 
+	ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+/*
+	ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+
+	ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);*/
 
 
 	return ret;
@@ -1019,6 +1041,14 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
 
+		ammo->position.x = App->map->data.amo1.x;
+		ammo->position.y = App->map->data.amo1.y;
+
+		/*ammo2->position.x = App->map->data.ammo2.x;
+		ammo2->position.y = App->map->data.ammo2.y;
+
+		ammo3->position.x = App->map->data.ammo3.x;
+		ammo3->position.y = App->map->data.ammo3.y;*/
 	}
 
 
@@ -1038,8 +1068,16 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 
 	zombie4->entitycoll = App->coll->AddCollider(zombie->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
 	zombie4->entitycoll->SetPos(zombie->position.x, zombie->position.y);
-	
 
+	ammo->entitycoll = App->coll->AddCollider(ammo->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
+	ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+	
+/*	ammo2->entitycoll = App->coll->AddCollider(ammo2->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
+	ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+
+	ammo3->entitycoll = App->coll->AddCollider(ammo3->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
+	ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+*/
 	// avtive and inactive
 
 	player->active = true;
@@ -1052,7 +1090,9 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	zombie3->dead = false;
 	zombie4->active = true;
 	zombie4->dead = false;
-
+	ammo->active = true;
+	/*ammo2->active = true;
+	ammo3->active = true;*/
 	
 }
 

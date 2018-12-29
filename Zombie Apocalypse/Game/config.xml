@@ -97,18 +97,17 @@
 
    </zombie>
     
-  <orb>
-         <folder>animation/orb.tmx</folder>
-         <texture>textures/pixel_orb.png</texture>
-         <collider x="0" y="11" width="12" height="15"/>
+  <ammo>
+         <folder>animation/items.tmx</folder>
+         <texture>textures/ItemsSpritesheet.png</texture>
+         <collider x="0" y="11" width="40" height="40"/>
          <animationspeed value="3.0"/>
          <areaofaction value="100"/>
          <printingoffset x="8" y="5"/>
          <colliding_offset value="5" />
          <entityID value1="6" value2="7" value3="8"/>
 
-
-   </orb>
+   </ammo>
   
   </entities>
 

@@ -251,7 +251,21 @@ bool j1Map::LoadMap(MapData& data)
 				data.enemy4.x = mapIterator.child("object").attribute("x").as_int();
 				data.enemy4.y = mapIterator.child("object").attribute("y").as_int();
 			}
-			
+			else if (tmp == "amo1")
+			{
+				data.amo1.x = mapIterator.child("object").attribute("x").as_int();
+				data.amo1.y = mapIterator.child("object").attribute("y").as_int();
+			}
+			else if (tmp == "ammo2")
+			{
+				data.ammo2.x = mapIterator.child("object").attribute("x").as_int();
+				data.ammo2.y = mapIterator.child("object").attribute("y").as_int();
+			}
+			else if (tmp == "ammo3")
+			{
+				data.ammo3.x = mapIterator.child("object").attribute("x").as_int();
+				data.ammo3.y = mapIterator.child("object").attribute("y").as_int();
+			}
 			
 		}
 		

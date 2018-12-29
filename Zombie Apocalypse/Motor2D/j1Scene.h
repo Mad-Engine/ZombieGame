@@ -9,7 +9,7 @@ struct SDL_Rect;
 class j1Player;
 class j1Slime;
 class j1Zombie;
-class j1Orb;
+class j1Amo;
 class j1Button;
 class j1UI_Element;
 
@@ -107,6 +107,9 @@ public:
 	j1Zombie*			zombie2 = nullptr;
 	j1Zombie*			zombie3 = nullptr;
 	j1Zombie*			zombie4 = nullptr;
+	j1Amo*				ammo = nullptr;
+	/*j1Amo*				ammo2 = nullptr;
+	j1Amo*				ammo3 = nullptr;*/
 
 	//variables used on module collision
 	int areaofcollision = 0;

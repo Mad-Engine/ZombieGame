@@ -11,7 +11,7 @@
 #include "j1Player.h"
 #include "j1Slime.h"
 #include "j1Zombie.h"
-#include "j1Orb.h"
+#include "j1Amo.h"
 
 class j1Entity;
 
@@ -64,7 +64,7 @@ public:
 	Playerdata& GetPlayerData() { return playerinfo; }
 	SlimeData& GetSlimeData() { return slimeinfo; }
 	ZombieData& GetBatData() { return zombieinfo; }
-	OrbData& GetOrbData() { return orbinfo; }
+	AmoData& GetOrbData() { return amoinfo; }
 
 	// --- Save & Load ---
 	bool Load(pugi::xml_node&);
@@ -89,7 +89,7 @@ private:
 
 	ZombieData zombieinfo;
 
-	OrbData orbinfo;
+	AmoData amoinfo;
 
 };
 
