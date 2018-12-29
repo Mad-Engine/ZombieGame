@@ -8,6 +8,7 @@
 #include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
 #include <time.h>
+#include "j1Input.h"
 
 
 j1EntityManager::j1EntityManager() : j1Module()
@@ -192,7 +193,17 @@ bool j1EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityManager_Update", Profiler::Color::Chocolate);
 
-	
+
+	App->input->GetMousePosition(mouse_pos.x, mouse_pos.y);
+
+	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	{
+		click_pos = mouse_pos;
+	}
+	else if (App->input->GetMouseButtonDown(1) == KEY_UP)
+	{
+		click_pos = { -1,-1 };
+	}
 
 	//accumulated_time += dt;
 

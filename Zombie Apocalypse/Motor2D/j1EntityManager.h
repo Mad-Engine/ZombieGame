@@ -81,6 +81,8 @@ public:
 
 	int					entityID = 0;
 	int					Secretboi = 0;
+	iPoint click_pos = { 0,0 };
+	iPoint mouse_pos = { 0,0 };
 private:
 	// --- Player ---
 	Playerdata playerinfo;
