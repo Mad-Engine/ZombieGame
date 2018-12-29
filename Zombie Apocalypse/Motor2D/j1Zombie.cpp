@@ -75,17 +75,69 @@ bool j1Zombie::Update(float dt)
 	batcolliding = false;
 	entitystate = LEFT;
 
+	if (isClicked(entitycoll->rect))
+	{
+		lifes--;
+	}
+
+	if (lifes == 0)
+	{
+		int index = manager->entities.find(this);
+		if (index == 1)
+		{
+			position.x = App->map->data.enemy1.x;
+			position.y = App->map->data.enemy1.y;
+		}
+		else if (index == 2)
+		{
+			position.x = App->map->data.enemy2.x;
+			position.y = App->map->data.enemy2.y;
+		}
+		else if (index == 3)
+		{
+			position.x = App->map->data.enemy3.x;
+			position.y = App->map->data.enemy3.y;
+		}
+
+		else if (index == 4)
+		{
+			position.x = App->map->data.enemy4.x;
+			position.y = App->map->data.enemy4.y;
+		}
+
+	}
+
+
 	return true;
 }
+
+bool j1Zombie::isClicked(SDL_Rect & rect)
+{
+	LOG("x vs mouse_x: %i %i", rect.x, manager->click_pos.x);
+
+	
+	iPoint realpos = App->render->ScreenToWorld(manager->click_pos.x, manager->click_pos.y);
+
+	return (rect.x < realpos.x &&
+		rect.x + rect.w > realpos.x &&
+		rect.y <  realpos.y  &&
+		rect.h + rect.y >  realpos.y);
+
+}
+
 
 bool j1Zombie::PostUpdate(float dt)
 {
 	bool ret = true;
 
-	CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
+	if (active)
+	{
+		CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
 
-	Pathfind(dt);
-	CurrentAnimation = ZombieInfo.walk;
+		Pathfind(dt);
+		CurrentAnimation = ZombieInfo.walk;
+
+	}
 
 	if (active && entitycoll!=nullptr)
 	{ 
@@ -206,7 +258,7 @@ bool j1Zombie::PostUpdate(float dt)
 	}
 
 	//Blitting zombie
-
+	
 	if (active)
 	{
 		App->render->Blit(spritesheet, position.x -50, position.y - 50 , &CurrentAnimation->GetCurrentFrame(dt));
@@ -216,6 +268,8 @@ bool j1Zombie::PostUpdate(float dt)
 	{
 		App->render->Blit(spritesheet, position.x - ZombieInfo.printingoffset.x*3, position.y - ZombieInfo.printingoffset.y, &CurrentAnimation->GetCurrentFrame(dt));
 	}*/
+
+
 	return ret;
 }
 

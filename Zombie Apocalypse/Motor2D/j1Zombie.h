@@ -68,6 +68,8 @@ public:
 
 	void UpdateMovement(float dt);
 
+	bool isClicked(SDL_Rect &rect);
+
 	// ----------------------
 
 public:
@@ -80,7 +82,7 @@ public:
 
 	bool batcolliding = false;
 
-
+	uint lifes = 3;
 	ZombieData ZombieInfo;
 	SDL_Rect Intersection = { 0,0,0,0 };
 

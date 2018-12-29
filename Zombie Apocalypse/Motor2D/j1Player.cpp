@@ -113,6 +113,8 @@ bool j1Player::Start()
 
 	rot = 0;
 
+	CurrentAnimation = playerinfo.WalkGun;
+
 	return true;
 }
 
@@ -413,18 +415,30 @@ bool j1Player::PostUpdate(float dt)
 
 	App->input->GetMousePosition(mousepos.x,mousepos.y);
 
-	mousepos.x = mousepos.x * 3;
-	mousepos.y = mousepos.y * 3;
+	//mousepos.x = mousepos.x * 3;
+	//mousepos.y = mousepos.y * 3;
 
-	Future_position.x = Future_position.x * 2.0f;
-	Future_position.y = Future_position.y * 2.0f;
+	//Future_position.x = Future_position.x * 2.0f;
+	//Future_position.y = Future_position.y * 2.0f;
 
+	mousepos = App->render->ScreenToWorld(mousepos.x, mousepos.y);
 
 	// ---------------------- //
 
 	// --- Blitting player ---
 
-	CurrentAnimation = playerinfo.WalkGun;
+	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	{
+		CurrentAnimation = playerinfo.AttackGun;
+		playerinfo.WalkGun->Reset();
+	}
+	
+	if (CurrentAnimation == playerinfo.AttackGun && CurrentAnimation->Finished())
+	{
+		CurrentAnimation = playerinfo.WalkGun;
+		playerinfo.AttackGun->Reset();
+	}
+
 
 	float vec_x = mousepos.x - Future_position.x;
 	float vec_y = mousepos.y - Future_position.y;
@@ -471,8 +485,8 @@ bool j1Player::PostUpdate(float dt)
 	diff_x = vec[(int)rot - 1].x;
 	diff_y = vec[(int)rot - 1].y;
 
-	Future_position.x = Future_position.x / 2.0f;
-	Future_position.y = Future_position.y / 2.0f;
+	//Future_position.x = Future_position.x / 2.0f;
+	//Future_position.y = Future_position.y / 2.0f;
 
 	App->render->Blit(spritesheet, Future_position.x - 40.0f + diff_x, Future_position.y - 10.0f + diff_y, &CurrentAnimation->GetCurrentFrame(dt),true,1.0f,-rot,flip);
 	
