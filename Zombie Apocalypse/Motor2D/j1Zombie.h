@@ -2,6 +2,7 @@
 #define __j1ZOMBIE_H__
 
 #include "j1Entity.h"
+#include "j1Timer.h"
 
 struct SDL_Texture;
 struct Collider;
@@ -98,7 +99,9 @@ public:
 	//_pathfinding
 
 	PathInfo* path_info = nullptr;
-
+	// Timer
+	j1Timer nohit;
+	bool stop = false;
 };
 
 #endif // __j1ZOMBIE_H__

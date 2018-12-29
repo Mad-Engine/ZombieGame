@@ -50,6 +50,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.AttackShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun");
 	playerinfo.AttackGun = LoadAnimation(playerinfo.folder.GetString(), "gun");
 	playerinfo.AttackFlame= playerinfo.AttackShotgun = LoadAnimation(playerinfo.folder.GetString(), "flame thrower");
+
+	playerinfo.Death = LoadAnimation(playerinfo.folder.GetString(), "dead");
 	// .............................................
 
 	int x = playernode.child("collider").attribute("x").as_int();

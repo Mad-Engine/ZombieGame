@@ -226,20 +226,16 @@ void j1Player::Handle_Ground_Animations()
 		{
 			lifes = 0;
 			dead = false;
+			App->scene->change_scene(App->scene->StageList.start->data->GetString());
 		}
 		else if (dead == true && CurrentAnimation->Finished())
 		{
 
 			dead = false;
-			bool success = App->LoadGame("save_game.xml");
-			if (!success)
-			{
-				App->scene->change_scene(App->scene->StageList.start->data->GetString());
-				App->scene->firstStage = true;
-				App->scene->secondStage = false;
-			}
-			else
-				App->LoadGame("save_game.xml");
+			
+
+			
+				
 
 			//CurrentAnimation = playerinfo.idleRight;
 		}
