@@ -70,14 +70,19 @@ bool j1Scene::Start()
 	player = (j1Player*)App->entities->CreateEntity("player", entity_type::PLAYER);
 	
 	zombie = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
-	//bat2 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
+	
+	zombie2 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
+	zombie2->Velocity.x * 2;
+	zombie2->Velocity.y * 2;
 
-	//slime = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
-	//slime2 = (j1Slime*)App->entities->CreateEntity("slime", entity_type::SLIME);
 
-	//orb = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
-	//orb2 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
-	//orb3 = (j1Orb*)App->entities->CreateEntity("orb", entity_type::ORB);
+	zombie3 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
+	zombie3->Velocity.x / 4;
+	zombie3->Velocity.y/4;
+
+	zombie4 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
+	zombie4->Velocity.x * 4;
+	zombie4->Velocity.y * 4;
 
 	//Loading both maps
 
@@ -117,28 +122,18 @@ bool j1Scene::Start()
 
 		zombie->position.x = App->map->data.enemy1.x;
 		zombie->position.y = App->map->data.enemy1.y;
-		
-		/*slime->position.x = App->map->data.slime1.x;
-		slime->position.y = App->map->data.slime1.y;
 
-		slime2->position.x = App->map->data.slime2.x;
-		slime2->position.y = App->map->data.slime2.y;
+		zombie2->position.x = App->map->data.enemy2.x;
+		zombie2->position.y = App->map->data.enemy2.y;
 
+		zombie3->position.x = App->map->data.enemy3.x;
+		zombie3->position.y = App->map->data.enemy3.y;
 
-		bat2->position.x = App->map->data.bat2.x;
-		bat2->position.y = App->map->data.bat2.y;
+		zombie4->position.x = App->map->data.enemy4.x;
+		zombie4->position.y = App->map->data.enemy4.y;
 
-		orb->position.x = App->map->data.orb.x;
-		orb->position.y = App->map->data.orb.y;
-
-		orb2->position.x = App->map->data.orb2.x;;
-		orb2->position.y = App->map->data.orb2.y;
-
-		orb3->position.x = App->map->data.orb3.x;
-		orb3->position.y = App->map->data.orb3.y;*/
-
-		//stage1Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
-		//App->audio->PlayMusic(stage1Music.GetString());
+		stage1Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
+		App->audio->PlayMusic(stage1Music.GetString());
 
 		// --- Pathfinding walkability map 1 ---
 
@@ -150,20 +145,6 @@ bool j1Scene::Start()
 		RELEASE_ARRAY(buffer_data);
 	}
 	
-
-	// --- Initial position for enemies ---
-	/*xSlime = slime->position.x;
-	ySlime = slime->position.y;
-
-	xSlime2 = slime2->position.x;
-	ySlime2 = slime2->position.y;
-
-	xBat = zombie->position.x;
-	yBat = zombie->position.y;
-
-	xBat2 = bat2->position.x;
-	yBat2 = bat2->position.y;*/
-
 
 	App->map->ColliderDrawer(App->map->data);
 
@@ -940,8 +921,8 @@ bool j1Scene::change_scene(const char* map_name) {
 		
 
 		App->map->ColliderDrawer(App->map->data);
-		//p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
-		//App->audio->PlayMusic(stageMusic.GetString());
+		p2SString stageMusic("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
+		App->audio->PlayMusic(stageMusic.GetString());
 		
 
 
@@ -955,7 +936,7 @@ bool j1Scene::change_scene(const char* map_name) {
 		RELEASE_ARRAY(buffer_data);
 	}
 	
-	//player->CurrentAnimation = player->playerinfo.idleRight;
+//	player->CurrentAnimation = player->playerinfo.idleRight;
 
 	setStandarEntityPosition(map_name);
 
@@ -1005,13 +986,11 @@ bool j1Scene::Load(pugi::xml_node &config)
 
 	zombie->entitycoll->SetPos(zombie->position.x, zombie->position.y);
 
-	/*slime->entitycoll->SetPos(slime->position.x, slime->position.y);
-	
-	slime2->entitycoll->SetPos(slime2->position.x, slime2->position.y);
+	zombie2->entitycoll->SetPos(zombie2->position.x, zombie2->position.y);
 
-	bat2->entitycoll->SetPos(bat2->position.x, bat2->position.y);
-*/
-	
+	zombie3->entitycoll->SetPos(zombie3->position.x, zombie3->position.y);
+
+	zombie4->entitycoll->SetPos(zombie4->position.x, zombie4->position.y);
 
 
 
@@ -1028,28 +1007,17 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		player->Future_position.x = App->map->data.initpos.x;
 		player->Future_position.y = App->map->data.initpos.y;
 
-	/*	slime->position.x = App->map->data.slime1.x;
-		slime->position.y = App->map->data.slime1.y;
-
-		slime2->position.x = App->map->data.slime2.x;
-		slime2->position.y = App->map->data.slime2.y;
-*/
 		zombie->position.x = App->map->data.enemy1.x;
 		zombie->position.y = App->map->data.enemy1.y;
 
-	/*	bat2->position.x = App->map->data.bat2.x;
-		bat2->position.y = App->map->data.bat2.y;
+		zombie2->position.x = App->map->data.enemy2.x;
+		zombie2->position.y = App->map->data.enemy2.y;
 
-		orb->position.x = App->map->data.orb.x;
-		orb->position.y = App->map->data.orb.y;
-		
-		orb2->position.x = App->map->data.orb2.x;;
-		orb2->position.y = App->map->data.orb2.y;
-	
-		orb3->position.x = App->map->data.orb3.x;
-		orb3->position.y = App->map->data.orb3.y;*/
-		
-	
+		zombie3->position.x = App->map->data.enemy3.x;
+		zombie3->position.y = App->map->data.enemy3.y;
+
+		zombie4->position.x = App->map->data.enemy4.x;
+		zombie4->position.y = App->map->data.enemy4.y;
 
 	}
 
@@ -1062,28 +1030,30 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	zombie->entitycoll = App->coll->AddCollider(zombie->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
 	zombie->entitycoll->SetPos(zombie->position.x, zombie->position.y);
 
-	/*bat2->entitycoll = App->coll->AddCollider(bat2->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
-	bat2->entitycoll->SetPos(bat2->position.x, bat2->position.y);*/
+	zombie2->entitycoll = App->coll->AddCollider(zombie->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
+	zombie2->entitycoll->SetPos(zombie->position.x, zombie->position.y);
 
+	zombie3->entitycoll = App->coll->AddCollider(zombie->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
+	zombie3->entitycoll->SetPos(zombie->position.x, zombie->position.y);
+
+	zombie4->entitycoll = App->coll->AddCollider(zombie->entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, App->entities);
+	zombie4->entitycoll->SetPos(zombie->position.x, zombie->position.y);
+	
 
 	// avtive and inactive
 
 	player->active = true;
 	player->dead = false;
-	/*slime->active = true;
-	slime->dead = false;
-	slime2->active = true;
-	slime2->dead = false;*/
 	zombie->active = true;
 	zombie->dead = false;
-	/*bat2->active = true;
-	bat2->dead = false;
-	orb->active = true;
-	orb->touched = false;
-	orb2->active = true;
-	orb2->touched = false;
-	orb3->active = true;
-	orb3->touched = false;*/
+	zombie2->active = true;
+	zombie2->dead = false;
+	zombie3->active = true;
+	zombie3->dead = false;
+	zombie4->active = true;
+	zombie4->dead = false;
+
+	
 }
 
 void j1Scene::loadSaveDataEntity()

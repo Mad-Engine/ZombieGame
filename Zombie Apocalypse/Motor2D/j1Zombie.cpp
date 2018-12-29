@@ -12,7 +12,7 @@
 #include "j1EntityManager.h"
 #include "j1Player.h"
 #include "j1Pathfinding.h"
-
+#include <time.h>
 
 j1Zombie::j1Zombie() : j1Entity("zombie", entity_type::ZOMBIE_NORMAL)
 {
@@ -29,7 +29,7 @@ j1Zombie::~j1Zombie()
 bool j1Zombie::Start()
 {
 	LOG("Loading zombie");
-	
+	srand(time(NULL));
 	ZombieInfo = manager->GetBatData();
 
 	entitycollrect = ZombieInfo.BatRect;
@@ -46,8 +46,8 @@ bool j1Zombie::Start()
 	position.x = 300;
 	position.y = 300;
 
-	Velocity.x = ZombieInfo.Velocity.x;
-
+	Velocity.x = ZombieInfo.Velocity.x/App->entities->Secretboi;
+	Velocity.y = Velocity.x;
 	entitystate = LEFT;
 
 	going_right = true;
@@ -106,7 +106,7 @@ bool j1Zombie::PostUpdate(float dt)
 			}
 
 			//Debug Purpose (moving zombie around)
-			if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
+			/*if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
 			{
 				position.x -= ZombieInfo.Velocity.x/10;
 				going_right=true;
@@ -125,7 +125,7 @@ bool j1Zombie::PostUpdate(float dt)
 			{
 				position.y += ZombieInfo.Velocity.y/10;
 				going_down = true;
-			}
+			}*/
 
 			/*else
 			{
@@ -278,7 +278,7 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 	if (active)
 	{
 
-		 if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && lateralcollision && App->scene->player->dead == false && !dead)
+		 if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->scene->player->dead == false && !dead)
 		{ 
 			// -- player death ---
 			
@@ -316,7 +316,6 @@ bool j1Zombie::ReestablishVariables()
 	bool ret = true;
 
 	pathfinding_size = 0;
-
 	return ret;
 }
 

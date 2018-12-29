@@ -7,6 +7,8 @@
 #include "j1App.h"
 #include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
+#include <time.h>
+
 
 j1EntityManager::j1EntityManager() : j1Module()
 {
@@ -23,6 +25,9 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	LOG("Setting up Entity manager");
 	bool ret = true;
+	
+	
+
 	//logic_updates_per_second = DEFAULT_LOGIC_PER_SECOND;
 	//update_ms_cycle = 1.0f / (float)logic_updates_per_second;
     update_ms_cycle = 1.0f / (float)App->framerate_cap;
@@ -45,7 +50,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.AttackShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun");
 	playerinfo.AttackGun = LoadAnimation(playerinfo.folder.GetString(), "gun");
 	playerinfo.AttackFlame= playerinfo.AttackShotgun = LoadAnimation(playerinfo.folder.GetString(), "flame thrower");
-	//.............................................
+	// .............................................
 
 	int x = playernode.child("collider").attribute("x").as_int();
 	int y = playernode.child("collider").attribute("y").as_int();
@@ -121,7 +126,6 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	zombieinfo.dead = LoadAnimation(zombieinfo.folder.GetString(), "Dead");
 
 	zombieinfo.Velocity.x = zombieinfo.auxVel.x = zombienode.child("Velocity").attribute("x").as_float();
-	zombieinfo.Velocity.y = zombieinfo.auxVel.y = zombienode.child("Velocity").attribute("y").as_float();
 	zombieinfo.initialVx = zombienode.child("Velocity").attribute("initalVx").as_float();
 	zombieinfo.colliding_offset = zombienode.child("colliding_offset").attribute("value").as_float();
 	zombieinfo.areaofaction = zombienode.child("areaofaction").attribute("value").as_int();
@@ -160,6 +164,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 
 	// ---------------------
 
+	
+
 	return ret;
 }
 
@@ -183,6 +189,8 @@ bool j1EntityManager::PreUpdate()
 bool j1EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityManager_Update", Profiler::Color::Chocolate);
+
+	
 
 	//accumulated_time += dt;
 
@@ -291,6 +299,8 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 {
 	j1Entity* entity = nullptr;
 
+	Secretboi = rand() % 10 + 1;
+
 	switch (entitytype)
 	{
 	case entity_type::SLIME:
@@ -298,6 +308,10 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 		break;
 	case entity_type::ZOMBIE_NORMAL:
 		entity = new j1Zombie();
+
+		entity->Velocity.x / Secretboi;
+		entity->Velocity.y = entity->Velocity.x;
+ 
 		break;
 	case entity_type::PLAYER:
 		entity = new j1Player();
@@ -307,6 +321,8 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 		break;
 	
 	}
+
+	
 	entityID++;
 	entity->Init(this);
 	entity->Start();

@@ -80,7 +80,7 @@ public:
 	float				accumulated_time = 0;
 
 	int					entityID = 0;
-
+	int					Secretboi = 0;
 private:
 	// --- Player ---
 	Playerdata playerinfo;
