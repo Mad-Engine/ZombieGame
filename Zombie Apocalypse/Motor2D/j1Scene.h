@@ -8,7 +8,7 @@ struct SDL_Texture;
 struct SDL_Rect;
 class j1Player;
 class j1Slime;
-class j1Bat;
+class j1Zombie;
 class j1Orb;
 class j1Button;
 class j1UI_Element;
@@ -103,13 +103,10 @@ public:
 
 	//Entities on map
 	j1Player*           player = nullptr;
-	j1Slime*			slime = nullptr;
-	j1Slime*			slime2 = nullptr;
-	j1Bat*				bat = nullptr;
-	j1Bat*				bat2 = nullptr;
-	j1Orb*				orb = nullptr;
-	j1Orb*				orb2 = nullptr;
-	j1Orb*				orb3 = nullptr;
+	j1Zombie*			zombie = nullptr;
+	j1Zombie*			zombie2 = nullptr;
+	j1Zombie*			zombie3 = nullptr;
+	j1Zombie*			zombie4 = nullptr;
 
 	//variables used on module collision
 	int areaofcollision = 0;

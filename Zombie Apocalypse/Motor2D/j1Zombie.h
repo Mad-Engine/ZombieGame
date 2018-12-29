@@ -1,5 +1,5 @@
-#ifndef __j1BAT_H__
-#define __j1BAT_H__
+#ifndef __j1ZOMBIE_H__
+#define __j1ZOMBIE_H__
 
 #include "j1Entity.h"
 
@@ -7,13 +7,13 @@ struct SDL_Texture;
 struct Collider;
 struct PathInfo;
 
-struct BatData {
+struct ZombieData {
 
 
 
-	Animation* flyRight = nullptr;
-	Animation* flyLeft = nullptr;
-	Animation* explote = nullptr;
+	Animation* walk = nullptr;
+	Animation* attack = nullptr;
+	Animation* dead = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
@@ -33,12 +33,12 @@ struct BatData {
 
 };
 
-class j1Bat :public j1Entity
+class j1Zombie :public j1Entity
 {
 public:
 
-	j1Bat();
-	~j1Bat();
+	j1Zombie();
+	~j1Zombie();
 
 	bool Start();
 	bool Update(float dt);
@@ -80,7 +80,8 @@ public:
 	bool batcolliding = false;
 
 
-	BatData BatInfo;
+	ZombieData ZombieInfo;
+	SDL_Rect Intersection = { 0,0,0,0 };
 
 	// Pathfinding
 	const p2DynArray<iPoint>* last_pathfinding = nullptr;
@@ -100,4 +101,4 @@ public:
 
 };
 
-#endif // __j1BAT_H__
+#endif // __j1ZOMBIE_H__

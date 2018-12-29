@@ -231,26 +231,26 @@ bool j1Map::LoadMap(MapData& data)
 				data.finalpos.x = mapIterator.child("object").attribute("x").as_int();
 				data.finalpos.y = mapIterator.child("object").attribute("y").as_int() + mapIterator.child("object").attribute("height").as_int();
 			}
-			/*else if (tmp == "slime1")
+			else if (tmp == "Enemies1")
 			{
-				data.slime1.x = mapIterator.child("object").attribute("x").as_int();
-				data.slime1.y = mapIterator.child("object").attribute("y").as_int();
+				data.enemy1.x = mapIterator.child("object").attribute("x").as_int();
+				data.enemy1.y = mapIterator.child("object").attribute("y").as_int();
 			}
-			else if (tmp == "slime2")
+			else if (tmp == "Enemies2")
 			{
-				data.slime2.x = mapIterator.child("object").attribute("x").as_int();
-				data.slime2.y = mapIterator.child("object").attribute("y").as_int();
+				data.enemy2.x = mapIterator.child("object").attribute("x").as_int();
+				data.enemy2.y = mapIterator.child("object").attribute("y").as_int();
 			}
-			else if (tmp == "bat1")
+			else if (tmp == "Enemies3")
 			{
-				data.bat1.x = mapIterator.child("object").attribute("x").as_int();
-				data.bat1.y = mapIterator.child("object").attribute("y").as_int();
+				data.enemy3.x = mapIterator.child("object").attribute("x").as_int();
+				data.enemy3.y = mapIterator.child("object").attribute("y").as_int();
 			}
-			else if (tmp == "bat2")
+			else if (tmp == "Enemies4")
 			{
-				data.bat2.x = mapIterator.child("object").attribute("x").as_int(); 
-				data.bat2.y = mapIterator.child("object").attribute("y").as_int();
-			}*/
+				data.enemy4.x = mapIterator.child("object").attribute("x").as_int();
+				data.enemy4.y = mapIterator.child("object").attribute("y").as_int();
+			}
 			
 			
 		}

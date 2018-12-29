@@ -7,6 +7,8 @@
 #include "j1App.h"
 #include "j1EntityManager.h"
 #include "Brofiler/Brofiler.h"
+#include <time.h>
+
 
 j1EntityManager::j1EntityManager() : j1Module()
 {
@@ -23,6 +25,9 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 {
 	LOG("Setting up Entity manager");
 	bool ret = true;
+	
+	
+
 	//logic_updates_per_second = DEFAULT_LOGIC_PER_SECOND;
 	//update_ms_cycle = 1.0f / (float)logic_updates_per_second;
     update_ms_cycle = 1.0f / (float)App->framerate_cap;
@@ -45,7 +50,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	playerinfo.AttackShotgun= LoadAnimation(playerinfo.folder.GetString(), "shotgun");
 	playerinfo.AttackGun = LoadAnimation(playerinfo.folder.GetString(), "gun");
 	playerinfo.AttackFlame= playerinfo.AttackShotgun = LoadAnimation(playerinfo.folder.GetString(), "flame thrower");
-	//.............................................
+	// .............................................
 
 	int x = playernode.child("collider").attribute("x").as_int();
 	int y = playernode.child("collider").attribute("y").as_int();
@@ -88,7 +93,7 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 
 	slimeinfo.runRight= LoadAnimation(slimeinfo.folder.GetString(), "slime right");
 	slimeinfo.runLeft = LoadAnimation(slimeinfo.folder.GetString(), "slime left");
-	slimeinfo.explote = LoadAnimation(slimeinfo.folder.GetString(), "explote");
+	slimeinfo.dead = LoadAnimation(slimeinfo.folder.GetString(), "dead");
 
 	slimeinfo.gravity = slimenode.child("gravity").attribute("value").as_float();
 	slimeinfo.Velocity.x = slimeinfo.auxVel.x = slimenode.child("Velocity").attribute("x").as_float();
@@ -102,35 +107,33 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 	slimeinfo.RefID.x = slimenode.child("entityID").attribute("value1").as_int();
 	slimeinfo.RefID.y = slimenode.child("entityID").attribute("value2").as_int();
 
-	//--- Bat data load --------------------
+	//--- ZOMBIE data load --------------------
 
-	pugi::xml_node batnode = config.child("bat");
+	pugi::xml_node zombienode = config.child("zombie");
 
-	batinfo.folder.create(batnode.child("folder").child_value());
-	batinfo.Texture.create(batnode.child("texture").child_value());
+	zombieinfo.folder.create(zombienode.child("folder").child_value());
+	zombieinfo.Texture.create(zombienode.child("texture").child_value());
 
-	x = batnode.child("collider").attribute("x").as_int();
-	y = batnode.child("collider").attribute("y").as_int();
-	w = batnode.child("collider").attribute("width").as_int();
-	h = batnode.child("collider").attribute("height").as_int();
-	batinfo.BatRect = { x,y,w,h };
+	x = zombienode.child("collider").attribute("x").as_int();
+	y = zombienode.child("collider").attribute("y").as_int();
+	w = zombienode.child("collider").attribute("width").as_int();
+	h = zombienode.child("collider").attribute("height").as_int();
+	zombieinfo.BatRect = { x,y,w,h };
 
 
-	batinfo.flyRight = LoadAnimation(batinfo.folder.GetString(), "bat right");
-	batinfo.flyLeft = LoadAnimation(batinfo.folder.GetString(), "bat left");
-	batinfo.explote = LoadAnimation(batinfo.folder.GetString(), "explote");
+	zombieinfo.walk = LoadAnimation(zombieinfo.folder.GetString(), "walk");
+	zombieinfo.attack = LoadAnimation(zombieinfo.folder.GetString(), "attack");
+	zombieinfo.dead = LoadAnimation(zombieinfo.folder.GetString(), "Dead");
 
-	batinfo.gravity = batnode.child("gravity").attribute("value").as_float(); //
-	batinfo.Velocity.x = batinfo.auxVel.x = batnode.child("Velocity").attribute("x").as_float();
-	batinfo.Velocity.y = batinfo.auxVel.y = batnode.child("Velocity").attribute("y").as_float();
-	batinfo.initialVx = batnode.child("Velocity").attribute("initalVx").as_float();
-	batinfo.colliding_offset = batnode.child("colliding_offset").attribute("value").as_float();
-	batinfo.areaofaction = batnode.child("areaofaction").attribute("value").as_int();
-	batinfo.animationspeed = batnode.child("animationspeed").attribute("value").as_float();
-	batinfo.printingoffset.x = batnode.child("printingoffset").attribute("x").as_int();
-	batinfo.printingoffset.y = batnode.child("printingoffset").attribute("y").as_int();
-	batinfo.RefID.x = batnode.child("entityID").attribute("value1").as_int();
-	batinfo.RefID.y = batnode.child("entityID").attribute("value2").as_int();
+	zombieinfo.Velocity.x = zombieinfo.auxVel.x = zombienode.child("Velocity").attribute("x").as_float();
+	zombieinfo.initialVx = zombienode.child("Velocity").attribute("initalVx").as_float();
+	zombieinfo.colliding_offset = zombienode.child("colliding_offset").attribute("value").as_float();
+	zombieinfo.areaofaction = zombienode.child("areaofaction").attribute("value").as_int();
+	zombieinfo.animationspeed = zombienode.child("animationspeed").attribute("value").as_float();
+	zombieinfo.printingoffset.x = zombienode.child("printingoffset").attribute("x").as_int();
+	zombieinfo.printingoffset.y = zombienode.child("printingoffset").attribute("y").as_int();
+	zombieinfo.RefID.x = zombienode.child("entityID").attribute("value1").as_int();
+	zombieinfo.RefID.y = zombienode.child("entityID").attribute("value2").as_int();
 
 	//--- Orbs data load --------------------
 
@@ -161,6 +164,8 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 
 	// ---------------------
 
+	
+
 	return ret;
 }
 
@@ -184,6 +189,8 @@ bool j1EntityManager::PreUpdate()
 bool j1EntityManager::Update(float dt)
 {
 	BROFILER_CATEGORY("EntityManager_Update", Profiler::Color::Chocolate);
+
+	
 
 	//accumulated_time += dt;
 
@@ -292,13 +299,19 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 {
 	j1Entity* entity = nullptr;
 
+	Secretboi = rand() % 10 + 1;
+
 	switch (entitytype)
 	{
 	case entity_type::SLIME:
 		entity = new j1Slime();
 		break;
-	case entity_type::BAT:
-		entity = new j1Bat();
+	case entity_type::ZOMBIE_NORMAL:
+		entity = new j1Zombie();
+
+		entity->Velocity.x / Secretboi;
+		entity->Velocity.y = entity->Velocity.x;
+ 
 		break;
 	case entity_type::PLAYER:
 		entity = new j1Player();
@@ -308,6 +321,8 @@ j1Entity* const j1EntityManager::CreateEntity(const char* entname, entity_type e
 		break;
 	
 	}
+
+	
 	entityID++;
 	entity->Init(this);
 	entity->Start();

@@ -25,7 +25,7 @@ enum class entity_type
 {
 	PLAYER,
 	SLIME,
-	BAT,
+	ZOMBIE_NORMAL,
 	ORB
 
 };

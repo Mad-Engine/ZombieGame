@@ -35,8 +35,8 @@ bool j1Slime::Start()
 	CurrentAnimation = Slimeinfo.runRight;
 	Slimeinfo.runLeft->speed = Slimeinfo.animationspeed;
 	Slimeinfo.runRight->speed = Slimeinfo.animationspeed/2;
-	Slimeinfo.explote->speed = Slimeinfo.animationspeed*2 ;
-	Slimeinfo.explote->loop = false;
+	Slimeinfo.dead->speed = Slimeinfo.animationspeed*2 ;
+	Slimeinfo.dead->loop = false;
 
 	gravity = Slimeinfo.gravity;
 
@@ -261,8 +261,8 @@ void j1Slime::OnCollision(Collider * c1, Collider * c2)
 			{
 				App->audio->PlayFx(App->audio->enemydeathfx);
 
-				Slimeinfo.explote->Reset();
-				CurrentAnimation = Slimeinfo.explote;
+				Slimeinfo.dead->Reset();
+				CurrentAnimation = Slimeinfo.dead;
 				
 				// add score
 				App->scene->player->score += 150;
