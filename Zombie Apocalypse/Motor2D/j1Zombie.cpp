@@ -1,4 +1,4 @@
-#include "j1Bat.h"
+#include "j1Zombie.h"
 #include "p2Log.h"
 #include "j1App.h"
 #include "j1Textures.h"
@@ -14,41 +14,41 @@
 #include "j1Pathfinding.h"
 
 
-j1Bat::j1Bat() : j1Entity("Bat", entity_type::BAT)
+j1Zombie::j1Zombie() : j1Entity("zombie", entity_type::ZOMBIE_NORMAL)
 {
 
 	last_pathfinding = nullptr;
 	current_path.Clear();
 }
 
-j1Bat::~j1Bat()
+j1Zombie::~j1Zombie()
 {
 
 }
 
-bool j1Bat::Start()
+bool j1Zombie::Start()
 {
-	LOG("Loading Bat");
+	LOG("Loading zombie");
 	
-	BatInfo = manager->GetBatData();
+	ZombieInfo = manager->GetBatData();
 
-	entitycollrect = BatInfo.BatRect;
-	colliding_offset = BatInfo.colliding_offset;
-	entitycoll = App->coll->AddCollider(entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_BAT, (j1Module*)manager);
+	entitycollrect = ZombieInfo.BatRect;
+	colliding_offset = ZombieInfo.colliding_offset;
+	entitycoll = App->coll->AddCollider(entitycollrect, COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE, (j1Module*)manager);
 
-	CurrentAnimation = BatInfo.flyRight;
-	BatInfo.flyLeft->speed = BatInfo.animationspeed/2.0f;
-	BatInfo.flyRight->speed = BatInfo.animationspeed/2.0f;
- 	BatInfo.explote->speed = BatInfo.animationspeed;
+	CurrentAnimation = ZombieInfo.walk;
+	ZombieInfo.attack->speed = ZombieInfo.animationspeed/2.0f;
+	ZombieInfo.walk->speed = ZombieInfo.animationspeed/2.0f;
+ 	ZombieInfo.dead->speed = ZombieInfo.animationspeed;
 
-	gravity = BatInfo.gravity;
+	gravity = ZombieInfo.gravity;
 
 	position.x = 300;
 	position.y = 300;
 
-	Velocity.x = BatInfo.Velocity.x;
+	Velocity.x = ZombieInfo.Velocity.x;
 
-	entitystate = FLYING;
+	entitystate = LEFT;
 
 	going_right = true;
 	going_left = false;
@@ -58,7 +58,7 @@ bool j1Bat::Start()
 	dead = false;
 
 	if (spritesheet == nullptr)
-		spritesheet = App->tex->Load(BatInfo.Texture.GetString());
+		spritesheet = App->tex->Load(ZombieInfo.Texture.GetString());
 
 	entityID = App->entities->entityID;
 
@@ -67,24 +67,25 @@ bool j1Bat::Start()
 	return true;
 }
 
-bool j1Bat::Update(float dt)
+bool j1Zombie::Update(float dt)
 {
 	going_down = false;
 	going_up = false;
 	
 	batcolliding = false;
-	entitystate = FLYING;
+	entitystate = LEFT;
 
 	return true;
 }
 
-bool j1Bat::PostUpdate(float dt)
+bool j1Zombie::PostUpdate(float dt)
 {
 	bool ret = true;
 
 	CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
 
 	Pathfind(dt);
+	CurrentAnimation = ZombieInfo.walk;
 
 	if (active && entitycoll!=nullptr)
 	{ 
@@ -93,66 +94,64 @@ bool j1Bat::PostUpdate(float dt)
 			//check for player nearby
 
 			if (!App->scene->player->god_mode &&
-				App->scene->player->Future_position.x > position.x - BatInfo.areaofaction &&
-				App->scene->player->Future_position.x < position.x + BatInfo.areaofaction &&
-				App->scene->player->Future_position.y < position.y + BatInfo.areaofaction &&
-				App->scene->player->Future_position.y > position.y - BatInfo.areaofaction)
+				App->scene->player->Future_position.x > position.x - ZombieInfo.areaofaction &&
+				App->scene->player->Future_position.x < position.x + ZombieInfo.areaofaction &&
+				App->scene->player->Future_position.y < position.y + ZombieInfo.areaofaction &&
+				App->scene->player->Future_position.y > position.y - ZombieInfo.areaofaction)
 			{
 
 
-				//CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
-
-				//Pathfind(dt);
-
+				
+				CurrentAnimation = ZombieInfo.attack;
 			}
 
-			//Debug Purpose (moving bat around)
-			/*if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
+			//Debug Purpose (moving zombie around)
+			if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
 			{
-				position.x -= BatInfo.Velocity.x/10;
+				position.x -= ZombieInfo.Velocity.x/10;
 				going_right=true;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_L) == KEY_REPEAT)
 			{
-				position.x += BatInfo.Velocity.x/10;
+				position.x += ZombieInfo.Velocity.x/10;
 				going_right = false;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_I) == KEY_REPEAT)
 			{
-				position.y -= BatInfo.Velocity.y/10;
+				position.y -= ZombieInfo.Velocity.y/10;
 				going_up = true;
 			}
 			if (App->input->GetKey(SDL_SCANCODE_K) == KEY_REPEAT)
 			{
-				position.y += BatInfo.Velocity.y/10;
+				position.y += ZombieInfo.Velocity.y/10;
 				going_down = true;
-			}*/
+			}
 
 			/*else
 			{
-				if (BatInfo.Velocity != BatInfo.auxVel)
+				if (ZombieInfo.Velocity != ZombieInfo.auxVel)
 				{
-					BatInfo.Velocity = BatInfo.auxVel;
+					ZombieInfo.Velocity = ZombieInfo.auxVel;
 				}
 
 				if (going_right)
 				{
-					position.x += BatInfo.Velocity.x*dt;
+					position.x += ZombieInfo.Velocity.x*dt;
 				}
 				else if (!going_right)
 				{
-					position.x -= BatInfo.Velocity.x*dt;
+					position.x -= ZombieInfo.Velocity.x*dt;
 
 				}
 
 				if (going_up)
 				{
-					position.y += BatInfo.Velocity.y*dt;
+					position.y += ZombieInfo.Velocity.y*dt;
 
 				}
 				else if (going_down)
 				{
-					position.y -= BatInfo.Velocity.y*dt;
+					position.y -= ZombieInfo.Velocity.y*dt;
 
 				}
 
@@ -183,10 +182,9 @@ bool j1Bat::PostUpdate(float dt)
 			}*/
 
 
-		if (going_right)
-			CurrentAnimation = BatInfo.flyRight;
-		else if (!going_right)
-			CurrentAnimation = BatInfo.flyLeft;
+		
+			
+	
 
 		//check for limits
 		if (position.x < 0)
@@ -207,21 +205,21 @@ bool j1Bat::PostUpdate(float dt)
 		entitycoll->SetPos(-50, -50);
 	}
 
-	//Blitting bat
+	//Blitting zombie
 
 	if (active)
 	{
-		App->render->Blit(spritesheet, position.x - BatInfo.printingoffset.x, position.y - BatInfo.printingoffset.y, &CurrentAnimation->GetCurrentFrame(dt));
+		App->render->Blit(spritesheet, position.x -50, position.y - 50 , &CurrentAnimation->GetCurrentFrame(dt));
 	}
 
-	if (!active && !CurrentAnimation->Finished())
+	/*if (!active && !CurrentAnimation->Finished())
 	{
-		App->render->Blit(spritesheet, position.x - BatInfo.printingoffset.x*3, position.y - BatInfo.printingoffset.y, &CurrentAnimation->GetCurrentFrame(dt));
-	}
+		App->render->Blit(spritesheet, position.x - ZombieInfo.printingoffset.x*3, position.y - ZombieInfo.printingoffset.y, &CurrentAnimation->GetCurrentFrame(dt));
+	}*/
 	return ret;
 }
 
-void j1Bat::OnCollision(Collider * c1, Collider * c2)
+void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 {
 	bool lateralcollision = true;
 
@@ -233,41 +231,42 @@ void j1Bat::OnCollision(Collider * c1, Collider * c2)
 	if (c1->rect.y + c1->rect.h >= c2->rect.y && c1->rect.y + c1->rect.h <= c2->rect.y + 2)
 	{
 		lateralcollision = false;
-
-
 	}
 
 	if (active)
 	{
-		if (c2->type == COLLIDER_TYPE::COLLIDER_FLOOR || c2->type == COLLIDER_TYPE::COLLIDER_PLATFORM || c2->type == COLLIDER_TYPE::COLLIDER_ROOF || c2->type == COLLIDER_TYPE::COLLIDER_SPIKES && dead == false && !lateralcollision)
+		if (c2->type == COLLIDER_TYPE::COLLIDER_FLOOR  && dead == false && !lateralcollision)
 		{
-			if (/*going_up &&*/ c2->rect.y + c2->rect.h == c1->rect.y)
+			SDL_IntersectRect(&c1->rect, &c2->rect, &Intersection);
+
+			if ( c2->rect.y + c2->rect.h >= c1->rect.y)
 			{
-				c1->rect.y += BatInfo.colliding_offset;
+				c1->rect.y += Intersection.h;
 				going_up = false;
 			}
-			else if (/*going_down &&*/ c1->rect.y + c1->rect.h == c2->rect.y)
+			else if ( c1->rect.y + c1->rect.h <= c2->rect.y)
 			{
 
-				c1->rect.y -= BatInfo.colliding_offset;
+				c1->rect.y -= Intersection.h;
 				going_down = false;
 			}
 
 			batcolliding = true;
 		}
 
-		if (lateralcollision)
+		else if (lateralcollision)
 		{
+			SDL_IntersectRect(&c1->rect, &c2->rect, &Intersection);
+
 			if (going_right)
 			{
 				going_right = false;
-				c1->rect.x -= BatInfo.colliding_offset;
+				c1->rect.x += Intersection.w;
 			}
 			else
 			{
 				going_right = true;
-				c1->rect.x += BatInfo.colliding_offset;
-
+				c1->rect.x -= Intersection.w;
 			}
 			batcolliding = true;
 		}
@@ -279,30 +278,7 @@ void j1Bat::OnCollision(Collider * c1, Collider * c2)
 	if (active)
 	{
 
-		if (c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && !lateralcollision)
-		{
-			if (dead == false)
-			{
-				App->audio->PlayFx(App->audio->enemydeathfx);
-
-				BatInfo.explote->Reset();
-				CurrentAnimation = BatInfo.explote;
-
-				//score here
-				App->scene->player->score += 350;
-
-				// entity dead
-				if (entitycoll != nullptr)
-				{
-					entitycoll->to_delete = true;
-
-				}
-
-				dead = true;
-				active = false;
-			}
-		}
-		else if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && lateralcollision && App->scene->player->dead == false && !dead)
+		 if (c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && lateralcollision && App->scene->player->dead == false && !dead)
 		{ 
 			// -- player death ---
 			
@@ -335,7 +311,7 @@ void j1Bat::OnCollision(Collider * c1, Collider * c2)
 	}
 }
 
-bool j1Bat::ReestablishVariables()
+bool j1Zombie::ReestablishVariables()
 {
 	bool ret = true;
 
@@ -344,7 +320,7 @@ bool j1Bat::ReestablishVariables()
 	return ret;
 }
 
-bool j1Bat::CreatePathfinding(const iPoint destination)
+bool j1Zombie::CreatePathfinding(const iPoint destination)
 {
 	bool ret = false;
 
@@ -365,7 +341,7 @@ bool j1Bat::CreatePathfinding(const iPoint destination)
 	return ret;
 }
 
-bool j1Bat::Pathfind(float dt)
+bool j1Zombie::Pathfind(float dt)
 {
 	bool ret = true;
 
@@ -387,27 +363,27 @@ bool j1Bat::Pathfind(float dt)
 	return ret;
 }
 
-void j1Bat::UpdateMovement(float dt)
+void j1Zombie::UpdateMovement(float dt)
 {
-	BatInfo.Velocity.x = current_path[pathfinding_index].x - App->map->WorldToMap(position.x, position.y,App->map->data).x;
-	BatInfo.Velocity.y = current_path[pathfinding_index].y - App->map->WorldToMap(position.x, position.y, App->map->data).y;
+	ZombieInfo.Velocity.x = current_path[pathfinding_index].x - App->map->WorldToMap(position.x, position.y,App->map->data).x;
+	ZombieInfo.Velocity.y = current_path[pathfinding_index].y - App->map->WorldToMap(position.x, position.y, App->map->data).y;
 
-	BatInfo.Velocity.x = BatInfo.Velocity.x*150.0f * dt;
-	BatInfo.Velocity.y = BatInfo.Velocity.y*150.0f * dt;
-	position.x += BatInfo.Velocity.x;
-	position.y += BatInfo.Velocity.y;
+	ZombieInfo.Velocity.x = ZombieInfo.Velocity.x*150.0f * dt;
+	ZombieInfo.Velocity.y = ZombieInfo.Velocity.y*150.0f * dt;
+	position.x += ZombieInfo.Velocity.x;
+	position.y += ZombieInfo.Velocity.y;
 }
 
-bool j1Bat::Load(pugi::xml_node &config)
+bool j1Zombie::Load(pugi::xml_node &config)
 {
 	bool ret = true;
-	if (entityID == BatInfo.RefID.x)
+	if (entityID == ZombieInfo.RefID.x)
 	{
 		position.x = config.child("Entity2").child("Batx").attribute("value").as_float();
 		position.y = config.child("Entity2").child("Baty").attribute("value").as_float();
 		active = config.child("Entity2").child("active").attribute("value").as_bool();
 	}
-	else if (entityID == BatInfo.RefID.y)
+	else if (entityID == ZombieInfo.RefID.y)
 	{
 		position.x = config.child("Entity3").child("Batx").attribute("value").as_float();
 		position.y = config.child("Entity3").child("Baty").attribute("value").as_float();
@@ -418,15 +394,15 @@ bool j1Bat::Load(pugi::xml_node &config)
 	return ret;
 }
 
-bool j1Bat::Save(pugi::xml_node &config) const
+bool j1Zombie::Save(pugi::xml_node &config) const
 {
-	if (entityID == BatInfo.RefID.x)
+	if (entityID == ZombieInfo.RefID.x)
 	{
 		config.append_child("Entity2").append_child("Batx").append_attribute("value") = position.x;
 		config.child("Entity2").append_child("Baty").append_attribute("value") = position.y;
 		config.child("Entity2").append_child("active").append_attribute("value") = active;
 	}
-	else if (entityID == BatInfo.RefID.y)
+	else if (entityID == ZombieInfo.RefID.y)
 	{
 		config.append_child("Entity3").append_child("Batx").append_attribute("value") = position.x;
 		config.child("Entity3").append_child("Baty").append_attribute("value") = position.y;
@@ -435,7 +411,7 @@ bool j1Bat::Save(pugi::xml_node &config) const
 	return true;
 }
 
-bool j1Bat::CleanUp()
+bool j1Zombie::CleanUp()
 {
 	delete path_info;
 
@@ -448,12 +424,12 @@ bool j1Bat::CleanUp()
 	return ret;
 }
 
-void j1Bat::FixedUpdate(float dt)
+void j1Zombie::FixedUpdate(float dt)
 {
 	PostUpdate(dt);
 }
 
-void j1Bat::LogicUpdate(float dt)
+void j1Zombie::LogicUpdate(float dt)
 {
 	Update(dt);
 

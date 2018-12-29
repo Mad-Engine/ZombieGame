@@ -10,7 +10,7 @@
 #include "j1Entity.h"
 #include "j1Player.h"
 #include "j1Slime.h"
-#include "j1Bat.h"
+#include "j1Zombie.h"
 #include "j1Orb.h"
 
 class j1Entity;
@@ -63,7 +63,7 @@ public:
 	// --- Get Entities data ---
 	Playerdata& GetPlayerData() { return playerinfo; }
 	SlimeData& GetSlimeData() { return slimeinfo; }
-	BatData& GetBatData() { return batinfo; }
+	ZombieData& GetBatData() { return zombieinfo; }
 	OrbData& GetOrbData() { return orbinfo; }
 
 	// --- Save & Load ---
@@ -87,7 +87,7 @@ private:
 
 	SlimeData slimeinfo;
 
-	BatData batinfo;
+	ZombieData zombieinfo;
 
 	OrbData orbinfo;
 

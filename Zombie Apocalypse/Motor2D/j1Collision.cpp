@@ -18,7 +18,7 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = false;
@@ -26,7 +26,7 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = false;
@@ -34,7 +34,7 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 
 
@@ -43,7 +43,7 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = true;
@@ -52,31 +52,28 @@ j1Collision::j1Collision()
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = true;
     matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 
 
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = true;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = true;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
 
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_FLOOR)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_SPIKES)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLATFORM)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ROOF)] = false;
-	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_BAT)] = false;
+	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_ENEMY_SLIME)] = false;
 	matrix[static_cast<int>(COLLIDER_TYPE::COLLIDER_ORB)][static_cast<int>(COLLIDER_TYPE::COLLIDER_PLAYER)] = true;
 
@@ -202,8 +199,8 @@ void j1Collision::DebugDraw()
 		case COLLIDER_TYPE::COLLIDER_ENEMY_SLIME: // brown
 			App->render->DrawQuad(item->data->rect, 153, 76, 0, alpha);
 			break;
-		case COLLIDER_TYPE::COLLIDER_ENEMY_BAT: // dark red
-			App->render->DrawQuad(item->data->rect, 153, 0, 76, alpha);
+		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE: // blue
+			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);
 			break;
 		case COLLIDER_TYPE::COLLIDER_ORB: // blue
 			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);

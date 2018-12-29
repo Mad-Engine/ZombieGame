@@ -88,10 +88,10 @@ struct MapData
 	int					tile_width;
 	int					tile_height;
 	iPoint				initpos;
-	iPoint				slime1;
-	iPoint				slime2;
-	iPoint				bat1;
-	iPoint				bat2;
+	iPoint				enemy1;
+	iPoint				enemy2;
+	iPoint				enemy3;
+	iPoint				enemy4;
 	iPoint				finalpos;
 	SDL_Color			background_color;
 	MapTypes			type;
