@@ -60,24 +60,24 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	VolumeChanger_fx = config.child("fx").child("VolumeChanger_fx").attribute("value").as_float();
 
 	fxDeath = config.child("fx").child("sound").attribute("death").as_string();
-	fxJump = config.child("fx").child("sound").attribute("jump").as_string();
-	fxdoubleJump = config.child("fx").child("sound").attribute("doubleJump").as_string();
+	//fxJump = config.child("fx").child("sound").attribute("jump").as_string();
+	//fxdoubleJump = config.child("fx").child("sound").attribute("doubleJump").as_string();
 	fxbuttonpop = config.child("fx").child("sound").attribute("buttonpop").as_string();
-	fxorb = config.child("fx").child("sound").attribute("orb").as_string();
-	fxenemydeath = config.child("fx").child("sound").attribute("enemydeath").as_string();
+	//fxorb = config.child("fx").child("sound").attribute("orb").as_string();
+	//fxenemydeath = config.child("fx").child("sound").attribute("enemydeath").as_string();
 	fxshot = config.child("fx").child("sound").attribute("shot").as_string();
 
-	p2SString deathSound ("%s%s", fxfolder.GetString(), fxDeath.GetString());
-	deathfx = LoadFx(deathSound.GetString());
+	//p2SString deathSound ("%s%s", fxfolder.GetString(), fxDeath.GetString());
+	//deathfx = LoadFx(deathSound.GetString());
 
-	p2SString enemydeathSound("%s%s", fxfolder.GetString(), fxenemydeath.GetString());
-	enemydeathfx = LoadFx(enemydeathSound.GetString());
+	//p2SString enemydeathSound("%s%s", fxfolder.GetString(), fxenemydeath.GetString());
+	//enemydeathfx = LoadFx(enemydeathSound.GetString());
 
-	p2SString jumpSound("%s%s", fxfolder.GetString(), fxJump.GetString());
-	jumpfx = LoadFx(jumpSound.GetString());
+	//p2SString jumpSound("%s%s", fxfolder.GetString(), fxJump.GetString());
+	//jumpfx = LoadFx(jumpSound.GetString());
 
-	p2SString doublejumpSound("%s%s", fxfolder.GetString(), fxdoubleJump.GetString());
-	doublejumpfx = LoadFx(doublejumpSound.GetString());
+	//p2SString doublejumpSound("%s%s", fxfolder.GetString(), fxdoubleJump.GetString());
+	//doublejumpfx = LoadFx(doublejumpSound.GetString());
 
 	p2SString buttonpopSound("%s%s", fxfolder.GetString(), fxbuttonpop.GetString());
 	buttonpopfx = LoadFx(buttonpopSound.GetString());
@@ -97,8 +97,6 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	HealthDroop = LoadFx("audio/fx/HealthDropping.wav");
 
 	cashfx= LoadFx("audio/fx/cashCollected.wav");
-
-
 
 	pugi::xml_node Music;
 	for (Music = config.child("music").child("song"); Music && ret; Music = Music.next_sibling("song"))
@@ -311,9 +309,6 @@ bool j1Audio::Load(pugi::xml_node &config)
 	VolumeChanger_music = config.child("VolumeChanger_music").attribute("value").as_float();
 
 	VolumeChanger_fx = config.child("VolumeChanger_fx").attribute("value").as_float();
-
-	if (testbool == true)
-		LOG("nice");
 
 	ret = Mix_VolumeMusic(128 * VolumeChanger_music);
 

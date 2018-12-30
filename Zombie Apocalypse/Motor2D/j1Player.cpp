@@ -558,7 +558,7 @@ void j1Player::Right_Collision(Collider * entitycollider, const Collider * to_ch
 			break;
 		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
 
-			if (deathtimer.ReadSec() > 5)
+			if (deathtimer.ReadSec() > 2)
 			{
 				deathtimer.Start();
 				lifes--;
@@ -587,7 +587,7 @@ void j1Player::Left_Collision(Collider * entitycollider, const Collider * to_che
 			break;
 		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
 
-			if (deathtimer.ReadSec() > 5)
+			if (deathtimer.ReadSec() > 2)
 			{
 				deathtimer.Start();
 				lifes--;
@@ -615,7 +615,7 @@ void j1Player::Up_Collision(Collider * entitycollider, const Collider * to_check
 			break;
 		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
 
-			if (deathtimer.ReadSec() > 5)
+			if (deathtimer.ReadSec() > 2)
 			{
 				deathtimer.Start();
 				lifes--;
@@ -643,7 +643,7 @@ void j1Player::Down_Collision(Collider * entitycollider, const Collider * to_che
 			break;
 		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
 
-			if (deathtimer.ReadSec() > 5)
+			if (deathtimer.ReadSec() > 2)
 			{
 				deathtimer.Start();
 				lifes--;

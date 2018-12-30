@@ -49,22 +49,21 @@ public:
 	float VolumeChanger_music=0.0;
 	float VolumeChanger_fx=0.0;
 
-	bool testbool = false;
 	p2SString fxDeath = nullptr;
-	p2SString fxJump = nullptr;
-	p2SString fxdoubleJump = nullptr;
+	//p2SString fxJump = nullptr;
+	//p2SString fxdoubleJump = nullptr;
 	p2SString fxbuttonpop = nullptr;
-	p2SString fxorb = nullptr;
-	p2SString fxenemydeath = nullptr;
+	//p2SString fxorb = nullptr;
+	//p2SString fxenemydeath = nullptr;
 	p2SString fxshot = nullptr;
 	//p2SString HealingPathSound = nullptr;
 	//p2SString HealthDroopPath = nullptr;
 
-	unsigned int deathfx = NULL;
-	unsigned int jumpfx = NULL;
-	unsigned int doublejumpfx = NULL;
+	//unsigned int deathfx = NULL;
+	//unsigned int jumpfx = NULL;
+	//unsigned int doublejumpfx = NULL;
 	unsigned int buttonpopfx = NULL;
-	unsigned int enemydeathfx = NULL;
+	//unsigned int enemydeathfx = NULL;
 	unsigned int shotfx = NULL;
 	unsigned int ammoDrop = NULL;
 	unsigned int ammoReload = NULL;

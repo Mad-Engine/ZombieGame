@@ -80,36 +80,40 @@ bool j1Zombie::Update(float dt)
 	{
 		lifes--;
 		App->scene->player->enemieskilled++;
+		manager->click_pos.x = -100;
+		manager->click_pos.y = -100;
 	}
 
 	if (lifes == 0)
 	{
+
 		int index = manager->entities.find(this);
 		auxiliarpos.x = position.x;
 		auxiliarpos.y = position.y;
 		App->scene->zombie_kills++;
 		App->scene->Total_kills++;
+		LOG("Total kills %i", App->scene->Total_kills);
 
 		seed = rand() % 4 + 1;
 
-		if (index == seed)
+		if (seed == 1)
 		{
 			position.x = App->map->data.enemy1.x;
 			position.y = App->map->data.enemy1.y;
 			
 		}
-		else if (index == seed)
+		else if (seed == 2)
 		{
 			position.x = App->map->data.enemy2.x;
 			position.y = App->map->data.enemy2.y;
 		}
-		else if (index == seed)
+		else if (seed == 3)
 		{
 			position.x = App->map->data.enemy3.x;
 			position.y = App->map->data.enemy3.y;
 		}
 
-		else if (index == seed)
+		else if (seed == 4)
 		{
 			position.x = App->map->data.enemy4.x;
 			position.y = App->map->data.enemy4.y;
@@ -126,7 +130,7 @@ bool j1Zombie::Update(float dt)
 
 bool j1Zombie::isClicked(SDL_Rect & rect)
 {
-	LOG("x vs mouse_x: %i %i", rect.x, manager->click_pos.x);
+	//LOG("x vs mouse_x: %i %i", rect.x, manager->click_pos.x);
 
 	
 	iPoint realpos = App->render->ScreenToWorld(manager->click_pos.x, manager->click_pos.y);

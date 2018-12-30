@@ -537,7 +537,7 @@ void j1App::SaveControlVariables()
 	cvar generaltime;
 
 	uint time = App->scene->sceneTimer.ReadSec();
-	generaltime.value = time- App->scene->timeAccumulated/100;
+	generaltime.value = time - App->scene->timeAccumulated/100;
 	generaltime.name = "TimePlayed";
 	generaltime.attr = "Time";
 	generaltime.priority = 0;
@@ -548,7 +548,7 @@ void j1App::SaveControlVariables()
 
 	// --- Ammo wasted and enemies killed ---
 
-	generaltime.value = App->scene->Total_kills/3.0f;
+	generaltime.value = App->scene->player->enemieskilled;
 	generaltime.name = "Enemieskilled";
 	generaltime.attr = "Total";
 
@@ -563,7 +563,11 @@ void j1App::SaveControlVariables()
 	// Ammo wasted and enemies killed
 
 	// --- Player shot accuracy ---
-	App->scene->player->accuracy = (float) ((float)App->scene->Total_kills/3.0f / (float)App->scene->player->shotsfired)*100;
+
+	if(App->scene->player->enemieskilled < App->scene->player->shotsfired)
+	App->scene->player->accuracy = (float) ((float)App->scene->player->enemieskilled / (float)App->scene->player->shotsfired)*100;
+	else
+	App->scene->player->accuracy = (float)((float)App->scene->player->shotsfired / (float)App->scene->player->enemieskilled) * 100;
 
 	generaltime.value = App->scene->player->accuracy;
 	generaltime.name = "Accuracy";

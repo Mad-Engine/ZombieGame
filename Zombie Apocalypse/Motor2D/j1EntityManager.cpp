@@ -204,7 +204,7 @@ bool j1EntityManager::Update(float dt)
 	}
 	else if (App->input->GetMouseButtonDown(1) == KEY_UP)
 	{
-		click_pos = { -1,-1 };
+		click_pos = { -100,-100 };
 	}
 
 	//accumulated_time += dt;
