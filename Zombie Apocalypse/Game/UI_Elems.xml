@@ -63,9 +63,9 @@
     <position x="50" y="725"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="330" h="226" />
-    <normal_rect x="985" y="750" w="330" h="226"/>
-    <hover_rect x="985" y="1312" w="330" h="226"/>
-    <click_rect  x="985" y="1031" w="330" h="226"/>
+    <normal_rect x="985" y="742" w="330" h="226"/>
+    <hover_rect x="985" y="1304" w="330" h="226"/>
+    <click_rect  x="985" y="1022" w="330" h="226"/>
   </Element>
 
   <Element> 6 - BUTTON SETTINGS TRIGGER MAIN MENU
@@ -74,9 +74,9 @@
     <position x="-300" y="725"/>
     <Texture path="gui/atlas.png"/>
     <logic_rect w="330" h="226" />
-    <normal_rect x="985" y="750" w="330" h="226"/>
-    <hover_rect x="985" y="1312" w="330" h="226"/>
-    <click_rect  x="985" y="1031" w="330" h="226"/>
+    <normal_rect x="985" y="742" w="330" h="226"/>
+    <hover_rect x="985" y="1304" w="330" h="226"/>
+    <click_rect  x="985" y="1022" w="330" h="226"/>
   </Element>
 
   <Element> 7 - BUTTON SETTINGS TRIGGER IN GAME
@@ -538,6 +538,27 @@ SOFTWARE."/>
     <type id="2" />
     <parent id="1"/>
     <position x="575" y="-75"/>
+    <place id="5"/>
+    <color r="245" g="245" b="220" a="55" />
+    <textA value=""/>
+    <textB value=""/>
+  </Element>
+  
+  <Element>  49 - PANEL AMMO HUD
+    <type id="0" />
+    <parent id="1"/>
+    <position x="1150" y="-75"/>
+    <Texture path="gui/atlas.png"/>
+    <logic_rect w="27" h="85" />
+    <normal_rect x="535" y="968" w="27" h="85"/>
+    <hover_rect  x="535" y="968" w="27" h="85"/>
+    <click_rect  x="535" y="968" w="27" h="85"/>
+  </Element>
+  
+  <Element> 50 - LABEL AMMO NUM
+    <type id="2" />
+    <parent id="1"/>
+    <position x="1100" y="-50"/>
     <place id="5"/>
     <color r="245" g="245" b="220" a="55" />
     <textA value=""/>

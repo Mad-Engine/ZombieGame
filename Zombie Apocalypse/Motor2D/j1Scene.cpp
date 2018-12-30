@@ -939,6 +939,15 @@ bool j1Scene::PostUpdate(float dt)
 			scorestring = auxstr.data();
 			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring);
 		}
+
+		// --- Ammo ---
+		*App->gui->UIelements.At(49)->data->GetActive() = true;
+		*App->gui->UIelements.At(50)->data->GetActive() = true;
+
+		score_sum = player->ammo;
+		auxstr = std::to_string(score_sum);
+		scorestring = auxstr.data();
+		App->gui->UIelements.At(50)->data->ShapeLabel(scorestring);
 	}
 	else
 	{
@@ -953,6 +962,8 @@ bool j1Scene::PostUpdate(float dt)
 		*App->gui->UIelements.At(46)->data->GetActive() = false;
 		*App->gui->UIelements.At(47)->data->GetActive() = false;
 		*App->gui->UIelements.At(48)->data->GetActive() = false;
+		*App->gui->UIelements.At(49)->data->GetActive() = false;
+		*App->gui->UIelements.At(50)->data->GetActive() = false;
 	}
 
 	// --- Controlling camera Bounds---
