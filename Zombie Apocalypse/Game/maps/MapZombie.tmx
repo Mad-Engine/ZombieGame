@@ -10177,13 +10177,13 @@
   <object id="10" x="1190" y="1188" width="50" height="52"/>
  </objectgroup>
  <objectgroup name="Enemies1">
-  <object id="11" x="300" y="76" width="52" height="54"/>
+  <object id="11" x="869.333" y="970.667" width="52" height="54"/>
  </objectgroup>
  <objectgroup name="Enemies2">
   <object id="13" x="2084" y="2290" width="50" height="52"/>
  </objectgroup>
  <objectgroup name="Enemies3">
-  <object id="12" x="2296" y="306" width="48" height="54"/>
+  <object id="12" x="1802.67" y="904.667" width="48" height="54"/>
  </objectgroup>
  <objectgroup name="Enemies4">
   <object id="16" x="216" y="1997" width="52" height="54"/>

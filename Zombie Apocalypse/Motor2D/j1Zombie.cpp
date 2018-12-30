@@ -141,8 +141,69 @@ bool j1Zombie::PostUpdate(float dt)
 
 	}
 
-	if (active && entitycoll!=nullptr)
-	{ 
+	if (active && entitycoll != nullptr)
+	{
+		if (App->scene->player->Future_position.x > position.x)
+		{
+			going_right = true;
+
+		}
+
+		else if (App->scene->player->Future_position.x < position.x)
+		{
+
+			going_right = false;
+		}
+
+		if (App->scene->player->Future_position.y > position.y)
+		{
+			going_down = false;
+			going_up = true;
+		}
+
+		else if (App->scene->player->Future_position.y < position.y)
+		{
+
+			going_down = true;
+			going_up = false;
+		}
+
+		else if (App->scene->player->Future_position.x == position.y)
+		{
+			going_down = false;
+			going_up = false;
+
+		}
+
+
+
+
+		if (dt > 0.000000)
+		{
+			if (going_right)
+			{
+				position.x += 1;
+
+			}
+			else if (!going_right)
+			{
+				position.x -= 1;
+
+			}
+
+			if (going_up)
+			{
+			position.y += 1;
+
+			}
+			else if (going_down)
+			{
+			position.y -= 1;
+
+			}
+		}
+
+	
 		if ((position.x)*App->win->GetScale() >= -App->render->camera.x && (position.x)*App->win->GetScale() <= -App->render->camera.x + App->render->camera.w)
 		{
 			//check for player nearby
@@ -153,12 +214,15 @@ bool j1Zombie::PostUpdate(float dt)
 				App->scene->player->Future_position.y < position.y + ZombieInfo.areaofaction &&
 				App->scene->player->Future_position.y > position.y - ZombieInfo.areaofaction)
 			{
-
-				CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
-
 				
+				//CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
+
+
+
 				CurrentAnimation = ZombieInfo.attack;
 			}
+
+				
 
 			//Debug Purpose (moving zombie around)
 			/*if (App->input->GetKey(SDL_SCANCODE_J) == KEY_REPEAT)
@@ -253,7 +317,7 @@ bool j1Zombie::PostUpdate(float dt)
 		}
 
 		
-	}
+		}
 	}
 	else if (!active && entitycoll != nullptr)
 	{
@@ -298,13 +362,13 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 
 			if ( c2->rect.y + c2->rect.h >= c1->rect.y)
 			{
-				c1->rect.y += Intersection.h;
+				c1->rect.y += Intersection.h*2;
 				going_up = false;
 			}
 			else if ( c1->rect.y + c1->rect.h <= c2->rect.y)
 			{
 
-				c1->rect.y -= Intersection.h;
+				c1->rect.y -= Intersection.h*2;
 				going_down = false;
 			}
 
@@ -317,13 +381,13 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 
 			if (going_right)
 			{
-				going_right = false;
-				c1->rect.x += Intersection.w;
+				
+				c1->rect.x += Intersection.w*2;
 			}
 			else
 			{
-				going_right = true;
-				c1->rect.x -= Intersection.w;
+			
+				c1->rect.x -= Intersection.w*2;
 			}
 			batcolliding = true;
 		}
