@@ -65,7 +65,9 @@ bool j1Scene::Start()
 {
 	bool ret = true;
 
-
+	// rounds
+	zombie_kills = 0;
+	roundNumber = 1;
 	// --- Creating entity  ---
 	player = (j1Player*)App->entities->CreateEntity("player", entity_type::PLAYER);
 	
@@ -131,15 +133,19 @@ bool j1Scene::Start()
 
 		zombie->position.x = App->map->data.enemy1.x;
 		zombie->position.y = App->map->data.enemy1.y;
+		zombie->walking = 1;
 
 		zombie2->position.x = App->map->data.enemy2.x;
 		zombie2->position.y = App->map->data.enemy2.y;
+		zombie2->walking = 1;
 
 		zombie3->position.x = App->map->data.enemy3.x;
 		zombie3->position.y = App->map->data.enemy3.y;
+		zombie3->walking = 1;
 
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
+		zombie4->walking = 1;
 
 		ammo->position.x = App->map->data.ammo1.x;
 		ammo->position.y = App->map->data.ammo1.y;
@@ -233,6 +239,59 @@ bool j1Scene::PreUpdate()
 bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Scene_Update", Profiler::Color::MediumSpringGreen);
+	// round number
+	enemyNeeds = roundNumber * 4;
+	if (zombie_kills == enemyNeeds)
+	{
+		roundNumber++;
+		//must dt 0
+		Fade(0, 0, 0, 1.0);
+		player->Future_position.x = App->map->data.initpos.x;
+		player->Future_position.y = App->map->data.initpos.y;
+
+		zombie->position.x = App->map->data.enemy1.x;
+		zombie->position.y = App->map->data.enemy1.y;
+		
+		zombie2->position.x = App->map->data.enemy2.x;
+		zombie2->position.y = App->map->data.enemy2.y;
+	
+		zombie3->position.x = App->map->data.enemy3.x;
+		zombie3->position.y = App->map->data.enemy3.y;
+		
+		zombie4->position.x = App->map->data.enemy4.x;
+		zombie4->position.y = App->map->data.enemy4.y;
+
+
+		int zombie_bingo = SecretNumber(4);
+
+
+			if (zombie_bingo == 1)
+			{
+				zombie->walking += 1;
+				if (zombie->walking  > 4)
+					zombie->walking  > 4;
+			}
+			else if (zombie_bingo == 2)
+			{
+				zombie2->walking += 1;
+				if (zombie2->walking  > 4)
+					zombie2->walking  > 4;
+			}
+			else if (zombie_bingo == 3)
+			{
+				zombie3->walking += 1;
+				if (zombie3->walking  > 4)
+					zombie3->walking  > 4;
+			}
+			else if (zombie_bingo == 4)
+			{
+				zombie4->walking += 1;
+				if (zombie4->walking  > 4)
+					zombie4->walking  > 4;
+			}
+			
+		
+	}
 
 	// drop rate
 	if (forDrop.ReadSec() >= 10)

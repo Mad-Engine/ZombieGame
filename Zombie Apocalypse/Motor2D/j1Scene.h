@@ -66,6 +66,8 @@ public:
 
 public:
 
+	int zombie_kills = 0;
+
 	// --- UI ---
 	float Volume_changer = 0.5f;
 	int parentindex = 0;
@@ -152,7 +154,9 @@ public:
 	bool fadeState = false;
 
 	bool Fade( int red, int green, int blue, float time = 2.0f);
+	// kills
 	
+
 	private:
 		enum fade_step
 		{
@@ -173,6 +177,11 @@ public:
 
 		// drop numbers
 		int drop=1;
+
+		//int round number
+		int roundNumber = 1;
+		int enemyNeeds = 0;
+		
 };
 
 #endif // __j1SCENE_H__
