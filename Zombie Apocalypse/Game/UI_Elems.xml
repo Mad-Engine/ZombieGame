@@ -6,11 +6,11 @@
     <type id="0" />
     <parent id="-1"/>
     <position x="420" y="50"/>
-    <Texture path="gui/logo.png"/>
-    <logic_rect w="401" h="171" />
-    <normal_rect x="0" y="0" w="401" h="171"/>
-    <hover_rect x="0" y="0"  w="401" h="171"/>
-    <click_rect x="0" y="0"  w="401" h="171"/>
+    <Texture path="gui/atlas.png"/>
+    <logic_rect w="0" h="0" />
+    <normal_rect x="0" y="0" w="0" h="0"/>
+    <hover_rect x="0" y="0"  w="0" h="0"/>
+    <click_rect x="0" y="0"  w="0" h="0"/>
   </Element>
 
   <Element> 1 - PANEL ORB1 HUD FATHER
@@ -568,8 +568,8 @@ SOFTWARE."/>
    <Element>  51 - PANEL YOU DIE
     <type id="0" />
     <parent id="1"/>
-    <position x="1150" y="-75"/>
-    <Texture path="gui/atlas.png"/>
+    <position x="-25" y="275"/>
+    <Texture path="gui/you die.png"/>
     <logic_rect  w="1280" h="141" />
     <normal_rect x="0" y="0" w="1280" h="141"/>
     <hover_rect  x="0" y="0" w="1280" h="141"/>

@@ -646,7 +646,7 @@ bool j1Scene::PostUpdate(float dt)
 	if (App->gui->focus == App->gui->UIelements.At(33)->data)
 	{
 		App->gui->focus = nullptr;
-		ShellExecuteA(NULL, "open", "https://atlasworks.github.io/orBit/", NULL, NULL, SW_SHOWNORMAL);
+		ShellExecuteA(NULL, "open", "https://github.com/Mad-Engine/ZombieGame", NULL, NULL, SW_SHOWNORMAL);
 	}
 
 	// --- Quit Button ---
@@ -906,6 +906,17 @@ bool j1Scene::PostUpdate(float dt)
 		else
 		*App->gui->UIelements.At(22)->data->GetActive() = false;
 
+		if (player->lifes == 0)
+		{
+			*App->gui->UIelements.At(51)->data->GetActive() = true;
+			youdietime.Start();
+		}
+
+		else if (youdietime.ReadSec() > 3)
+		{
+			*App->gui->UIelements.At(51)->data->GetActive() = false;
+		}
+
 		// --- SCORE ---
 		*App->gui->UIelements.At(45)->data->GetActive() = true;
 		*App->gui->UIelements.At(46)->data->GetActive() = true;
@@ -974,6 +985,7 @@ bool j1Scene::PostUpdate(float dt)
 		*App->gui->UIelements.At(48)->data->GetActive() = false;
 		*App->gui->UIelements.At(49)->data->GetActive() = false;
 		*App->gui->UIelements.At(50)->data->GetActive() = false;
+		*App->gui->UIelements.At(51)->data->GetActive() = false;
 	}
 
 	// --- Controlling camera Bounds---

@@ -27,6 +27,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 
 	atlas_file_name = conf.child("atlas").attribute("file").as_string("");
 	logo_file_name = conf.child("logo").attribute("file").as_string("");
+	die_file_name = conf.child("die").attribute("file").as_string("");
 
 	return ret;
 }
@@ -36,6 +37,7 @@ bool j1Gui::Start()
 {
 	atlas = CreateImage(atlas_file_name.GetString());
 	logo = CreateImage(logo_file_name.GetString());
+	youdie = CreateImage(die_file_name.GetString());
 
 	if (atlas == nullptr)
 		return false;
@@ -248,6 +250,9 @@ ButtonInfo j1Gui::FillButton(pugi::xml_node & UIconfig)
 
 	else if (path == logo_file_name)
 		Data.tex = logo;
+
+	else if (path == die_file_name)
+		Data.tex = youdie;
 
 	// --- Rectangles ---
 	Data.rects.logic_rect.x = Data.position.x;

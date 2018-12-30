@@ -21,6 +21,7 @@
   <gui>
     <atlas file="gui/atlas.png"/>
     <logo file="gui/logo.png"/>
+    <die file="gui/you die.png"/>
   </gui>
 
   <file_system>

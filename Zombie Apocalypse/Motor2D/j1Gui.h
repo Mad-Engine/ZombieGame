@@ -72,9 +72,11 @@ private:
 
 	SDL_Texture* atlas = nullptr;
 	SDL_Texture* logo = nullptr;
+	SDL_Texture* youdie = nullptr;
 
 	p2SString atlas_file_name;
 	p2SString logo_file_name;
+	p2SString die_file_name;
 
 	iPoint mouse_pos = { 0,0 };
 	iPoint click_pos = { 0,0 };
