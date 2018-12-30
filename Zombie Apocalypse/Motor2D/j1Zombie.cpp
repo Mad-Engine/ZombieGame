@@ -85,10 +85,12 @@ bool j1Zombie::Update(float dt)
 		int index = manager->entities.find(this);
 		auxiliarpos.x = position.x;
 		auxiliarpos.y = position.y;
+
 		if (index == 1)
 		{
 			position.x = App->map->data.enemy1.x;
 			position.y = App->map->data.enemy1.y;
+			
 		}
 		else if (index == 2)
 		{
@@ -106,6 +108,8 @@ bool j1Zombie::Update(float dt)
 			position.x = App->map->data.enemy4.x;
 			position.y = App->map->data.enemy4.y;
 		}
+
+		entitycoll->SetPos(position.x, position.y);
 		lifes = 3;
 		dropammo = true;
 	}
@@ -328,13 +332,10 @@ bool j1Zombie::PostUpdate(float dt)
 	
 	if (active)
 	{
-		App->render->Blit(spritesheet, position.x -50, position.y - 50 , &CurrentAnimation->GetCurrentFrame(dt));
+		App->render->Blit(spritesheet, position.x -50, position.y -25 , &CurrentAnimation->GetCurrentFrame(dt));
 	}
 
-	/*if (!active && !CurrentAnimation->Finished())
-	{
-		App->render->Blit(spritesheet, position.x - ZombieInfo.printingoffset.x*3, position.y - ZombieInfo.printingoffset.y, &CurrentAnimation->GetCurrentFrame(dt));
-	}*/
+	
 
 
 	return ret;

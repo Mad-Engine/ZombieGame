@@ -89,7 +89,7 @@ bool j1Amo::PostUpdate(float dt)
 	if (active)
 	{
 		
-		App->render->Blit(spritesheet, position.x, position.y, &CurrentAnimation->GetCurrentFrame(dt));
+		App->render->Blit(spritesheet, position.x-25, position.y-5, &CurrentAnimation->GetCurrentFrame(dt));
 	}
 	
 
