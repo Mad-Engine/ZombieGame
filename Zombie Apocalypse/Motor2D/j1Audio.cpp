@@ -92,6 +92,14 @@ bool j1Audio::Awake(pugi::xml_node& config)
 
 	die = LoadFx("audio/fx/1 heart.wav");
 
+	healingfx = LoadFx("audio/fx/Healing.wav");
+
+	HealthDroop = LoadFx("audio/fx/HealthDropping.wav");
+
+	cashfx= LoadFx("audio/fx/cashCollected.wav");
+
+
+
 	pugi::xml_node Music;
 	for (Music = config.child("music").child("song"); Music && ret; Music = Music.next_sibling("song"))
 	{

@@ -57,6 +57,8 @@ public:
 	p2SString fxorb = nullptr;
 	p2SString fxenemydeath = nullptr;
 	p2SString fxshot = nullptr;
+	//p2SString HealingPathSound = nullptr;
+	//p2SString HealthDroopPath = nullptr;
 
 	unsigned int deathfx = NULL;
 	unsigned int jumpfx = NULL;
@@ -67,6 +69,9 @@ public:
 	unsigned int ammoDrop = NULL;
 	unsigned int ammoReload = NULL;
 	unsigned int die = NULL;
+	unsigned int healingfx=NULL;
+	unsigned int HealthDroop = NULL;
+	unsigned int cashfx = NULL;
 
 private:
 
