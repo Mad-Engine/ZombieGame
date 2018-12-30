@@ -565,4 +565,15 @@ SOFTWARE."/>
     <textB value=""/>
   </Element>
   
+   <Element>  51 - PANEL YOU DIE
+    <type id="0" />
+    <parent id="1"/>
+    <position x="1150" y="-75"/>
+    <Texture path="gui/atlas.png"/>
+    <logic_rect  w="1280" h="141" />
+    <normal_rect x="0" y="0" w="1280" h="141"/>
+    <hover_rect  x="0" y="0" w="1280" h="141"/>
+    <click_rect  x="0" y="0" w="1280" h="141"/>
+  </Element>
+ 
 </config>
