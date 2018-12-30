@@ -67,6 +67,7 @@ public:
 public:
 
 	int zombie_kills = 0;
+	int Total_kills = 0;
 
 	// --- UI ---
 	float Volume_changer = 0.5f;

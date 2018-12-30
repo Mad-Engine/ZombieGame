@@ -86,6 +86,7 @@ bool j1Zombie::Update(float dt)
 		auxiliarpos.x = position.x;
 		auxiliarpos.y = position.y;
 		App->scene->zombie_kills++;
+		App->scene->Total_kills++;
 
 		if (index == 1)
 		{

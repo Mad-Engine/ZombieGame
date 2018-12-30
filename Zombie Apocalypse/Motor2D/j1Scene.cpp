@@ -240,7 +240,7 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Scene_Update", Profiler::Color::MediumSpringGreen);
 	// round number
-	enemyNeeds = roundNumber * 4;
+	enemyNeeds = roundNumber * 3;
 	if (zombie_kills == enemyNeeds)
 	{
 		roundNumber++;
@@ -261,7 +261,7 @@ bool j1Scene::Update(float dt)
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
 
-
+		zombie_kills = 0;
 		int zombie_bingo = SecretNumber(4);
 
 
