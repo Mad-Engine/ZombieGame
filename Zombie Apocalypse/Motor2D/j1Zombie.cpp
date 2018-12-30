@@ -401,7 +401,7 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 
 	if (active)
 	{
-		if (nohit.ReadSec() >= 10 && stop == true)
+		if (nohit.ReadSec() >= nohit_time && stop == true)
 		{
 			stop = false;
 
@@ -411,7 +411,7 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 			// -- player death ---
 			 nohit.Start();
 			 stop = true;
-			entitycoll->SetPos(-50, -50);
+			/*entitycoll->SetPos(-50, -50);
 			
 
 			if (going_right)
@@ -427,12 +427,12 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 				entitystate = RIGHT;
 				going_left = false;
    				c2->rect.x = c2->rect.x - c1->rect.w * 2;
-			}
+			}*/
 
 			
 			LOG("actual lifes. %i", App->scene->player->lifes);
-			App->scene->player->playerinfo.Death->Reset();
-			App->scene->player->CurrentAnimation = App->scene->player->playerinfo.Death;
+			//App->scene->player->playerinfo.Death->Reset();
+			//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.Death;
 			
 			App->scene->player->dead = true;
 		}

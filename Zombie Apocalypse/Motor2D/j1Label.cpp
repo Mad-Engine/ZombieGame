@@ -160,11 +160,11 @@ inline void j1Label::PlaceAtMiddle()
 	}
 }
 
-void j1Label::ShapeLabel(const char * text)
+void j1Label::ShapeLabel(const char * text, _TTF_Font* font)
 {
 	App->tex->UnLoad((SDL_Texture*)this->Data.tex);
-	this->Data.tex = App->font->Print(text, this->Data.color, App->font->default);
-	App->font->CalcSize(text, this->Data.rects.rect_normal.w, this->Data.rects.rect_normal.h, App->font->default);
+	this->Data.tex = App->font->Print(text, this->Data.color, font);
+	App->font->CalcSize(text, this->Data.rects.rect_normal.w, this->Data.rects.rect_normal.h, font);
 	this->Data.rects.logic_rect = { this->position.x , this->position.y , this->Data.rects.rect_normal.w , this->Data.rects.rect_normal.h };
 	this->Data.texts.current_text = text;
 }

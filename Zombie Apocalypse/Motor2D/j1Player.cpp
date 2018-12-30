@@ -278,7 +278,7 @@ void j1Player::Handle_Ground_Animations()
 				App->scene->Activate_HUD = false;
 			}
 
-			if (lifes < 0 && CurrentAnimation->Finished())
+			if (lifes < 0 )
 			{
 				lifes = 0;
 				dead = false;

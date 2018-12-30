@@ -913,7 +913,7 @@ bool j1Scene::PostUpdate(float dt)
 		score_sum = player->score + player->totalscore;
 		auxstr = std::to_string(score_sum);
 		scorestring=auxstr.data();
-		App->gui->UIelements.At(46)->data->ShapeLabel(scorestring);
+		App->gui->UIelements.At(46)->data->ShapeLabel(scorestring, App->font->default);
 
 		// --- LIFES ---
 
@@ -941,13 +941,13 @@ bool j1Scene::PostUpdate(float dt)
 		{
 			auxstr = std::to_string(timeWhenPaused);
 			scorestring = auxstr.data();
-			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring);
+			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring,App->font->default);
 		}
 		else
 		{
 			auxstr = std::to_string(sceneTimer.ReadSec());
 			scorestring = auxstr.data();
-			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring);
+			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring, App->font->default);
 		}
 
 		// --- Ammo ---
@@ -957,7 +957,7 @@ bool j1Scene::PostUpdate(float dt)
 		score_sum = player->ammo;
 		auxstr = std::to_string(score_sum);
 		scorestring = auxstr.data();
-		App->gui->UIelements.At(50)->data->ShapeLabel(scorestring);
+		App->gui->UIelements.At(50)->data->ShapeLabel(scorestring, App->font->bigger);
 	}
 	else
 	{

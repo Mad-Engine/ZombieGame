@@ -5,6 +5,7 @@
 #include "p2List.h"
 #include "p2Point.h"
 #include "p2SString.h"
+#include "j1Fonts.h"
 
 enum class ELEMENTS
 {
@@ -62,7 +63,7 @@ public:
 
 	virtual textbox * GetTexts();
 
-	virtual void ShapeLabel(const char *text) {}
+	virtual void ShapeLabel(const char *text, _TTF_Font* font) {}
 
 	j1UI_Element* Getparent() const { return parent; }
 

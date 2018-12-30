@@ -103,6 +103,7 @@ public:
 	PathInfo* path_info = nullptr;
 	// Timer
 	j1Timer nohit;
+	uint nohit_time = 5;
 	bool stop = false;
 
 	// ammo drop
