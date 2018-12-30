@@ -78,7 +78,7 @@ public:
 	bool going_left = false;
 	bool going_up = false;
 	bool going_down = false;
-
+	iPoint auxiliarpos = { 0,0 };
 
 	bool batcolliding = false;
 
@@ -104,6 +104,9 @@ public:
 	// Timer
 	j1Timer nohit;
 	bool stop = false;
+
+	// ammo drop
+	bool dropammo = false;
 };
 
 #endif // __j1ZOMBIE_H__

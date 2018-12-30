@@ -83,6 +83,8 @@ bool j1Zombie::Update(float dt)
 	if (lifes == 0)
 	{
 		int index = manager->entities.find(this);
+		auxiliarpos.x = position.x;
+		auxiliarpos.y = position.y;
 		if (index == 1)
 		{
 			position.x = App->map->data.enemy1.x;
@@ -104,7 +106,8 @@ bool j1Zombie::Update(float dt)
 			position.x = App->map->data.enemy4.x;
 			position.y = App->map->data.enemy4.y;
 		}
-
+		lifes = 3;
+		dropammo = true;
 	}
 
 
@@ -132,7 +135,6 @@ bool j1Zombie::PostUpdate(float dt)
 
 	if (active)
 	{
-		CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
 
 		Pathfind(dt);
 		CurrentAnimation = ZombieInfo.walk;
@@ -152,6 +154,7 @@ bool j1Zombie::PostUpdate(float dt)
 				App->scene->player->Future_position.y > position.y - ZombieInfo.areaofaction)
 			{
 
+				CreatePathfinding({ (int)App->scene->player->Future_position.x, (int)App->scene->player->Future_position.y });
 
 				
 				CurrentAnimation = ZombieInfo.attack;

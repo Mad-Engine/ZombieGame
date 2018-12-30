@@ -123,6 +123,8 @@ public:
 	// player lifes
 	int lifes = 0;
 	bool dead = false;
+	//player ammo
+	int ammo = 0;
 
 	//SCORE & items
 	int orbs_number = 0;

@@ -3,6 +3,7 @@
 
 #include "j1Module.h"
 #include "j1Timer.h"
+#include <Time.h>
 
 struct SDL_Texture;
 struct SDL_Rect;
@@ -61,6 +62,7 @@ public:
 	void ONdrag(j1UI_Element & element);
 
 	void ONFocus();
+	int SecretNumber();
 
 public:
 
@@ -167,7 +169,7 @@ public:
 		int redAmount = 0;
 		int greenAmount = 0;
 		int blueAmount = 0;
-
+		j1Timer forDrop;
 };
 
 #endif // __j1SCENE_H__

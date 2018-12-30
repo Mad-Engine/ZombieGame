@@ -177,7 +177,7 @@ bool j1Scene::Start()
 
 	// ---- Timer ----
 	sceneTimer.Start();
-
+	forDrop.Start();
 	// ---- Fade -----
 	SDL_SetRenderDrawBlendMode(App->render->renderer, SDL_BLENDMODE_BLEND);
 	App->win->GetWindowSize(window_w, window_h);
@@ -259,6 +259,131 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Scene_Update", Profiler::Color::MediumSpringGreen);
 
+	if (forDrop.ReadSec() >= 30)
+	{
+		forDrop.Start();
+
+		if (zombie->dropammo == true)
+		{
+			if (ammo->active == false)
+			{
+
+				ammo->position.x = zombie->auxiliarpos.x;
+				ammo->position.y = zombie->auxiliarpos.y;
+				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				ammo->active = true;
+				
+				player->ammo += App->entities->Secretboi;
+			}
+			/*else if (ammo2->active == false)
+			{
+			ammo2->position.x = zombie->position.x;
+			ammo2->position.y = zombie->position.y;
+			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+			ammo2->active = true;
+			}
+			else if (ammo3->active == false)
+			{
+			ammo3->position.x = zombie->position.x;
+			ammo3->position.y = zombie->position.y;
+			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+			ammo3->active = true;
+			}*/
+
+			zombie->dropammo = false;
+
+
+		}
+
+		if (zombie2->dropammo == true)
+		{
+			if (ammo->active == false)
+			{
+
+				ammo->position.x = zombie2->auxiliarpos.x;
+				ammo->position.y = zombie2->auxiliarpos.y;
+				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				ammo->active = true;
+			}
+			/*else if (ammo2->active == false)
+			{
+			ammo2->position.x = zombie2->position.x;
+			ammo2->position.y = zombie2->position.y;
+			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+			ammo2->active = true;
+			}
+			else if (ammo3->active == false)
+			{
+			ammo3->position.x = zombie2->position.x;
+			ammo3->position.y = zombie2->position.y;
+			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+			ammo3->active = true;
+			}*/
+
+			zombie2->dropammo = false;
+
+
+		}
+
+		if (zombie3->dropammo == true)
+		{
+			if (ammo->active == false)
+			{
+
+				ammo->position.x = zombie3->auxiliarpos.x;
+				ammo->position.y = zombie3->auxiliarpos.y;
+				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				ammo->active = true;
+			}
+			/*else if (ammo2->active == false)
+			{
+			ammo2->position.x = zombie3->position.x;
+			ammo2->position.y = zombie3->position.y;
+			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+			ammo2->active = true;
+			}
+			else if (ammo3->active == false)
+			{
+			ammo3->position.x = zombie3->position.x;
+			ammo3->position.y = zombie3->position.y;
+			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+			ammo3->active = true;
+			}*/
+
+
+		}
+
+		if (zombie4->dropammo == true)
+		{
+			if (ammo->active == false)
+			{
+
+				ammo->position.x = zombie4->auxiliarpos.x;
+				ammo->position.y = zombie4->auxiliarpos.y;
+				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				ammo->active = true;
+			}
+			/*else if (ammo2->active == false)
+			{
+			ammo2->position.x = zombie4->position.x;
+			ammo2->position.y = zombie4->position.y;
+			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+			ammo2->active = true;
+			}
+			else if (ammo3->active == false)
+			{
+			ammo3->position.x = zombie4->position.x;
+			ammo3->position.y = zombie4->position.y;
+			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+			ammo3->active = true;
+			}*/
+
+			zombie4->dropammo = false;
+
+
+		}
+
+	}
 	
 	
 	if (App->input->GetKey(SDL_SCANCODE_F2) == KEY_DOWN) // beginning of current level
@@ -361,20 +486,7 @@ bool j1Scene::Update(float dt)
 		//Debug purpose
 		//App->win->SetTitle(title.GetString());
 	}
-	else
-	{
-		App->map->Draw(App->map->data2);
-
-
-		iPoint map_coordinates = App->map->WorldToMap(x - App->render->camera.x, y - App->render->camera.y, App->map->data2);
-		p2SString title("Map:%dx%d Tiles:%dx%d Tilesets:%d Tile:%d,%d",
-			App->map->data.width, App->map->data.height,
-			App->map->data.tile_width, App->map->data.tile_height,
-			App->map->data.tilesets.count(),
-			map_coordinates.x, map_coordinates.y);
-		//Debug purpose
-		//App->win->SetTitle(title.GetString());
-	}
+	
 
 	// --- Debug Pathfinding
 	if (App->coll->debug)
@@ -1398,4 +1510,11 @@ bool j1Scene::Fade(int red, int green, int blue, float time)
 	}
 
 	return ret;
+}
+
+int j1Scene::SecretNumber() 
+{
+	srand(time(NULL));
+	int lol = rand() % 10 + 1;
+	return lol;
 }

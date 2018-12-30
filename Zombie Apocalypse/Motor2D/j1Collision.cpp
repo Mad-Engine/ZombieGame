@@ -203,7 +203,7 @@ void j1Collision::DebugDraw()
 			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);
 			break;
 		case COLLIDER_TYPE::COLLIDER_AMMO: // blue
-			App->render->DrawQuad(item->data->rect, 0, 191, 255, alpha);
+			App->render->DrawQuad(item->data->rect, 255, 255, 0, alpha);
 			break;
 		}
 		item = item->next;

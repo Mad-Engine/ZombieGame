@@ -54,12 +54,17 @@ bool j1Amo::Start()
 	entityID = App->entities->entityID;
 
 	active = true;
+	Timer4active.Start();
 
 	return true;
 }
 
 bool j1Amo::Update(float dt)
 {
+	/*if (Timer4active.ReadSec() >= 60)
+	{
+		active
+	}*/
 	if (active && entitycoll != nullptr)
 	{
 		entitycoll->SetPos(position.x, position.y); 
@@ -95,25 +100,22 @@ bool j1Amo::PostUpdate(float dt)
 
 void j1Amo::OnCollision(Collider * c1, Collider * c2)
 {
-	bool lateralcollision = true;
 
 	if (active)
 	{
 		if (c2->type == COLLIDER_TYPE::COLLIDER_AMMO || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER)
 		{
-			if (touched == false)
-			{
+			
 				App->audio->PlayFx(App->audio->orbfx);
 				App->scene->player->score += 1000;
-				if (entitycoll != nullptr)
-				{
-					entitycoll->to_delete = true;
-					CurrentAnimation = Amoinfo.glow;
-				}
-
-				touched = true;
+				
+				entitycoll->SetPos(0, 0);
+				CurrentAnimation = Amoinfo.glow;
+				int extra = App->scene->SecretNumber();
+				App->scene->player->ammo += extra + 1;
+				
 				active = false;
-			}
+			
 		}
 	}
 

@@ -2,7 +2,7 @@
 #define __j1ORB_H__
 
 #include "j1Entity.h"
-
+#include "j1Timer.h"
 struct SDL_Texture;
 struct Collider;
 struct PathInfo;
@@ -55,7 +55,8 @@ public:
 
 	void UpdateMovement(float dt);
 
-	// ----------------------
+	// ------Timer--------
+	j1Timer Timer4active;
 
 public:
 
