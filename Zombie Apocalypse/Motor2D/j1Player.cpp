@@ -443,8 +443,7 @@ bool j1Player::PostUpdate(float dt)
 	    &&	!App->scene->Activate_MainMenu
 	    &&	!App->scene->Activate_InGameSettings
 	    &&	!App->scene->Activate_MainMenuSettings
-	    &&	!App->scene->Activate_Credits
-	    &&	!App->scene->Activate_HUD)
+	    &&	!App->scene->Activate_Credits)
 	{
 		if ( ammo > 0)
 		{
