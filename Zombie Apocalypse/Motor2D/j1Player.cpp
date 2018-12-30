@@ -475,7 +475,7 @@ bool j1Player::PostUpdate(float dt)
 			//rot += 180;
 		}
 
-		else if (mousepos.y >= Future_position.y + entitycoll->rect.h / 2 && mousepos.x <= Future_position.x + entitycoll->rect.w / 2)
+		else if (mousepos.y >= Future_position.y + entitycoll->rect.h / 2 && mousepos.x < Future_position.x + entitycoll->rect.w / 2)
 		{
 
 			rot = atan(((float)(vec_x) / (float)(vec_y)))*180.0f / 3.14f;

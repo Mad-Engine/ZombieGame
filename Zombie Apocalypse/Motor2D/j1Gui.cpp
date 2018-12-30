@@ -36,7 +36,7 @@ bool j1Gui::Awake(pugi::xml_node& conf)
 bool j1Gui::Start()
 {
 	atlas = CreateImage(atlas_file_name.GetString());
-	logo = CreateImage(logo_file_name.GetString());
+	//logo = CreateImage(logo_file_name.GetString());
 	youdie = CreateImage(die_file_name.GetString());
 
 	if (atlas == nullptr)
