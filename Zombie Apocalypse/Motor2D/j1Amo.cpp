@@ -107,8 +107,6 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 		if (c2->type == COLLIDER_TYPE::COLLIDER_AMMO || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER)
 		{
 			
-				App->audio->PlayFx(App->audio->orbfx);
-			
 				
 				entitycoll->SetPos(0, 0);
 
@@ -117,12 +115,20 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 					int extra = App->scene->SecretNumber(10);
 					App->scene->player->ammo += extra + 1;
 					App->scene->player->score +100;
+					App->audio->PlayFx(App->audio->ammoReload);
 				}
 
 				if (typeof == 2)
 				{
 					App->scene->player->score += 50;
 					App->scene->player->lifes += 1;
+					App->scene->player->help = true;
+					
+					if (App->scene->player->lifes > 3)
+					{
+						App->scene->player->lifes = 3;
+					}
+					
 				}
 				if (typeof == 3)
 				{

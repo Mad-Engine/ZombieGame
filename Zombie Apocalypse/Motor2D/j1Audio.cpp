@@ -82,11 +82,15 @@ bool j1Audio::Awake(pugi::xml_node& config)
 	p2SString buttonpopSound("%s%s", fxfolder.GetString(), fxbuttonpop.GetString());
 	buttonpopfx = LoadFx(buttonpopSound.GetString());
 
-	p2SString orbSound("%s%s", fxfolder.GetString(), fxorb.GetString());
-	orbfx = LoadFx(orbSound.GetString());
 
 	p2SString shotSound("%s%s", fxfolder.GetString(), fxshot.GetString());
 	shotfx = LoadFx(shotSound.GetString());
+
+	ammoDrop = LoadFx("audio/fx/Ammo_Dropping.wav");
+
+	ammoReload = LoadFx("audio/fx/Pistol_Reload.wav");
+
+	die = LoadFx("audio/fx/1 heart.wav");
 
 	pugi::xml_node Music;
 	for (Music = config.child("music").child("song"); Music && ret; Music = Music.next_sibling("song"))

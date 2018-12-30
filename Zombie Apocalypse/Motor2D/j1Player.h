@@ -142,8 +142,12 @@ public:
 
 	float diff_x = 0.0f;
 	float diff_y = 0.0f;
-
+	
 	fPoint vec[360];
+
+	// health
+
+	bool help = true ;
 };
 
 #endif // __j1Player_H__

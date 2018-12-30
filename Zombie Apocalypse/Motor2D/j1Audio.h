@@ -62,9 +62,11 @@ public:
 	unsigned int jumpfx = NULL;
 	unsigned int doublejumpfx = NULL;
 	unsigned int buttonpopfx = NULL;
-	unsigned int orbfx = NULL;
 	unsigned int enemydeathfx = NULL;
 	unsigned int shotfx = NULL;
+	unsigned int ammoDrop = NULL;
+	unsigned int ammoReload = NULL;
+	unsigned int die = NULL;
 
 private:
 

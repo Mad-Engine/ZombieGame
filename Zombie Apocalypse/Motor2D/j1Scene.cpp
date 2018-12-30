@@ -248,8 +248,8 @@ bool j1Scene::Update(float dt)
 				ammo->position.y = zombie->auxiliarpos.y;
 				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 				ammo->active = true;
-				
-				player->ammo += App->entities->Secretboi;
+				App->audio->PlayFx(App->audio->ammoDrop);
+
 			}
 			else if (ammo2->active == false && drop == 2)
 			{
@@ -280,6 +280,8 @@ bool j1Scene::Update(float dt)
 				ammo2->position.y = zombie2->position.y;
 				ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 				ammo2->active = true;
+				App->audio->PlayFx(App->audio->ammoDrop);
+
 			}
 			 else if (ammo->active == false && drop == 2)
 			 {
@@ -310,6 +312,7 @@ bool j1Scene::Update(float dt)
 				ammo3->position.y = zombie3->position.y;
 				ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 				ammo3->active = true;
+				App->audio->PlayFx(App->audio->ammoDrop);
 			}
 			else if (ammo->active == false && drop == 2)
 			{
@@ -340,6 +343,7 @@ bool j1Scene::Update(float dt)
 				ammo->position.y = zombie4->auxiliarpos.y;
 				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 				ammo->active = true;
+				App->audio->PlayFx(App->audio->ammoDrop);
 			}
 			else if (ammo2->active == false && drop == 2)
 			{

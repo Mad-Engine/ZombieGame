@@ -283,6 +283,7 @@ void j1Player::Handle_Ground_Animations()
 				lifes = 0;
 				dead = false;
 				App->scene->change_scene(App->scene->StageList.start->data->GetString());
+				help = true;
 			}
 			else if (dead == true && CurrentAnimation->Finished())
 			{
@@ -330,6 +331,16 @@ void j1Player::Handle_Aerial_Animations()
 
 bool j1Player::Update(float dt)
 {
+
+
+	// -- health
+
+
+	if (lifes == 1 && help == true)
+	{
+		App->audio->PlayFx(App->audio->die);
+		help = false;
+	}
 	// --- LOGIC --------------------
 
 	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
