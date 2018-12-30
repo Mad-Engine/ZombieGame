@@ -913,7 +913,7 @@ bool j1Scene::PostUpdate(float dt)
 		score_sum = player->score + player->totalscore;
 		auxstr = std::to_string(score_sum);
 		scorestring=auxstr.data();
-		App->gui->UIelements.At(46)->data->ShapeLabel(scorestring);
+		App->gui->UIelements.At(46)->data->ShapeLabel(scorestring, App->font->default);
 
 		// --- LIFES ---
 
@@ -941,14 +941,23 @@ bool j1Scene::PostUpdate(float dt)
 		{
 			auxstr = std::to_string(timeWhenPaused);
 			scorestring = auxstr.data();
-			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring);
+			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring,App->font->default);
 		}
 		else
 		{
 			auxstr = std::to_string(sceneTimer.ReadSec());
 			scorestring = auxstr.data();
-			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring);
+			App->gui->UIelements.At(48)->data->ShapeLabel(scorestring, App->font->default);
 		}
+
+		// --- Ammo ---
+		*App->gui->UIelements.At(49)->data->GetActive() = true;
+		*App->gui->UIelements.At(50)->data->GetActive() = true;
+
+		score_sum = player->ammo;
+		auxstr = std::to_string(score_sum);
+		scorestring = auxstr.data();
+		App->gui->UIelements.At(50)->data->ShapeLabel(scorestring, App->font->bigger);
 	}
 	else
 	{
@@ -963,6 +972,8 @@ bool j1Scene::PostUpdate(float dt)
 		*App->gui->UIelements.At(46)->data->GetActive() = false;
 		*App->gui->UIelements.At(47)->data->GetActive() = false;
 		*App->gui->UIelements.At(48)->data->GetActive() = false;
+		*App->gui->UIelements.At(49)->data->GetActive() = false;
+		*App->gui->UIelements.At(50)->data->GetActive() = false;
 	}
 
 	// --- Controlling camera Bounds---

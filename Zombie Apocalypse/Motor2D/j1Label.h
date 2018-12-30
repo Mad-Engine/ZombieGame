@@ -53,7 +53,7 @@ public:
 	inline void PlaceAtMiddle();
 
 	// --- Utilities ---
-	void ShapeLabel(const char *text) override;
+	void ShapeLabel(const char *text, _TTF_Font* font) override;
 
 private:
 	Text Data;
