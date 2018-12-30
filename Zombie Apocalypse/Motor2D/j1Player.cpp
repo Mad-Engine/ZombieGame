@@ -440,9 +440,14 @@ bool j1Player::PostUpdate(float dt)
 
 	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
 	{
-		CurrentAnimation = playerinfo.AttackGun;
-		playerinfo.WalkGun->Reset();
-		App->audio->PlayFx(App->audio->shotfx);
+		if ( ammo > 0)
+		{
+			CurrentAnimation = playerinfo.AttackGun;
+			playerinfo.WalkGun->Reset();
+			App->audio->PlayFx(App->audio->shotfx);
+			ammo--;
+		}
+		
 	}
 	
 	if (CurrentAnimation == playerinfo.AttackGun && CurrentAnimation->Finished())

@@ -68,6 +68,7 @@ bool j1Scene::Start()
 	// rounds
 	zombie_kills = 0;
 	roundNumber = 1;
+	
 	// --- Creating entity  ---
 	player = (j1Player*)App->entities->CreateEntity("player", entity_type::PLAYER);
 	
@@ -80,7 +81,7 @@ bool j1Scene::Start()
 	zombie4 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
 	
 
-	
+	player->ammo = 10;
 
 	ammo = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
 
@@ -292,7 +293,19 @@ bool j1Scene::Update(float dt)
 			
 		
 	}
+	if (player->ammo == 0)
+	{
+		if (ammo->active == false)
+		{
 
+			ammo->position.x = App->map->data.ammo1.x;
+			ammo->position.y = App->map->data.ammo1.y;
+			ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+			ammo->active = true;
+			App->audio->PlayFx(App->audio->ammoDrop);
+
+		}
+	}
 	// drop rate
 	if (forDrop.ReadSec() >= 10)
 	{
