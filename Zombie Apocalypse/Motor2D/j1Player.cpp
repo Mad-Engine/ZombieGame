@@ -438,7 +438,13 @@ bool j1Player::PostUpdate(float dt)
 
 	// --- Blitting player ---
 
-	if (App->input->GetMouseButtonDown(1) == KEY_DOWN)
+	if ( App->input->GetMouseButtonDown(1) == KEY_DOWN
+		&&  !App->scene->Activate_Ingamemenu 
+	    &&	!App->scene->Activate_MainMenu
+	    &&	!App->scene->Activate_InGameSettings
+	    &&	!App->scene->Activate_MainMenuSettings
+	    &&	!App->scene->Activate_Credits
+	    &&	!App->scene->Activate_HUD)
 	{
 		if ( ammo > 0)
 		{
