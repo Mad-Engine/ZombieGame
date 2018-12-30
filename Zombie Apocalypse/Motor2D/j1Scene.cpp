@@ -908,15 +908,26 @@ bool j1Scene::PostUpdate(float dt)
 
 		if (player->lifes == 0)
 		{
+			onyoudie = true;
 			*App->gui->UIelements.At(51)->data->GetActive() = true;
 			youdietime.Start();
 		}
 
-		else if (youdietime.ReadSec() > 3)
+		else if (onyoudie && youdietime.ReadSec() > 3)
 		{
+			onyoudie = false;
 			*App->gui->UIelements.At(51)->data->GetActive() = false;
+			Activate_MainMenu = true;
+			Activate_Ingamemenu = false;
+			Activate_InGameSettings = false;
+			Activate_MainMenuSettings = false;
+			Activate_Credits = false;
+			Activate_HUD = false;
 		}
 
+			 
+			 
+			 
 		// --- SCORE ---
 		*App->gui->UIelements.At(45)->data->GetActive() = true;
 		*App->gui->UIelements.At(46)->data->GetActive() = true;

@@ -57,6 +57,15 @@ bool j1Amo::Start()
 	active = true;
 	Timer4active.Start();
 
+	// --- cvars ---
+
+	cvarname_timecollect.create("ControlVar_timetocollect");
+	cvarattr_timecollect.create("Time");
+
+	cvartimetocollect.name = cvarname_timecollect;
+	cvartimetocollect.attr = cvarattr_timecollect;
+	cvartimetocollect.priority = 0;
+
 	return true;
 }
 
@@ -69,6 +78,12 @@ bool j1Amo::Update(float dt)
 	if (active && entitycoll != nullptr)
 	{
 		entitycoll->SetPos(position.x, position.y); 
+
+		if (ControlVar_timetocollect == 0)
+		{
+			Timetocollect.Start();
+			ControlVar_timetocollect = 1;
+		}
 	}
 	else if (!active && entitycoll != nullptr)
 	{
@@ -106,7 +121,11 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 	{
 		if (c2->type == COLLIDER_TYPE::COLLIDER_AMMO || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER)
 		{
-			
+
+			ControlVar_timetocollect = Timetocollect.ReadSec();
+			cvartimetocollect.value = ControlVar_timetocollect;
+			App->addvartolist(cvartimetocollect);
+			ControlVar_timetocollect = 0;
 				
 				entitycoll->SetPos(0, 0);
 

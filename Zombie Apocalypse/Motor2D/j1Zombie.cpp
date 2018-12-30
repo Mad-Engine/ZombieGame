@@ -64,6 +64,7 @@ bool j1Zombie::Start()
 
 	active = true;
 
+
 	return true;
 }
 
@@ -88,31 +89,33 @@ bool j1Zombie::Update(float dt)
 		App->scene->zombie_kills++;
 		App->scene->Total_kills++;
 
-		if (index == 1)
+		seed = rand() % 4 + 1;
+
+		if (index == seed)
 		{
 			position.x = App->map->data.enemy1.x;
 			position.y = App->map->data.enemy1.y;
 			
 		}
-		else if (index == 2)
+		else if (index == seed)
 		{
 			position.x = App->map->data.enemy2.x;
 			position.y = App->map->data.enemy2.y;
 		}
-		else if (index == 3)
+		else if (index == seed)
 		{
 			position.x = App->map->data.enemy3.x;
 			position.y = App->map->data.enemy3.y;
 		}
 
-		else if (index == 4)
+		else if (index == seed)
 		{
 			position.x = App->map->data.enemy4.x;
 			position.y = App->map->data.enemy4.y;
 		}
 
 		entitycoll->SetPos(position.x, position.y);
-		lifes = 3;
+		lifes = 1;
 		dropammo = true;
 	}
 
@@ -406,36 +409,36 @@ void j1Zombie::OnCollision(Collider * c1, Collider * c2)
 			stop = false;
 
 		}
-		else if (stop == false && c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->scene->player->dead == false && !dead)
-		{ 
-			// -- player death ---
-			 nohit.Start();
-			 stop = true;
-			/*entitycoll->SetPos(-50, -50);
-			
+		//else if (stop == false && c1->type == COLLIDER_TYPE::COLLIDER_PLAYER || c2->type == COLLIDER_TYPE::COLLIDER_PLAYER && App->scene->player->dead == false && !dead)
+		//{ 
+		//	// -- player death ---
+		//	 nohit.Start();
+		//	 stop = true;
+		//	/*entitycoll->SetPos(-50, -50);
+		//	
 
-			if (going_right)
-			{
-				entitystate = LEFT;
-				going_left = true;
-				going_right = false;
-				c2->rect.x = c2->rect.x + c1->rect.w * 2;
-			}
-			else
-			{
-				going_right = true;
-				entitystate = RIGHT;
-				going_left = false;
-   				c2->rect.x = c2->rect.x - c1->rect.w * 2;
-			}*/
+		//	if (going_right)
+		//	{
+		//		entitystate = LEFT;
+		//		going_left = true;
+		//		going_right = false;
+		//		c2->rect.x = c2->rect.x + c1->rect.w * 2;
+		//	}
+		//	else
+		//	{
+		//		going_right = true;
+		//		entitystate = RIGHT;
+		//		going_left = false;
+  // 				c2->rect.x = c2->rect.x - c1->rect.w * 2;
+		//	}*/
 
-			
-			LOG("actual lifes. %i", App->scene->player->lifes);
-			//App->scene->player->playerinfo.Death->Reset();
-			//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.Death;
-			
-			App->scene->player->dead = true;
-		}
+		//	
+		//	LOG("actual lifes. %i", App->scene->player->lifes);
+		//	//App->scene->player->playerinfo.Death->Reset();
+		//	//App->scene->player->CurrentAnimation = App->scene->player->playerinfo.Death;
+		//	
+		//	App->scene->player->dead = true;
+		//}
 	}
 }
 

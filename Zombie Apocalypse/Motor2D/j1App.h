@@ -6,6 +6,8 @@
 #include "j1PerfTimer.h"
 #include "j1Timer.h"
 #include "PugiXml\src\pugixml.hpp"
+#include "p2SString.h"
+#include "p2PQueue.h"
 
 
 // Modules
@@ -22,6 +24,13 @@ class j1EntityManager;
 class j1Fonts;
 class j1Gui;
 
+struct cvar 
+{
+	p2SString attr;
+	p2SString name;
+	uint value = 0;
+	uint priority = 0;
+};
 
 class j1App
 {
@@ -63,6 +72,11 @@ public:
 	// Load config file
 	pugi::xml_node LoadConfig(pugi::xml_document&, const char * path) const;
 
+	// --- Control Variables Save ---
+	void SaveControlVariables();
+
+	void addvartolist(cvar var);
+
 private:
 
 	// Call modules before each loop iteration
@@ -83,6 +97,7 @@ private:
 	// Load / Save
 	bool LoadGameNow();
 	bool SavegameNow() const;
+
 
 public:
 
@@ -120,6 +135,8 @@ private:
 	
 	p2SString			load_game;
 	mutable p2SString	save_game;
+	mutable p2SString	controlvarsfile;
+	p2PQueue <cvar> controlvars;
 
 	j1PerfTimer			ptimer;
 	uint64				frame_count = 0;

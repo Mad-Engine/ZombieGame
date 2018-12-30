@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<Cvars>
+	<ControlVar_timetocollect Time="1" />
+	<ControlVar_timetocollect Time="2" />
+</Cvars>

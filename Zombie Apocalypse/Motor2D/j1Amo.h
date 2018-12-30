@@ -3,6 +3,8 @@
 
 #include "j1Entity.h"
 #include "j1Timer.h"
+#include "j1App.h"
+
 struct SDL_Texture;
 struct Collider;
 struct PathInfo;
@@ -60,6 +62,11 @@ public:
 
 	// ------Timer--------
 	j1Timer Timer4active;
+	j1Timer Timetocollect;
+	int ControlVar_timetocollect = 0;
+	p2SString cvarname_timecollect;
+	p2SString cvarattr_timecollect;
+	cvar cvartimetocollect;
 
 public:
 

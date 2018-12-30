@@ -518,3 +518,48 @@ bool j1App::SavegameNow() const
 	want_to_save = false;
 	return ret;
 }
+
+void j1App::SaveControlVariables()
+{
+	bool ret = true;
+
+	controlvarsfile.create("ControlVars.xml");
+
+	LOG("Saving Variable to %s...", controlvarsfile.GetString());
+
+	// xml object where we will store all data
+	pugi::xml_document data;
+	pugi::xml_node cvars;
+
+	cvars = data.append_child("Cvars");
+
+	p2PQueue_item <cvar> *item = controlvars.start;
+
+	const char* name;
+	const char* attr;
+
+	while (item)
+	{
+		name = item->data.name.GetString();
+		attr = item->data.attr.GetString();
+
+		cvars.append_child(name).append_attribute(attr) = item->data.value;
+
+		item = item->next;
+	}
+
+	if (ret == true)
+	{
+		data.save_file(controlvarsfile.GetString());
+		LOG("... finished saving control var", controlvarsfile.GetString());
+	}
+
+	controlvars.Clear();
+
+	data.reset();
+}
+
+void j1App::addvartolist(cvar var)
+{
+	controlvars.Push(var,var.priority);
+}

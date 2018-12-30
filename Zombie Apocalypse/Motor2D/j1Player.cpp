@@ -32,8 +32,8 @@ bool j1Player::Start()
 	entitycoll = App->coll->AddCollider(entitycollrect,COLLIDER_TYPE::COLLIDER_PLAYER, (j1Module*) manager);
 
 	// --- Current Player Position ---
-	position.x = 0;
-	position.y = 0;
+	position.x = 300;
+	position.y = 300;
 
 	entitycoll->SetPos(position.x, position.y);
 
@@ -114,6 +114,8 @@ bool j1Player::Start()
 	rot = 0;
 
 	CurrentAnimation = playerinfo.WalkGun;
+
+	deathtimer.Start();
 
 	return true;
 }
@@ -263,39 +265,36 @@ void j1Player::Handle_Ground_Animations()
 			
 		}*/
 		
-		if (no_timer.ReadSec() >= 10 && stop == true)
-		{
+		//if (no_timer.ReadSec() >= 5 && stop == true)
+		//{
+		//	stop = false;
+		//}
 
-			stop = false;
+		//if (stop == false)
+		//{
+		//	if (lifes == 0)
+		//	{
+		//		App->scene->Activate_MainMenu = true;
+		//		App->scene->Activate_HUD = false;
+		//	}
 
-		}
-
-		if (stop == false)
-		{
-			if (lifes == 0)
-			{
-				App->scene->Activate_MainMenu = true;
-				App->scene->Activate_HUD = false;
-			}
-
-			if (lifes < 0 )
-			{
-				lifes = 0;
-				dead = false;
-				App->scene->change_scene(App->scene->StageList.start->data->GetString());
-				help = true;
-			}
-			else if (dead == true && CurrentAnimation->Finished())
-			{
-
-				dead = false;
-				App->scene->player->lifes -= 1;
-				LOG("now lifes. %i", App->scene->player->lifes);
-				stop = true;
-				no_timer.Start();
-				//CurrentAnimation = playerinfo.idleRight;
-			}
-		}
+		//	if (lifes < 0 )
+		//	{
+		//		lifes = 0;
+		//		dead = false;
+		//		App->scene->change_scene(App->scene->StageList.start->data->GetString());
+		//		help = true;
+		//	}
+		//	else if (dead == true)
+		//	{
+		//		dead = false;
+		//		/*App->scene->player->lifes -= 1;*/
+		//		LOG("now lifes. %i", App->scene->player->lifes);
+		//		stop = true;
+		//		no_timer.Start();
+		//		//CurrentAnimation = playerinfo.idleRight;
+		//	}
+		//}
 }
 
 
@@ -331,10 +330,7 @@ void j1Player::Handle_Aerial_Animations()
 
 bool j1Player::Update(float dt)
 {
-
-
 	// -- health
-
 
 	if (lifes == 1 && help == true)
 	{
@@ -343,17 +339,17 @@ bool j1Player::Update(float dt)
 	}
 	// --- LOGIC --------------------
 
-	if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
-	{
-		if (!App->scene->Activate_MainMenu
-			&& !App->scene->Activate_Ingamemenu
-			&& !App->scene->Activate_Credits
-			&& !App->scene->Activate_InGameSettings
-			&& !App->scene->Activate_MainMenuSettings)
-		{
-			god_mode = !god_mode;
-		}
-	}
+	//if (App->input->GetKey(SDL_SCANCODE_F10) == KEY_DOWN)
+	//{
+	//	if (!App->scene->Activate_MainMenu
+	//		&& !App->scene->Activate_Ingamemenu
+	//		&& !App->scene->Activate_Credits
+	//		&& !App->scene->Activate_InGameSettings
+	//		&& !App->scene->Activate_MainMenuSettings)
+	//	{
+	//		god_mode = !god_mode;
+	//	}
+	//}
 
 	if (god_mode)
 	{
@@ -402,20 +398,20 @@ bool j1Player::Update(float dt)
 
 		if (EntityMovement != MOVEMENT::STATIC)
 			UpdateEntityMovement(dt);
-
-
-
 		//-------------------------------
 
 		// --- Handling animations ---
 
-
 		Handle_Ground_Animations();
 
+		if (lifes == 0)
+		{
+			App->scene->change_scene(App->scene->StageList.start->data->GetString());
+		}
 
-
-		return true;
 	}
+
+	return true;
 }
 
 bool j1Player::PostUpdate(float dt)
@@ -536,6 +532,7 @@ void j1Player::OnCollision(Collider * entitycollider, Collider * to_check)
 		case MOVEMENT::DOWNWARDS:
 			Down_Collision(entitycollider, to_check);
 			break;
+
 		}
 
 		Future_position.x = entitycollider->rect.x;
@@ -561,6 +558,14 @@ void j1Player::Right_Collision(Collider * entitycollider, const Collider * to_ch
 			entitycollider->rect.x -= Intersection.w;
 			App->render->camera.x = camera_pos_backup.x;
 			break;
+		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
+
+			if (deathtimer.ReadSec() > 5)
+			{
+				deathtimer.Start();
+				lifes--;
+			}
+			break;
 	}
 }
 
@@ -582,6 +587,14 @@ void j1Player::Left_Collision(Collider * entitycollider, const Collider * to_che
 			entitycollider->rect.x += Intersection.w;
 			App->render->camera.x = camera_pos_backup.x;
 			break;
+		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
+
+			if (deathtimer.ReadSec() > 5)
+			{
+				deathtimer.Start();
+				lifes--;
+			}
+			break;
 	}
 }
 
@@ -601,6 +614,14 @@ void j1Player::Up_Collision(Collider * entitycollider, const Collider * to_check
 			break;
 		case COLLIDER_TYPE::COLLIDER_ROOF:
 			entitycollider->rect.y += Intersection.h;
+			break;
+		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
+
+			if (deathtimer.ReadSec() > 5)
+			{
+				deathtimer.Start();
+				lifes--;
+			}
 			break;
 	}
 
@@ -622,23 +643,15 @@ void j1Player::Down_Collision(Collider * entitycollider, const Collider * to_che
 		case COLLIDER_TYPE::COLLIDER_ROOF:
 			entitycollider->rect.y -= Intersection.h;
 			break;
-		case COLLIDER_TYPE::COLLIDER_SPIKES:
-			entitycollider->rect.y -= Intersection.h;
-		
-			if (!dead)
+		case COLLIDER_TYPE::COLLIDER_ENEMY_ZOMBIE:
+
+			if (deathtimer.ReadSec() > 5)
 			{
-				App->audio->PlayFx(App->audio->deathfx);
-				LOG("actual lifes. %i", lifes);
-				//playerinfo.deathRight->Reset();
-				//CurrentAnimation = playerinfo.deathRight;
-				Velocity.y += playerinfo.jump_force;
-				//CurrentAnimation = playerinfo.deathRight;
-				lifes -= 1;
-				LOG("now lifes. %i", App->scene->player->lifes);
-				dead = true;
-				score -= 100;
+				deathtimer.Start();
+				lifes--;
 			}
 			break;
+	
 	}
 
 	double_jump = false;

@@ -89,7 +89,10 @@ int main(int argc, char* args[])
 				BROFILER_FRAME("MY_FRAME");
 
 				if (App->Update() == false)
+				{
 					state = CLEAN;
+					App->SaveControlVariables();
+				}
 			}
 			break;
 
@@ -115,6 +118,7 @@ int main(int argc, char* args[])
 			break;
 		}
 	}
+
 
 	LOG("... Bye! :)\n");
 

@@ -180,6 +180,9 @@
     <ClInclude Include="j1Amo.h">
       <Filter>Development ======\Entities</Filter>
     </ClInclude>
+    <ClInclude Include="p2PQueue.h">
+      <Filter>Toolkit ======</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Toolkit ======">

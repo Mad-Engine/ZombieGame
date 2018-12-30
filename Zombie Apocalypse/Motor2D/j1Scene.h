@@ -139,6 +139,7 @@ public:
 	// -- Timer --
 	j1Timer sceneTimer;
 	j1Timer youdietime;
+	bool onyoudie = false;
 
 	uint32 timeWhenPaused=0;
 

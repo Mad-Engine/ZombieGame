@@ -82,7 +82,7 @@ public:
 
 	bool batcolliding = false;
 
-	uint lifes = 3;
+	uint lifes = 1;
 	ZombieData ZombieInfo;
 	SDL_Rect Intersection = { 0,0,0,0 };
 
@@ -111,6 +111,7 @@ public:
 
 	// walking
 	int walking = 1;
+	uint seed = 0;
 };
 
 #endif // __j1ZOMBIE_H__

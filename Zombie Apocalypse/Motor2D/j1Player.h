@@ -148,6 +148,10 @@ public:
 	// health
 
 	bool help = true ;
+
+	// --- Death ---
+	j1Timer deathtimer;
+
 };
 
 #endif // __j1Player_H__
