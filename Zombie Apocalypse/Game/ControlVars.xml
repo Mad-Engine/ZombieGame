@@ -1,9 +1,7 @@
 <?xml version="1.0"?>
 <Cvars>
-	<TimePlayed Time="27" />
-	<Enemieskilled Total="9" />
-	<Ammunitionused Total="13" />
-	<Accuracy Percentage="69" />
-	<ControlVar_timetocollect Time="1" />
-	<ControlVar_timetocollect Time="2" />
+	<TimePlayed Time="0" />
+	<Enemieskilled Total="0" />
+	<Ammunitionused Total="0" />
+	<Accuracy Percentage="0" />
 </Cvars>

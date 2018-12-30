@@ -537,7 +537,15 @@ void j1App::SaveControlVariables()
 	cvar generaltime;
 
 	uint time = App->scene->sceneTimer.ReadSec();
-	generaltime.value = time - App->scene->timeAccumulated/100;
+	generaltime.value = time;
+
+	LOG("time %i", time);
+
+	if (on_GamePause)
+	{
+		generaltime.value = scene->timeWhenPaused;
+	}
+
 	generaltime.name = "TimePlayed";
 	generaltime.attr = "Time";
 	generaltime.priority = 0;

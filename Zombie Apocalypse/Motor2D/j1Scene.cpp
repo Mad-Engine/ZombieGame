@@ -911,7 +911,6 @@ bool j1Scene::PostUpdate(float dt)
 			onyoudie = true;
 			*App->gui->UIelements.At(51)->data->GetActive() = true;
 			youdietime.Start();
-			App->SaveControlVariables();
 		}
 
 		else if (onyoudie && youdietime.ReadSec() > 3)
@@ -1129,6 +1128,7 @@ bool j1Scene::change_scene(const char* map_name) {
 	
 	bool ret = true;
 
+	App->SaveControlVariables();
 	timeAccumulated = 0;
 	timeWhenPaused = 0;
 	sceneTimer.ResetX();
