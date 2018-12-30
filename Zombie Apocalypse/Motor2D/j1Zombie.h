@@ -107,6 +107,9 @@ public:
 
 	// ammo drop
 	bool dropammo = false;
+
+	// walking
+	int walking = 1;
 };
 
 #endif // __j1ZOMBIE_H__

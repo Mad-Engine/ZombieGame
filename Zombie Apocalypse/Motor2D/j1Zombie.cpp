@@ -85,6 +85,8 @@ bool j1Zombie::Update(float dt)
 		int index = manager->entities.find(this);
 		auxiliarpos.x = position.x;
 		auxiliarpos.y = position.y;
+		App->scene->zombie_kills++;
+		App->scene->Total_kills++;
 
 		if (index == 1)
 		{
@@ -186,23 +188,23 @@ bool j1Zombie::PostUpdate(float dt)
 		{
 			if (going_right)
 			{
-				position.x += 1;
+				position.x += walking;
 
 			}
 			else if (!going_right)
 			{
-				position.x -= 1;
+				position.x -= walking;
 
 			}
 
 			if (going_up)
 			{
-			position.y += 1;
+			position.y += walking;
 
 			}
 			else if (going_down)
 			{
-			position.y -= 1;
+			position.y -= walking;
 
 			}
 		}
