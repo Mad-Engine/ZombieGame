@@ -123,7 +123,8 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 					App->scene->player->score += 50;
 					App->scene->player->lifes += 1;
 					App->scene->player->help = true;
-					
+					App->audio->PlayFx(App->audio->healingfx);
+
 					if (App->scene->player->lifes > 3)
 					{
 						App->scene->player->lifes = 3;
@@ -133,6 +134,7 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 				if (typeof == 3)
 				{
 					App->scene->player->score += 1000;
+					App->audio->PlayFx(App->audio->cashfx);
 				}
 				
 				

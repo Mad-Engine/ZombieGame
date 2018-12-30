@@ -316,6 +316,8 @@ bool j1Scene::Update(float dt)
 			ammo2->position.y = zombie->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
+			App->audio->PlayFx(App->audio->HealthDroop);
+		
 			}
 			else if (ammo3->active == false && drop == 3)
 			{
@@ -323,6 +325,7 @@ bool j1Scene::Update(float dt)
 			ammo3->position.y = zombie->position.y;
 			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 			ammo3->active = true;
+			App->audio->PlayFx(App->audio->cashfx);
 			}
 
 			zombie->dropammo = false;
@@ -348,7 +351,9 @@ bool j1Scene::Update(float dt)
 				 ammo->position.x = zombie2->auxiliarpos.x;
 				 ammo->position.y = zombie2->auxiliarpos.y;
 				 ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				 App->audio->PlayFx(App->audio->HealthDroop);
 				 ammo->active = true;
+			
 			 }
 			else if (ammo3->active == false && drop == 3)
 				{
@@ -356,6 +361,7 @@ bool j1Scene::Update(float dt)
 				ammo3->position.y = zombie2->position.y;
 				ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 				ammo3->active = true;
+			
 				}
 
 			zombie2->dropammo = false;
@@ -380,6 +386,7 @@ bool j1Scene::Update(float dt)
 				ammo->position.y = zombie3->auxiliarpos.y;
 				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 				ammo->active = true;
+				App->audio->PlayFx(App->audio->HealthDroop);
 			}
 			else if (ammo2->active == false && drop == 3)
 			{
@@ -387,6 +394,7 @@ bool j1Scene::Update(float dt)
 			ammo2->position.y = zombie3->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
+
 			}
 			
 
@@ -410,6 +418,8 @@ bool j1Scene::Update(float dt)
 			ammo2->position.y = zombie4->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
+			App->audio->PlayFx(App->audio->HealthDroop);
+			
 			}
 			else if (ammo3->active == false && drop == 3)
 			{
