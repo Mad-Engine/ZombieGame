@@ -64,7 +64,7 @@ bool j1Amo::Start()
 
 	cvartimetocollect.name = cvarname_timecollect;
 	cvartimetocollect.attr = cvarattr_timecollect;
-	cvartimetocollect.priority = 0;
+	cvartimetocollect.priority = 1;
 
 	return true;
 }

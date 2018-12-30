@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <Cvars>
+	<TimePlayed Time="6" />
 	<ControlVar_timetocollect Time="1" />
 	<ControlVar_timetocollect Time="2" />
 </Cvars>

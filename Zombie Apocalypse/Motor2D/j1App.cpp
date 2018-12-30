@@ -533,6 +533,16 @@ void j1App::SaveControlVariables()
 
 	cvars = data.append_child("Cvars");
 
+	cvar generaltime;
+
+	uint time = App->scene->sceneTimer.ReadSec();
+	generaltime.value = time- App->scene->timeAccumulated/100;
+	generaltime.name = "TimePlayed";
+	generaltime.attr = "Time";
+	generaltime.priority = 0;
+
+	controlvars.Push(generaltime, generaltime.priority);
+
 	p2PQueue_item <cvar> *item = controlvars.start;
 
 	const char* name;

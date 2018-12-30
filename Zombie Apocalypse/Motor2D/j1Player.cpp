@@ -199,17 +199,14 @@ void j1Player::God_Movement(float dt)
 	if (App->input->GetKey(SDL_SCANCODE_D) == KEY_REPEAT)
 		Future_position.x += Velocity.x*3*dt;
 
-
 	if (App->input->GetKey(SDL_SCANCODE_A) == KEY_REPEAT)
 		Future_position.x -= Velocity.x*3*dt;
-
 
 	if (App->input->GetKey(SDL_SCANCODE_W) == KEY_REPEAT)
 		Future_position.y -= Velocity.x*3.0f*dt;
 
 	if (App->input->GetKey(SDL_SCANCODE_S) == KEY_REPEAT)
 		Future_position.y += Velocity.x*3.0f*dt;
-
 }
 
 inline void j1Player::Apply_Vertical_Impulse(float dt)
