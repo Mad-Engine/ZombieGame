@@ -75,7 +75,7 @@ bool j1Zombie::Update(float dt)
 	batcolliding = false;
 	entitystate = LEFT;
 
-	if (isClicked(entitycoll->rect))
+	if (isClicked(entitycoll->rect) && App->scene->player->ammo!=0)
 	{
 		lifes--;
 	}
