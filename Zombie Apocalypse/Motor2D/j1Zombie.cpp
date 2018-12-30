@@ -79,6 +79,7 @@ bool j1Zombie::Update(float dt)
 	if (isClicked(entitycoll->rect) && App->scene->player->ammo!=0)
 	{
 		lifes--;
+		App->scene->player->enemieskilled++;
 	}
 
 	if (lifes == 0)

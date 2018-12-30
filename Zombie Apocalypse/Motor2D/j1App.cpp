@@ -533,6 +533,7 @@ void j1App::SaveControlVariables()
 
 	cvars = data.append_child("Cvars");
 
+	// --- General time ---
 	cvar generaltime;
 
 	uint time = App->scene->sceneTimer.ReadSec();
@@ -542,6 +543,34 @@ void j1App::SaveControlVariables()
 	generaltime.priority = 0;
 
 	controlvars.Push(generaltime, generaltime.priority);
+
+	// General time
+
+	// --- Ammo wasted and enemies killed ---
+
+	generaltime.value = App->scene->Total_kills/3.0f;
+	generaltime.name = "Enemieskilled";
+	generaltime.attr = "Total";
+
+	controlvars.Push(generaltime, generaltime.priority);
+
+	generaltime.value = App->scene->player->shotsfired;
+	generaltime.name = "Ammunitionused";
+	generaltime.attr = "Total";
+
+	controlvars.Push(generaltime, generaltime.priority);
+
+	// Ammo wasted and enemies killed
+
+	// --- Player shot accuracy ---
+	App->scene->player->accuracy = (float) ((float)App->scene->Total_kills/3.0f / (float)App->scene->player->shotsfired)*100;
+
+	generaltime.value = App->scene->player->accuracy;
+	generaltime.name = "Accuracy";
+	generaltime.attr = "Percentage";
+
+	controlvars.Push(generaltime, generaltime.priority);
+	// Player shot accuracy
 
 	p2PQueue_item <cvar> *item = controlvars.start;
 

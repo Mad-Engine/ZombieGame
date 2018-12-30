@@ -152,6 +152,11 @@ public:
 	// --- Death ---
 	j1Timer deathtimer;
 
+	// --- Kills ---
+	int enemieskilled = 0;
+	int shotsfired = 0;
+	float accuracy = 0;
+
 };
 
 #endif // __j1Player_H__

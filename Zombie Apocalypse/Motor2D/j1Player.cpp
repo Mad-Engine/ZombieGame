@@ -440,6 +440,7 @@ bool j1Player::PostUpdate(float dt)
 	{
 		if ( ammo > 0)
 		{
+			shotsfired++;
 			CurrentAnimation = playerinfo.AttackGun;
 			playerinfo.WalkGun->Reset();
 			App->audio->PlayFx(App->audio->shotfx);
