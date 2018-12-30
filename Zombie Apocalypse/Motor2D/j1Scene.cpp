@@ -72,26 +72,27 @@ bool j1Scene::Start()
 	zombie = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
 	
 	zombie2 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
-	zombie2->Velocity.x * 2;
-	zombie2->Velocity.y * 2;
-
-
+	
 	zombie3 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
-	zombie3->Velocity.x / 4;
-	zombie3->Velocity.y/4;
-
+	
 	zombie4 = (j1Zombie*)App->entities->CreateEntity("zombie", entity_type::ZOMBIE_NORMAL);
-	zombie4->Velocity.x * 4;
-	zombie4->Velocity.y * 4;
+	
 
 	
 
 	ammo = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
 
-	/*ammo2 = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
+	ammo2 = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
 
 	ammo3 = (j1Amo*)App->entities->CreateEntity("ammo", entity_type::AMMO);
-*/
+
+
+	ammo->SetType(1); //bullets
+
+	ammo2->SetType(2);//healt
+
+	ammo3->SetType(3);//
+
 	//Loading both maps
 
 	p2List_item<p2SString*>* stageListItem;
@@ -140,14 +141,14 @@ bool j1Scene::Start()
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
 
-		ammo->position.x = App->map->data.amo1.x;
-		ammo->position.y = App->map->data.amo1.y;
+		ammo->position.x = App->map->data.ammo1.x;
+		ammo->position.y = App->map->data.ammo1.y;
 
-		/*ammo2->position.x = App->map->data.ammo2.x;
+		ammo2->position.x = App->map->data.ammo2.x;
 		ammo2->position.y = App->map->data.ammo2.y;
 
 		ammo3->position.x = App->map->data.ammo3.x;
-		ammo3->position.y = App->map->data.ammo3.y;*/
+		ammo3->position.y = App->map->data.ammo3.y;
 
 		stage1Music.create("%s%s", App->audio->musicfolder.GetString(), App->audio->SongNamesList.start->data->GetString());
 		App->audio->PlayMusic(stage1Music.GetString());
@@ -206,32 +207,6 @@ bool j1Scene::PreUpdate()
 		no_continue = true;
 	}
 	
-	// debug pathfing ------------------
-	//static iPoint origin;
-	//static bool origin_selected = false;
-
-	//int x, y;
-	//App->input->GetMousePosition(x, y);
-	//iPoint p = App->render->ScreenToWorld(x, y);
-	//if(firstStage)
-	//p = App->map->WorldToMap(p.x, p.y, App->map->data);
-	//else
-	//p = App->map->WorldToMap(p.x, p.y, App->map->data2);
-
-	//if (App->input->GetMouseButtonDown(SDL_BUTTON_LEFT) == KEY_DOWN)
-	//{
-	//	if (origin_selected == true)
-	//	{
-	//		App->pathfinding->CreatePath(origin, p);
-	//		origin_selected = false;
-	//	}
-	//	else
-	//	{
-	//		origin = p;
-	//		origin_selected = true;
-	//	}
-	//}
-
 	
 
 	//win condition
@@ -259,13 +234,14 @@ bool j1Scene::Update(float dt)
 {
 	BROFILER_CATEGORY("Scene_Update", Profiler::Color::MediumSpringGreen);
 
-	if (forDrop.ReadSec() >= 30)
+	// drop rate
+	if (forDrop.ReadSec() >= 10)
 	{
-		forDrop.Start();
+		drop = SecretNumber(3);
 
 		if (zombie->dropammo == true)
 		{
-			if (ammo->active == false)
+			if (ammo->active == false && drop==1)
 			{
 
 				ammo->position.x = zombie->auxiliarpos.x;
@@ -275,20 +251,20 @@ bool j1Scene::Update(float dt)
 				
 				player->ammo += App->entities->Secretboi;
 			}
-			/*else if (ammo2->active == false)
+			else if (ammo2->active == false && drop == 2)
 			{
 			ammo2->position.x = zombie->position.x;
 			ammo2->position.y = zombie->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
 			}
-			else if (ammo3->active == false)
+			else if (ammo3->active == false && drop == 3)
 			{
 			ammo3->position.x = zombie->position.x;
 			ammo3->position.y = zombie->position.y;
 			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 			ammo3->active = true;
-			}*/
+			}
 
 			zombie->dropammo = false;
 
@@ -297,28 +273,29 @@ bool j1Scene::Update(float dt)
 
 		if (zombie2->dropammo == true)
 		{
-			if (ammo->active == false)
+			
+			 if (ammo2->active == false && drop == 1)
 			{
+				ammo2->position.x = zombie2->position.x;
+				ammo2->position.y = zombie2->position.y;
+				ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
+				ammo2->active = true;
+			}
+			 else if (ammo->active == false && drop == 2)
+			 {
 
-				ammo->position.x = zombie2->auxiliarpos.x;
-				ammo->position.y = zombie2->auxiliarpos.y;
-				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
-				ammo->active = true;
-			}
-			/*else if (ammo2->active == false)
-			{
-			ammo2->position.x = zombie2->position.x;
-			ammo2->position.y = zombie2->position.y;
-			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
-			ammo2->active = true;
-			}
-			else if (ammo3->active == false)
-			{
-			ammo3->position.x = zombie2->position.x;
-			ammo3->position.y = zombie2->position.y;
-			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
-			ammo3->active = true;
-			}*/
+				 ammo->position.x = zombie2->auxiliarpos.x;
+				 ammo->position.y = zombie2->auxiliarpos.y;
+				 ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
+				 ammo->active = true;
+			 }
+			else if (ammo3->active == false && drop == 3)
+				{
+				ammo3->position.x = zombie2->position.x;
+				ammo3->position.y = zombie2->position.y;
+				ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+				ammo3->active = true;
+				}
 
 			zombie2->dropammo = false;
 
@@ -327,7 +304,14 @@ bool j1Scene::Update(float dt)
 
 		if (zombie3->dropammo == true)
 		{
-			if (ammo->active == false)
+			 if (ammo3->active == false && drop == 1)
+			{
+				ammo3->position.x = zombie3->position.x;
+				ammo3->position.y = zombie3->position.y;
+				ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
+				ammo3->active = true;
+			}
+			else if (ammo->active == false && drop == 2)
 			{
 
 				ammo->position.x = zombie3->auxiliarpos.x;
@@ -335,27 +319,21 @@ bool j1Scene::Update(float dt)
 				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 				ammo->active = true;
 			}
-			/*else if (ammo2->active == false)
+			else if (ammo2->active == false && drop == 3)
 			{
 			ammo2->position.x = zombie3->position.x;
 			ammo2->position.y = zombie3->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
 			}
-			else if (ammo3->active == false)
-			{
-			ammo3->position.x = zombie3->position.x;
-			ammo3->position.y = zombie3->position.y;
-			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
-			ammo3->active = true;
-			}*/
+			
 
-
+			zombie3->dropammo = false;
 		}
 
 		if (zombie4->dropammo == true)
 		{
-			if (ammo->active == false)
+			if (ammo->active == false && drop == 1)
 			{
 
 				ammo->position.x = zombie4->auxiliarpos.x;
@@ -363,25 +341,27 @@ bool j1Scene::Update(float dt)
 				ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 				ammo->active = true;
 			}
-			/*else if (ammo2->active == false)
+			else if (ammo2->active == false && drop == 2)
 			{
 			ammo2->position.x = zombie4->position.x;
 			ammo2->position.y = zombie4->position.y;
 			ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 			ammo2->active = true;
 			}
-			else if (ammo3->active == false)
+			else if (ammo3->active == false && drop == 3)
 			{
 			ammo3->position.x = zombie4->position.x;
 			ammo3->position.y = zombie4->position.y;
 			ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 			ammo3->active = true;
-			}*/
+			}
 
 			zombie4->dropammo = false;
 
 
 		}
+
+		forDrop.Start();
 
 	}
 	
@@ -1122,10 +1102,10 @@ bool j1Scene::Load(pugi::xml_node &config)
 	zombie4->entitycoll->SetPos(zombie4->position.x, zombie4->position.y);
 
 	ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
-/*
+
 	ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 
-	ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);*/
+	ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
 
 
 	return ret;
@@ -1153,14 +1133,14 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 		zombie4->position.x = App->map->data.enemy4.x;
 		zombie4->position.y = App->map->data.enemy4.y;
 
-		ammo->position.x = App->map->data.amo1.x;
-		ammo->position.y = App->map->data.amo1.y;
+		ammo->position.x = App->map->data.ammo1.x;
+		ammo->position.y = App->map->data.ammo1.y;
 
-		/*ammo2->position.x = App->map->data.ammo2.x;
+		ammo2->position.x = App->map->data.ammo2.x;
 		ammo2->position.y = App->map->data.ammo2.y;
 
 		ammo3->position.x = App->map->data.ammo3.x;
-		ammo3->position.y = App->map->data.ammo3.y;*/
+		ammo3->position.y = App->map->data.ammo3.y;
 	}
 
 
@@ -1184,12 +1164,12 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	ammo->entitycoll = App->coll->AddCollider(ammo->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
 	ammo->entitycoll->SetPos(ammo->position.x, ammo->position.y);
 	
-/*	ammo2->entitycoll = App->coll->AddCollider(ammo2->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
+	ammo2->entitycoll = App->coll->AddCollider(ammo2->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
 	ammo2->entitycoll->SetPos(ammo2->position.x, ammo2->position.y);
 
 	ammo3->entitycoll = App->coll->AddCollider(ammo3->entitycollrect, COLLIDER_TYPE::COLLIDER_AMMO, App->entities);
 	ammo3->entitycoll->SetPos(ammo3->position.x, ammo3->position.y);
-*/
+
 	// avtive and inactive
 
 	player->active = true;
@@ -1203,8 +1183,12 @@ void j1Scene::setStandarEntityPosition(const char* map_name)
 	zombie4->active = true;
 	zombie4->dead = false;
 	ammo->active = true;
-	/*ammo2->active = true;
-	ammo3->active = true;*/
+	ammo2->active = true;
+	ammo3->active = true;
+
+	/*ammo->active = false;
+	ammo2->active = false;
+	ammo3->active = false;*/
 	
 }
 
@@ -1512,9 +1496,9 @@ bool j1Scene::Fade(int red, int green, int blue, float time)
 	return ret;
 }
 
-int j1Scene::SecretNumber() 
+int j1Scene::SecretNumber(int options) 
 {
 	srand(time(NULL));
-	int lol = rand() % 10 + 1;
+	int lol = rand() % options + 1;
 	return lol;
 }

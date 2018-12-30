@@ -9,7 +9,9 @@ struct PathInfo;
 
 struct AmoData {
 	
-	Animation* glow = nullptr;
+	Animation* Ammo_glow = nullptr;
+	Animation* Health_glow = nullptr;
+	Animation* Money_glow = nullptr;
 
 	p2SString folder = nullptr;
 	p2SString Texture = nullptr;
@@ -50,6 +52,7 @@ public:
 	bool Load(pugi::xml_node&);
 	bool Save(pugi::xml_node&) const;
 
+	void SetType(int type);
 	// --- Pathfinding ---
 
 
@@ -62,6 +65,7 @@ public:
 
 	AmoData Amoinfo;
 	bool touched = false;
+	int typeof = 1;
 };
 
 #endif // __j1ORB_H__

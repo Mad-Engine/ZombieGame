@@ -36,11 +36,12 @@ bool j1Amo::Start()
 
 	touched = false;
 	
+	typeof = 1;
 
-	CurrentAnimation = Amoinfo.glow;
-	Amoinfo.glow->speed = Amoinfo.animationspeed;
-	Amoinfo.glow->loop = true;
-	Amoinfo.glow->speed = Amoinfo.animationspeed;
+	CurrentAnimation = Amoinfo.Ammo_glow;
+	Amoinfo.Ammo_glow->speed = Amoinfo.animationspeed;
+	Amoinfo.Ammo_glow->loop = true;
+	Amoinfo.Ammo_glow->speed = Amoinfo.animationspeed;
 
 
 	entitycoll->SetPos(position.x, position.y);
@@ -68,7 +69,6 @@ bool j1Amo::Update(float dt)
 	if (active && entitycoll != nullptr)
 	{
 		entitycoll->SetPos(position.x, position.y); 
-		CurrentAnimation = Amoinfo.glow;
 	}
 	else if (!active && entitycoll != nullptr)
 	{
@@ -88,6 +88,7 @@ bool j1Amo::PostUpdate(float dt)
 	//Blitting ammo
 	if (active)
 	{
+		
 		App->render->Blit(spritesheet, position.x, position.y, &CurrentAnimation->GetCurrentFrame(dt));
 	}
 	
@@ -107,12 +108,27 @@ void j1Amo::OnCollision(Collider * c1, Collider * c2)
 		{
 			
 				App->audio->PlayFx(App->audio->orbfx);
-				App->scene->player->score += 1000;
+			
 				
 				entitycoll->SetPos(0, 0);
-				CurrentAnimation = Amoinfo.glow;
-				int extra = App->scene->SecretNumber();
-				App->scene->player->ammo += extra + 1;
+
+				if (typeof == 1)
+				{
+					int extra = App->scene->SecretNumber(10);
+					App->scene->player->ammo += extra + 1;
+					App->scene->player->score +100;
+				}
+
+				if (typeof == 2)
+				{
+					App->scene->player->score += 50;
+					App->scene->player->lifes += 1;
+				}
+				if (typeof == 3)
+				{
+					App->scene->player->score += 1000;
+				}
+				
 				
 				active = false;
 			
@@ -200,5 +216,25 @@ void j1Amo::FixedUpdate(float dt)
 void j1Amo::LogicUpdate(float dt)
 {
 	Update(dt);
+
+}
+
+void j1Amo :: SetType(int type)
+{
+
+	typeof = type;
+
+	if (typeof == 1)
+	{
+		CurrentAnimation = Amoinfo.Ammo_glow;
+	}
+	else if (typeof == 2)
+	{
+		CurrentAnimation = Amoinfo.Health_glow;
+	}
+	else
+	{
+		CurrentAnimation = Amoinfo.Money_glow;
+	}
 
 }

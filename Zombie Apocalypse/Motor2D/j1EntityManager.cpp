@@ -153,8 +153,10 @@ bool j1EntityManager::Awake(pugi::xml_node& config)
 
 
 	
-	amoinfo.glow = LoadAnimation(amoinfo.folder.GetString(), "Ammo");
-
+	
+	amoinfo.Money_glow = LoadAnimation(amoinfo.folder.GetString(), "money");
+	amoinfo.Ammo_glow = LoadAnimation(amoinfo.folder.GetString(), "Ammo");
+	amoinfo.Health_glow = LoadAnimation(amoinfo.folder.GetString(), "health");
 
 	amoinfo.colliding_offset = orbnode.child("colliding_offset").attribute("value").as_float();
 	amoinfo.areaofaction = orbnode.child("areaofaction").attribute("value").as_int();

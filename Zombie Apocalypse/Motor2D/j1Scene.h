@@ -62,7 +62,7 @@ public:
 	void ONdrag(j1UI_Element & element);
 
 	void ONFocus();
-	int SecretNumber();
+	int SecretNumber(int options);
 
 public:
 
@@ -110,8 +110,8 @@ public:
 	j1Zombie*			zombie3 = nullptr;
 	j1Zombie*			zombie4 = nullptr;
 	j1Amo*				ammo = nullptr;
-	/*j1Amo*				ammo2 = nullptr;
-	j1Amo*				ammo3 = nullptr;*/
+	j1Amo*				ammo2 = nullptr;
+	j1Amo*				ammo3 = nullptr;
 
 	//variables used on module collision
 	int areaofcollision = 0;
@@ -170,6 +170,9 @@ public:
 		int greenAmount = 0;
 		int blueAmount = 0;
 		j1Timer forDrop;
+
+		// drop numbers
+		int drop=1;
 };
 
 #endif // __j1SCENE_H__
